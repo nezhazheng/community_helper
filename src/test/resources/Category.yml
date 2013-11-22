@@ -1,0 +1,7 @@
+category:
+  - id: 1
+    parent_id: 0
+    name: '维修商'
+  - id: 2
+    parent_id: 0
+    name: '物业服务商'

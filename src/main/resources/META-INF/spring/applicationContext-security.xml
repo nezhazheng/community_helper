@@ -15,6 +15,7 @@
 		<custom-filter ref="authenticationTokenProcessingFilter"
 			position="FORM_LOGIN_FILTER" />
 		<intercept-url pattern="/user/authenticate" access="permitAll" />
+		<intercept-url pattern="/user" method="POST" access="permitAll" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
 	</http>
 

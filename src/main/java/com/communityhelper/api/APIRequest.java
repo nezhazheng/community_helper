@@ -5,6 +5,13 @@ public class APIRequest {
     private String channel;
     private String platform;
     private String phonenum;
+    private String imei;
+    public String getImei() {
+        return imei;
+    }
+    public void setImei(String imei) {
+        this.imei = imei;
+    }
     public String getVersion() {
         return version;
     }

@@ -1,4 +1,4 @@
-package com.communityhelper.api;
+package com.communityhelper.user.api;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,17 +31,19 @@ public class UsersControllerTest extends TestEnviroment {
     }
     
     @Test
-    public void should_auth_correct_with_username_password() throws Exception{
+    public void should_auth_success_with_correct_username_password() throws Exception{
+        // Given
         UserDTO user = new UserDTO();
         user.setUsername("admin");
         user.setPassword("111111");
         user.setVersion("10.0");
         
+        // When
         mockMvc.perform(post("/user/authenticate")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(TestUtil.convertObjectToJsonBytes(user)))
+                
+        // Then
         .andExpect(status().isOk());
-        
-        
     }
 }

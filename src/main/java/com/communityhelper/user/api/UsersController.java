@@ -1,10 +1,8 @@
 package com.communityhelper.user.api;
 
-import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,9 +43,10 @@ public class UsersController {
         user.setAddress(userDTO.getAddress());
         user.setRealName(userDTO.getRealName());
         
-        if(user.persist()){
-            
+        if(user.persist()) {
+            return success("注册成功");
+        } else {
+            return response().status(Status.USER_ALREADY_EXISTS);
         }
-        return success("注册成功");
     }
 }

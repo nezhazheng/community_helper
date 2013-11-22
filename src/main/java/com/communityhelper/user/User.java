@@ -5,7 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.TypedQuery;
-import javax.persistence.UniqueConstraint;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
@@ -25,7 +24,7 @@ public class User {
     private String mobile;
     @Column(name = "password")
     private String password;
-    @Column(name = "realName")
+    @Column(name = "real_name")
     private String realName;
     @Column(name = "address")
     private String address; 
