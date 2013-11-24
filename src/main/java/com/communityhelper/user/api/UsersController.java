@@ -34,7 +34,8 @@ public class UsersController {
         String token = service.getToken(tryUser);
         user.setToken(token);
         user.setAddress(tryUser.getAddress());
-        user.setRealName(user.getRealName());
+        user.setRealName(tryUser.getRealName());
+        user.setId(tryUser.getId());
         return success("用户登录成功").result(user);
     }
     
@@ -49,7 +50,7 @@ public class UsersController {
         user.setRealName(userDTO.getRealName());
         
         if(user.persist()) {
-            return success("注册成功");
+            return success("注册成功").result(user);
         } else {
             return response().status(Status.USER_ALREADY_EXISTS);
         }

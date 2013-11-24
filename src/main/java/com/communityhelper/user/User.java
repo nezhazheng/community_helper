@@ -10,6 +10,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.json.RooJson;
+import org.springframework.transaction.annotation.Transactional;
 
 @RooJavaBean
 @RooEntity(versionField = "", table = "user", finders = "findUsersByPhonenumEquals")
@@ -29,6 +30,7 @@ public class User {
     @Column(name = "address")
     private String address; 
     
+    @Transactional
     public boolean persist(){
         if (notPresent()) {
             entityManager.persist(this);

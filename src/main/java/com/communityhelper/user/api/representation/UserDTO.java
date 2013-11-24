@@ -3,12 +3,19 @@ package com.communityhelper.user.api.representation;
 import com.communityhelper.api.APIRequest;
 
 public class UserDTO extends APIRequest{
+    private Integer id;
     private String phonenum;
     private String password;
     private String realName;
     private String address;
     private String token;
     
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public String getToken() {
         return token;
     }

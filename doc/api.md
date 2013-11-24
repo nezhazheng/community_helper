@@ -173,9 +173,15 @@ response
 
 ```json
 {
-  "status": "000",				// USER_ALREADY_EXISTS is possible
-  "message": "注册成功",
-  "result": null
+    "status": "000",				// USER_ALREADY_EXISTS is possible
+    "message": "注册成功",
+    "result": {
+        "id": 2,
+        "phonenum": "13311008877",
+        "password": "123456",
+        "realName": "hehehe",
+        "address": "上地"
+    }
 }
 ```
 
@@ -203,7 +209,8 @@ response
         "password": "111111",
         "realName": null,
         "address": null,
-        "token": "xxx"
+        "token": "xxx",
+        "id": 1				// User ID
     }
 }
 ```
