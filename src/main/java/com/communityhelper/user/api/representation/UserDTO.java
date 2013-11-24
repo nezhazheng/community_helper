@@ -1,13 +1,20 @@
-package com.communityhelper.user.api;
+package com.communityhelper.user.api.representation;
 
 import com.communityhelper.api.APIRequest;
 
 public class UserDTO extends APIRequest{
-    private String username;
+    private String phonenum;
     private String password;
     private String realName;
     private String address;
+    private String token;
     
+    public String getToken() {
+        return token;
+    }
+    public void setToken(String token) {
+        this.token = token;
+    }
     public String getRealName() {
         return realName;
     }
@@ -20,11 +27,11 @@ public class UserDTO extends APIRequest{
     public void setAddress(String address) {
         this.address = address;
     }
-    public String getUsername() {
-        return username;
+    public String getPhonenum() {
+        return phonenum;
     }
-    public void setUsername(String username) {
-        this.username = username;
+    public void setPhonenum(String username) {
+        this.phonenum = username;
     }
     public String getPassword() {
         return password;

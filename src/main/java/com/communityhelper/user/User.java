@@ -12,7 +12,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.json.RooJson;
 
 @RooJavaBean
-@RooEntity(versionField = "", table = "user", finders = "findUsersByMobileEquals")
+@RooEntity(versionField = "", table = "user", finders = "findUsersByPhonenumEquals")
 @RooJson
 public class User {
     @Id
@@ -20,8 +20,8 @@ public class User {
     @Column(name = "id")
     private Integer id;
     
-    @Column(name = "mobile", unique=true)
-    private String mobile;
+    @Column(name = "phonenum", unique=true)
+    private String phonenum;
     @Column(name = "password")
     private String password;
     @Column(name = "real_name")
@@ -38,12 +38,12 @@ public class User {
     }
     
     public boolean notPresent() {
-        User tryUser = findUserByMobile(getMobile());
+        User tryUser = findUserByMobile(getPhonenum());
         return tryUser == null;
     }
     
     public static User findUserByMobile(String mobile) {
-        TypedQuery<User> userQuery = User.findUsersByMobileEquals(mobile);
+        TypedQuery<User> userQuery = User.findUsersByPhonenumEquals(mobile);
         try {
             return userQuery.getSingleResult();
         }

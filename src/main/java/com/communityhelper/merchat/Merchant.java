@@ -12,6 +12,7 @@ import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.json.RooJson;
 
+import com.communityhelper.api.Page;
 import com.communityhelper.category.Category;
 
 @RooJson
@@ -41,5 +42,25 @@ public class Merchant {
                 "select c from Merchant c where c.categoryId = :categoryId ", Merchant.class);
         query.setParameter("categoryId", Category.DEFAULT_ROOT_ID);
         return query.getResultList();
+    }
+
+
+    public static Page findMerchantsByCategoryId(Integer categoryId,
+            Integer start, Integer size) {
+        TypedQuery<Merchant> query = entityManager().createQuery(
+                "select c from Merchant c where c.categoryId = :categoryId ", Merchant.class);
+        query.setParameter("categoryId", categoryId)
+        .setFirstResult(start)
+        .setMaxResults(size);
+        List<Merchant> merchants = query.getResultList();
+        Page<Merchant> page = new Page<Merchant>(start, size);
+        page.setList(merchants);
+        page.setTotalResult(countMerchantsByCategoryId(categoryId));
+        return page;
+    }
+    
+    public static Integer countMerchantsByCategoryId(Integer parentId) {
+        return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Merchant o where o.categoryId = :categoryId ", Long.class)
+                .setParameter("categoryId", parentId).getSingleResult().toString());
     }
 }

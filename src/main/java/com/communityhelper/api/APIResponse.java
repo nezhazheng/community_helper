@@ -75,7 +75,8 @@ public class APIResponse {
         PASSWORD_ERROR("002", "用户密码错误"), 
         USER_ALREADY_EXISTS("003", "用户已经存在"),
         NOT_HAVE_RECORD("999", "没有找到数据"), 
-        SUCCESS("000", "成功");
+        SUCCESS("000", "成功"), 
+        ERROR("999", "系统错误");
         
         private String status;
         private String message;

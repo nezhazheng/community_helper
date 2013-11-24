@@ -16,12 +16,12 @@ privileged aspect User_Roo_JavaBean {
         this.id = id;
     }
     
-    public String User.getMobile() {
-        return this.mobile;
+    public String User.getPhonenum() {
+        return this.phonenum;
     }
     
-    public void User.setMobile(String mobile) {
-        this.mobile = mobile;
+    public void User.setPhonenum(String phonenum) {
+        this.phonenum = phonenum;
     }
     
     public String User.getPassword() {

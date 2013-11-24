@@ -1,47 +1,50 @@
 package com.communityhelper.category.api;
 
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.context.WebApplicationContext;
+import org.springframework.test.web.servlet.ResultActions;
 
-import com.communityhelper.TestEnviroment;
+import com.communityhelper.MVCTestEnviroment;
+import com.communityhelper.api.APIRequest;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 
-@DatabaseSetup(value = {"/Category.yml", "/Merchant.yml"})
-@WebAppConfiguration
-@ContextConfiguration(locations = {"/WEB-INF/spring/webmvc-config.xml"})
-public class CategoriesControllerTest extends TestEnviroment {
-    @Autowired  
-    protected WebApplicationContext wac;  
-    
-    private MockMvc mockMvc;
-    
-    @Before
-    public void setUp(){
-        mockMvc = webAppContextSetup(wac).build();
-    }
-    
+@DatabaseSetup(value = {"/Category.yml"})
+public class CategoriesControllerTest extends MVCTestEnviroment {
     @Test
-    public void should_got_categories_and_merchants() throws Exception{
-        //Given 
+    public void should_got_index_page() throws Exception{
+      //Given
+        APIRequest device = new APIRequest();
+        device.setChannel("5");
+        device.setPlatform("ios");
+        device.setVersion("3.12.0.1"); 
         
         //When
-        mockMvc.perform(get("/category"))
+        post("/category", device)
         //Then
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.status", is("000")))
         .andExpect(jsonPath("$.result", hasSize(4)))
         .andExpect(jsonPath("$.result[0].name", is("维修商")))
         .andExpect(jsonPath("$.result[*].name", containsInAnyOrder("小红物业服务商", "维修商", "物业服务商", "大李维修商")));
+    }
+    
+    @Test
+    public void should_got_child_category_page() throws Exception{
+      //Given
+        APIRequest device = new APIRequest();
+        device.setChannel("5");
+        device.setPlatform("ios");
+        device.setVersion("3.12.0.1"); 
+        
+        //When
+        ResultActions result = post("/category/1", device, 1, 2)
+        //Then
+        .andExpect(status().isOk());
+        System.out.println(result.andReturn().getResponse().getContentAsString());
     }
 }

@@ -27,7 +27,7 @@ public class RegisterUserDetails implements UserDetails {
     }
     @Override
     public String getUsername() {
-        return user.getMobile();
+        return user.getPhonenum();
     }
     @Override
     public boolean isAccountNonExpired() {

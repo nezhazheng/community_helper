@@ -5,3 +5,22 @@ category:
   - id: 2
     parent_id: 0
     name: '物业服务商'
+  - id: 3
+    parent_id: 1
+    name: '餐饮'
+  - id: 4
+    parent_id: 1
+    name: '超市'
+merchant:
+  - id: 1
+    category_id: 0
+    name: '大李维修商'
+  - id: 2
+    category_id: 0
+    name: '小红物业服务商'
+  - id: 3
+    category_id: 1
+    name: '小毛物业服务商'
+  - id: 4
+    category_id: 1
+    name: '馄饨店'

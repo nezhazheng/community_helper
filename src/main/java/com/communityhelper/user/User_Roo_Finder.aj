@@ -10,11 +10,11 @@ import javax.persistence.TypedQuery;
 
 privileged aspect User_Roo_Finder {
     
-    public static TypedQuery<User> User.findUsersByMobileEquals(String mobile) {
-        if (mobile == null || mobile.length() == 0) throw new IllegalArgumentException("The mobile argument is required");
+    public static TypedQuery<User> User.findUsersByPhonenumEquals(String phonenum) {
+        if (phonenum == null || phonenum.length() == 0) throw new IllegalArgumentException("The phonenum argument is required");
         EntityManager em = User.entityManager();
-        TypedQuery<User> q = em.createQuery("SELECT o FROM User AS o WHERE o.mobile = :mobile", User.class);
-        q.setParameter("mobile", mobile);
+        TypedQuery<User> q = em.createQuery("SELECT o FROM User AS o WHERE o.phonenum = :phonenum", User.class);
+        q.setParameter("phonenum", phonenum);
         return q;
     }
     

@@ -1,0 +1,5 @@
+image:
+  - id: 1
+    platform: 'ios'
+    type: 'LaunchImage'
+    url: http://localhost/image/i.png

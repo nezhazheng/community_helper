@@ -13,8 +13,8 @@ public class TokenService {
     @Autowired
     private KeyBasedPersistenceTokenService tokenService;
     
-    public String getToken(UserDetails userDetails){
-        String preToToken = userDetails.getUsername() + "=" + userDetails.getPassword();
+    public String getToken(User user){
+        String preToToken = user.getPhonenum() + "=" + user.getPassword();
         Token token = tokenService.allocateToken(preToToken);
         return token.getKey();
     }
