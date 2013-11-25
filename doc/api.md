@@ -290,3 +290,27 @@ response
     "result": null
 }
 ```
+
+#### 完善用户信息
+
+request
+
+URL:/user/{id}/complete
+
+```json
+{
+  "address": "更新地址了",
+  "realName": "呵呵呵呵"
+}
+```
+
+response
+
+```json
+{
+    "status": "000",
+    "message": "完善成功",
+    "result": null
+}
+```
+

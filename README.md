@@ -7,8 +7,8 @@
 4. software update api		DONE
 5. feedback			DONE
 6. add order to category
-7. add complete user info api
-8. add score avg and socre user count to merchant detail api.
+7. add complete user info api	DONE
+8. add score avg and socre user count to merchant detail api.		DONE
 
 #### performance and security
 1. add compress

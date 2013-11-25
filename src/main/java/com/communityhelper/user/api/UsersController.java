@@ -2,6 +2,7 @@ package com.communityhelper.user.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,5 +54,16 @@ public class UsersController {
         } else {
             return response().status(Status.USER_ALREADY_EXISTS);
         }
+    }
+    
+    @RequestMapping(value = "/{id}/complete", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    APIResponse completeUserInfo(@PathVariable Integer id, @RequestBody UserDTO userDTO){
+        User user = User.findUser(id);
+        user.setAddress(userDTO.getAddress());
+        user.setRealName(userDTO.getRealName());
+        user.merge();
+        return success("完善成功");
     }
 }
