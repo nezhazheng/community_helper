@@ -242,7 +242,8 @@ response
             "name": "大李维修商",
             "contactPhoneNumber": "11111222",
             "contactAddress": "海上海花园",
-            "score": 5
+            "score": 5,					// 评分
+            "scoreUserCount": 1			// 评分人数
         },
         "feedbackList": {		//商户反馈列表
             "pageIndex": 0,

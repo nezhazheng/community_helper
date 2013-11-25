@@ -11,9 +11,11 @@ import javax.persistence.TypedQuery;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.json.RooJson;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.communityhelper.api.Page;
 import com.communityhelper.category.Category;
+import com.communityhelper.feedback.Feedback;
 
 @RooJson
 @RooJavaBean
@@ -34,7 +36,10 @@ public class Merchant {
     private String contactAddress;
     /** 用户评分 */
     @Column(name = "score")
-    private Integer score;
+    private Double score;
+    /** 评分人数 */
+    @Column(name = "score_user_count")
+    private Integer scoreUserCount;
     
     
     public static List<Merchant> findRootMerchants() {
@@ -62,5 +67,15 @@ public class Merchant {
     public static Integer countMerchantsByCategoryId(Integer parentId) {
         return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Merchant o where o.categoryId = :categoryId ", Long.class)
                 .setParameter("categoryId", parentId).getSingleResult().toString());
+    }
+
+    @Transactional
+    public void updateScore(Feedback feedback) {
+        // update score avg
+        double total = feedback.getScore().doubleValue()+ this.getScore();
+        double score = total / (this.getScoreUserCount() + 1);
+        this.setScore(score);
+        this.setScoreUserCount(this.getScoreUserCount() + 1);
+        this.merge();
     }
 }

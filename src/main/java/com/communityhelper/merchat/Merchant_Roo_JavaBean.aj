@@ -3,6 +3,7 @@
 
 package com.communityhelper.merchat;
 
+import java.lang.Double;
 import java.lang.Integer;
 import java.lang.String;
 
@@ -48,12 +49,20 @@ privileged aspect Merchant_Roo_JavaBean {
         this.contactAddress = contactAddress;
     }
     
-    public Integer Merchant.getScore() {
+    public Double Merchant.getScore() {
         return this.score;
     }
     
-    public void Merchant.setScore(Integer score) {
+    public void Merchant.setScore(Double score) {
         this.score = score;
+    }
+    
+    public Integer Merchant.getScoreUserCount() {
+        return this.scoreUserCount;
+    }
+    
+    public void Merchant.setScoreUserCount(Integer scoreUserCount) {
+        this.scoreUserCount = scoreUserCount;
     }
     
 }

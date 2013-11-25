@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.communityhelper.api.APIResponse;
 import com.communityhelper.api.APIResponse.Status;
 import com.communityhelper.feedback.Feedback;
+import com.communityhelper.merchat.Merchant;
 
 @Controller
 @RequestMapping("/merchant/{merchantId}/feedback")
@@ -26,6 +27,8 @@ public class FeedbacksController {
         if(!feedback.persist()){
             return response().status(Status.ALREADY_FEEDBACK);
         }
+        Merchant.findMerchant(merchantId).updateScore(feedback);
+        
         return response().success("留言成功");
     }
 }
