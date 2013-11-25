@@ -6,6 +6,7 @@
 3. add merchant
 4. software update api		DONE
 5. feedback
+6. add order to category
 
 #### performance and security
 1. add compress

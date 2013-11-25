@@ -223,6 +223,12 @@ request
 
 URL:/merchant/{merchantId}
 
+* 返回的数据中类别和商户都有可能包含
+
+start: 分页开始位置			Optional	Default:0
+
+size: 父类别ID			Optional	Default:10
+
 response
 
 ```json
@@ -230,12 +236,32 @@ response
     "status": "000",
     "message": "查询成功",
     "result": {
-        "id": 1,
-        "categoryId": 0,
-        "name": "大李维修商",
-        "contactPhoneNumber": "11111222",
-        "contactAddress": "海上海花园",
-        "score": 5
+        "merchant": {			//商户详情
+            "id": 1,
+            "categoryId": 0,
+            "name": "大李维修商",
+            "contactPhoneNumber": "11111222",
+            "contactAddress": "海上海花园",
+            "score": 5
+        },
+        "feedbackList": {		//商户反馈列表
+            "pageIndex": 0,
+            "maxResult": 4,
+            "totalResult": 1,
+            "list": [
+                {
+                    "id": {
+                        "userId": 1,
+                        "merchantId": 1
+                    },
+                    "message": "感觉非常好",
+                    "createDate": 1385345646000,  // 留言时间，根据需要进行格式化
+                    "score": 5
+                }
+            ],
+            "currentPageNo": 1,
+            "totalPage": 1
+        }
     }
 }
 ```
