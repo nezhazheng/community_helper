@@ -51,6 +51,8 @@ NOT_HAVE_RECORD("999", "没有找到数据"),
 
 SUCCESS("000", "成功"), 
 
+ALREADY_FEEDBACK("101","用户已经留言"),
+
 ERROR("999", "系统错误");
 
 ### API
@@ -235,5 +237,29 @@ response
         "contactAddress": "海上海花园",
         "score": 5
     }
+}
+```
+
+#### 用户留言
+
+request
+
+URL:/merchant/{merchantId}/feedback
+
+```json
+{
+  "message": "感觉非常好",
+  "userId": 1,
+  "score": 5			// 星星评分，可以选择1-5分
+}
+```
+
+response
+
+```json
+{
+    "status": "100",		// ALREADY_FEEDBACK 代表已经留言过了
+    "message": "留言成功",
+    "result": null
 }
 ```

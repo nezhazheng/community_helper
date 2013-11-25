@@ -71,12 +71,13 @@ public class APIResponse {
     
     public enum Status{
         /** User API Status Code */
+        SUCCESS("000", "成功"), 
+        ERROR("999", "系统错误"), 
         USER_NOT_FOUND("001", "用户不存在"), 
         PASSWORD_ERROR("002", "用户密码错误"), 
         USER_ALREADY_EXISTS("003", "用户已经存在"),
         NOT_HAVE_RECORD("999", "没有找到数据"), 
-        SUCCESS("000", "成功"), 
-        ERROR("999", "系统错误");
+        ALREADY_FEEDBACK("101","用户已经留言");
         
         private String status;
         private String message;

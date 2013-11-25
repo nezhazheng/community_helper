@@ -11,7 +11,6 @@ import com.communityhelper.api.APIResponse;
 import com.communityhelper.api.APIResponse.Status;
 import com.communityhelper.security.TokenService;
 import com.communityhelper.user.User;
-import com.communityhelper.user.api.representation.UserDTO;
 
 import static com.communityhelper.api.APIResponse.*;
 
