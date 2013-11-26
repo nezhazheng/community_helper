@@ -2,6 +2,7 @@ package com.communityhelper.user.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.communityhelper.api.APIResponse;
 import com.communityhelper.api.APIResponse.Status;
+import com.communityhelper.category.MerchantStatus;
+import com.communityhelper.merchat.Merchant;
+import com.communityhelper.merchat.api.representation.MerchantDTO;
 import com.communityhelper.security.TokenService;
 import com.communityhelper.user.User;
 
@@ -20,6 +24,7 @@ import static com.communityhelper.api.APIResponse.*;
 public class UsersController {
     @Autowired
     private TokenService service;
+    
     @RequestMapping(method = RequestMethod.POST, value = "/authenticate")
     public
     @ResponseBody
@@ -56,14 +61,32 @@ public class UsersController {
         }
     }
     
-    @RequestMapping(value = "/{id}/complete", method = RequestMethod.POST)
+    @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
     public
     @ResponseBody
-    APIResponse completeUserInfo(@PathVariable Integer id, @RequestBody UserDTO userDTO){
+    APIResponse updateUser(@PathVariable Integer id, @RequestBody UserDTO userDTO){
         User user = User.findUser(id);
-        user.setAddress(userDTO.getAddress());
-        user.setRealName(userDTO.getRealName());
+        if(StringUtils.hasLength(userDTO.getAddress())) {
+            user.setAddress(userDTO.getAddress());
+        }
+        if(StringUtils.hasLength(userDTO.getRealName())) {
+            user.setRealName(userDTO.getRealName());
+        }
+        if(StringUtils.hasLength(userDTO.getPassword())) {
+            user.setPassword(userDTO.getPassword());
+        }
         user.merge();
         return success("完善成功");
+    }
+    
+    @RequestMapping(value = "/{userId}/merchant/auth", method = RequestMethod.POST)
+    public 
+    @ResponseBody
+    APIResponse merchantAuth(@PathVariable Integer userId, @RequestBody MerchantDTO dto) {
+        Merchant merchant = dto.toMerchant();
+        merchant.setUserId(userId);
+        merchant.setStatus(MerchantStatus.NOT_VALID);
+        merchant.persist();
+        return success("商户添加认证成功");
     }
 }

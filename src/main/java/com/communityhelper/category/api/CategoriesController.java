@@ -1,7 +1,5 @@
 package com.communityhelper.category.api;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,10 +32,10 @@ public class CategoriesController {
     public 
     @ResponseBody
     APIResponse index(@RequestBody APIRequest device){
-        List<Category> categories = Category.findRootCategories();
-        List<Merchant> merchants = Merchant.findRootMerchants();
-        List categoryList = categoryService.createCategoryList(categories, merchants);
-        return response().success("查询成功").result(categoryList);
+        Page categories = Category.findChildCategories(Category.DEFAULT_ROOT_ID, 0, 10);
+        Page merchants = Merchant.findValidMerchantsByCategoryId(Category.DEFAULT_ROOT_ID, 0, 10);
+        Page categoryPage = categoryService.createCategoryPage(categories, merchants);
+        return response().success("查询成功").result(categoryPage);
     }
     
     /**
@@ -51,7 +49,7 @@ public class CategoriesController {
             @RequestParam(value = "size", defaultValue = "10") Integer size,
             @RequestBody APIRequest device){
         Page categories = Category.findChildCategories(categoryId, start, size);
-        Page merchants = Merchant.findMerchantsByCategoryId(categoryId, start, size);
+        Page merchants = Merchant.findValidMerchantsByCategoryId(categoryId, start, size);
         Page categoryPage = categoryService.createCategoryPage(categories, merchants);
         return response().success("查询成功").result(categoryPage);
     }

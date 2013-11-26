@@ -1,0 +1,6 @@
+user:
+  - id: 1
+    phonenum: '13311008877'
+    password: '123456'
+    address: 'myaddress'
+    real_name: 'zhengzheng'

@@ -291,16 +291,19 @@ response
 }
 ```
 
-#### 完善用户信息
+#### 完善用户信息 修改密码
 
 request
 
-URL:/user/{id}/complete
+* 完善用户信息和修改密码等可以使用此接口，按需传参数即可
+
+URL:/user/{id}/update
 
 ```json
 {
   "address": "更新地址了",
-  "realName": "呵呵呵呵"
+  "realName": "呵呵呵呵",
+  "password": "123456"
 }
 ```
 
@@ -314,3 +317,52 @@ response
 }
 ```
 
+#### 添加商户
+
+request
+
+URL:/merchant
+
+```json
+{
+  "name": "测试商户",
+  "contactPhoneNumber": "123456789",
+  "contactAddress": "呵呵呵呵",
+  "desc": "测试描述"
+}
+```
+
+response
+
+```json
+{
+    "status": "000",
+    "message": "添加商户成功",
+    "result": null
+}
+```
+
+#### 用户认证商户
+
+request
+
+URL:/user/{userId}/merchant/auth
+
+```json
+{
+  "name": "测试商户",
+  "contactPhoneNumber": "123456789",
+  "contactAddress": "呵呵呵呵",
+  "desc": "测试描述"
+}
+```
+
+response
+
+```json
+{
+    "status": "000",
+    "message": "添加商户成功",
+    "result": null
+}
+```

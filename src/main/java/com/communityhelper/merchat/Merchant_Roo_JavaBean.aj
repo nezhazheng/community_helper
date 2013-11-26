@@ -3,6 +3,7 @@
 
 package com.communityhelper.merchat;
 
+import com.communityhelper.category.MerchantStatus;
 import java.lang.Double;
 import java.lang.Integer;
 import java.lang.String;
@@ -23,6 +24,14 @@ privileged aspect Merchant_Roo_JavaBean {
     
     public void Merchant.setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
+    }
+    
+    public Integer Merchant.getUserId() {
+        return this.userId;
+    }
+    
+    public void Merchant.setUserId(Integer userId) {
+        this.userId = userId;
     }
     
     public String Merchant.getName() {
@@ -49,6 +58,14 @@ privileged aspect Merchant_Roo_JavaBean {
         this.contactAddress = contactAddress;
     }
     
+    public String Merchant.getDescription() {
+        return this.description;
+    }
+    
+    public void Merchant.setDescription(String description) {
+        this.description = description;
+    }
+    
     public Double Merchant.getScore() {
         return this.score;
     }
@@ -63,6 +80,22 @@ privileged aspect Merchant_Roo_JavaBean {
     
     public void Merchant.setScoreUserCount(Integer scoreUserCount) {
         this.scoreUserCount = scoreUserCount;
+    }
+    
+    public MerchantStatus Merchant.getStatus() {
+        return this.status;
+    }
+    
+    public void Merchant.setStatus(MerchantStatus status) {
+        this.status = status;
+    }
+    
+    public Integer Merchant.getOrder() {
+        return this.order;
+    }
+    
+    public void Merchant.setOrder(Integer order) {
+        this.order = order;
     }
     
 }

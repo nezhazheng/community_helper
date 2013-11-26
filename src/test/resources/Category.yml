@@ -15,12 +15,16 @@ merchant:
   - id: 1
     category_id: 0
     name: '大李维修商'
+    status: 'VALID'
   - id: 2
     category_id: 0
     name: '小红物业服务商'
+    status: 'VALID'
   - id: 3
     category_id: 1
     name: '小毛物业服务商'
+    status: 'VALID'
   - id: 4
     category_id: 1
     name: '馄饨店'
+    status: 'VALID'
