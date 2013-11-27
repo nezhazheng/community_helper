@@ -1,6 +1,8 @@
 package com.communityhelper.user.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +27,11 @@ public class UsersController {
     @Autowired
     private TokenService service;
     
+    private static final StandardPasswordEncoder PASSWORD_ENCODER = new StandardPasswordEncoder("community");
+    
+    public static void main(String[] args) {
+    }
+    
     @RequestMapping(method = RequestMethod.POST, value = "/authenticate")
     public
     @ResponseBody
@@ -33,7 +40,7 @@ public class UsersController {
         if(tryUser == null){
             return response().status(Status.USER_NOT_FOUND);
         }
-        if(!tryUser.getPassword().equals(user.getPassword())){
+        if(!PASSWORD_ENCODER.matches(user.getPassword(), tryUser.getPassword())){
             return response().status(Status.PASSWORD_ERROR);
         }
         String token = service.getToken(tryUser);
@@ -50,7 +57,7 @@ public class UsersController {
     APIResponse register(@RequestBody UserDTO userDTO){
         User user = new User();
         user.setPhonenum(userDTO.getPhonenum());
-        user.setPassword(userDTO.getPassword());
+        user.setPassword(PASSWORD_ENCODER.encode(userDTO.getPassword()));
         user.setAddress(userDTO.getAddress());
         user.setRealName(userDTO.getRealName());
         

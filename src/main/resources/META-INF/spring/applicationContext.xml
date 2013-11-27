@@ -77,12 +77,4 @@
         <property name="pseudoRandomNumberBits" value="5"/>
         <property name="secureRandom" ref="secureRandom"/>
     </bean>
-    
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
-        <property name="messageConverters">  
-            <list>  
-                  <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />  
-            </list>  
-        </property>  
-    </bean>
 </beans>
