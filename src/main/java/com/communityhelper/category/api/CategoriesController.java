@@ -18,7 +18,7 @@ import com.communityhelper.merchat.Merchant;
 
 import static com.communityhelper.api.APIResponse.*;
 @Controller
-@RequestMapping("/category")
+@RequestMapping(value = "/category", method = RequestMethod.POST)
 public class CategoriesController {
     
     @Autowired
@@ -28,7 +28,7 @@ public class CategoriesController {
      * 商户首页
      * @return
      */
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping
     public 
     @ResponseBody
     APIResponse index(@RequestBody APIRequest device){
@@ -41,7 +41,7 @@ public class CategoriesController {
     /**
      * 类别列表（含商户）
      */
-    @RequestMapping(value = "/{categoryId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{categoryId}")
     public
     @ResponseBody
     APIResponse categoryList(@PathVariable("categoryId") Integer categoryId,
@@ -53,4 +53,13 @@ public class CategoriesController {
         Page categoryPage = categoryService.createCategoryPage(categories, merchants);
         return response().success("查询成功").result(categoryPage);
     }
+    
+//    /**
+//     * 所有类别
+//     * @return
+//     */
+//    @RequestMapping(value = "/all")
+//    public APIResponse allCategory(){
+//        
+//    }
 }

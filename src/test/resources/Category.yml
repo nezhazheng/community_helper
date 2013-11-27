@@ -28,3 +28,7 @@ merchant:
     category_id: 1
     name: '馄饨店'
     status: 'VALID'
+  - id: 5
+    category_id: 3
+    name: '大黄馄饨店'
+    status: 'NOT_VALID'

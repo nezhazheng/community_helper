@@ -46,11 +46,17 @@ public class MerchantsController {
     APIResponse addMerchant(@RequestBody MerchantDTO dto){
         Merchant merchant = dto.toMerchant();
         merchant.setStatus(MerchantStatus.NOT_VALID);
-        try{
-            merchant.persist();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        merchant.persist();
         return response().success("添加商户成功");
+    }
+    
+    @RequestMapping(value = "/{merchantId}/audit")
+    public 
+    @ResponseBody
+    APIResponse audit(@RequestParam("status") String status, @PathVariable Integer merchantId){
+        Merchant merchant = Merchant.findMerchant(merchantId);
+        merchant.setStatus(MerchantStatus.valueOf(status));
+        merchant.merge();
+        return response().success("审核成功");
     }
 }

@@ -11,8 +11,9 @@
 8. add score avg and socre user count to merchant detail api.		DONE
 9. modify password		DONE
 10. sms related
-11. audit merchant		
+11. audit merchant		DONE
 12. user login & auth		DONE
+13. add category to create merchant api.
 
 #### performance and security
 1. add compress			DONE
