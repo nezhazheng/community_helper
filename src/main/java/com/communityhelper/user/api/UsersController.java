@@ -29,9 +29,6 @@ public class UsersController {
     
     private static final StandardPasswordEncoder PASSWORD_ENCODER = new StandardPasswordEncoder("community");
     
-    public static void main(String[] args) {
-    }
-    
     @RequestMapping(method = RequestMethod.POST, value = "/authenticate")
     public
     @ResponseBody

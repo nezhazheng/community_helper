@@ -1,5 +1,7 @@
 package com.communityhelper.security;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.token.KeyBasedPersistenceTokenService;
@@ -14,14 +16,9 @@ public class TokenTest extends TestEnviroment{
     public void testTokenService(){
         Token token =  tokenService.allocateToken("admin=111111");
         String key = token.getKey();
-        System.out.println(key);
-        System.out.println(token.getExtendedInformation());
-        System.out.println(token.getKeyCreationTime());
         
         Token verifyToken = tokenService.verifyToken(key);
-        System.out.println(verifyToken.getKey());
-        System.out.println(verifyToken.getExtendedInformation());
-        System.out.println(verifyToken.getKeyCreationTime());
+        assertEquals(key, verifyToken.getKey());
     }
 }
 
