@@ -15,10 +15,10 @@
 12. user login & auth		DONE
 
 #### performance and security
-1. add compress
+1. add compress			DONE
 2. add encrypt
 3. caching
-4. password encrypt
+4. password encrypt		DONE
 
 #### other
 1. api doc			working on
