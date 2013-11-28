@@ -17,12 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.communityhelper.api.Page;
 import com.communityhelper.category.MerchantStatus;
+import com.communityhelper.category.Orderable;
 import com.communityhelper.feedback.Feedback;
 
 @RooJson
 @RooJavaBean
 @RooEntity(versionField = "", table = "merchant")
-public class Merchant {
+public class Merchant implements Orderable, Comparable<Orderable> {
     
     @Id
     @Column(name = "id")
@@ -97,5 +98,10 @@ public class Merchant {
         this.setScore(0.0);
         this.setScoreUserCount(0);
         this.setOrder(0);
+    }
+    
+    @Override
+    public int compareTo(Orderable o) {
+        return this.getOrder().compareTo(o.getOrder());
     }
 }

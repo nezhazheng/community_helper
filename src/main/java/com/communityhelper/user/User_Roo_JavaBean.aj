@@ -48,4 +48,20 @@ privileged aspect User_Roo_JavaBean {
         this.address = address;
     }
     
+    public String User.getChannel() {
+        return this.channel;
+    }
+    
+    public void User.setChannel(String channel) {
+        this.channel = channel;
+    }
+    
+    public String User.getImei() {
+        return this.imei;
+    }
+    
+    public void User.setImei(String imei) {
+        this.imei = imei;
+    }
+    
 }

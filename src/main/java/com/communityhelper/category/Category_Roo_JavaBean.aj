@@ -32,4 +32,12 @@ privileged aspect Category_Roo_JavaBean {
         this.name = name;
     }
     
+    public Integer Category.getOrder() {
+        return this.order;
+    }
+    
+    public void Category.setOrder(Integer order) {
+        this.order = order;
+    }
+    
 }

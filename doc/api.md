@@ -344,6 +344,31 @@ response
 }
 ```
 
+#### 修改商户
+
+request
+
+URL:/merchant/{merchantId}/update
+
+```json
+{
+  "name": "测试商户",
+  "contactPhoneNumber": "123456789",
+  "contactAddress": "呵呵呵呵",
+  "desc": "测试描述"
+}
+```
+
+response
+
+```json
+{
+    "status": "000",
+    "message": "修改成功",
+    "result": null
+}
+```
+
 #### 用户认证商户
 
 request
@@ -365,6 +390,31 @@ response
 {
     "status": "000",
     "message": "添加商户成功",
+    "result": null
+}
+```
+
+#### 我要反馈
+
+request
+
+URL:/software/user/{userId}/feedback
+
+```json
+{
+  "platform": "ios",
+  "version": "4.0.0",
+  "channel": "5",
+  "message": "测试反馈"	
+}
+```
+
+response
+
+```json
+{
+    "status": "000",
+    "message": "反馈成功",
     "result": null
 }
 ```

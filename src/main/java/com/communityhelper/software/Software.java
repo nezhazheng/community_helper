@@ -44,6 +44,22 @@ public class Software {
         return software;
     }
     
+    public static Software findSoftwareByPlatformAndVersionAndChannel(
+            String platform, String version, String channel){
+        Software software = null;
+        try {
+            software = entityManager().createQuery("select o from Software o where o.platform = :platform" +
+                    " and o.channel = :channel and o.version = :version", Software.class)
+                    .setParameter("platform", platform)
+                    .setParameter("channel", channel)
+                    .setParameter("version", version)
+                    .getSingleResult();
+        } catch (EmptyResultDataAccessException empty) {
+            return null;
+        }  
+        return software;
+    }
+    
     public boolean upgrade(String originVersion){
         String[] target = this.getVersion().split("\\.");
         String[] origin = originVersion.split("\\.");

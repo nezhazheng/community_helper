@@ -1,6 +1,7 @@
 package com.communityhelper.category.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ public class CategoryService {
             }
             result.addAll(merchants.getList().subList(0, offset));
         }
+        Collections.sort(result);
         categoryPage.setTotalResult(categories.getTotalResult() + merchants.getTotalResult());
         categoryPage.setList(result);
         return categoryPage;

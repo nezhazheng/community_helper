@@ -57,6 +57,8 @@ public class UsersController {
         user.setPassword(PASSWORD_ENCODER.encode(userDTO.getPassword()));
         user.setAddress(userDTO.getAddress());
         user.setRealName(userDTO.getRealName());
+        user.setImei(userDTO.getImei());
+        user.setChannel(userDTO.getChannel());
         
         if(user.persist()) {
             return success("注册成功").result(user);

@@ -12,8 +12,10 @@
 9. modify password		DONE
 10. sms related
 11. audit merchant		DONE
-12. user login & auth		DONE
-13. add category to create merchant api.
+12. user login and auth		DONE
+13. add realname authorization when post merchant feedback
+14. add software feedback api.	DONE
+15. add device info to User model	DONE
 
 #### performance and security
 1. add compress			DONE

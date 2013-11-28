@@ -28,7 +28,10 @@ public class CategoriesControllerTest extends MVCTestEnviroment {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.status", is("000")))
         .andExpect(jsonPath("$.result.totalResult", is(4)))
-        .andExpect(jsonPath("$.result.list[0].name", is("维修商")))
+        // test sort
+        .andExpect(jsonPath("$.result.list[0].name", is("物业服务商")))
+        .andExpect(jsonPath("$.result.list[3].name", is("大李维修商")))
+        
         .andExpect(jsonPath("$.result.list[*].name", containsInAnyOrder("小红物业服务商", "维修商", "物业服务商", "大李维修商")));
     }
     

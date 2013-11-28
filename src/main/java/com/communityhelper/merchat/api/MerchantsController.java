@@ -3,6 +3,7 @@ package com.communityhelper.merchat.api;
 import static com.communityhelper.api.APIResponse.response;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +41,31 @@ public class MerchantsController {
         return response().success("查询成功").result(detailDTO);
     }
     
+    /**
+     * 修改商户
+     * @return
+     */
+    @RequestMapping(value = "/{merchantId}/update")
+    public 
+    @ResponseBody
+    APIResponse update(@PathVariable("merchantId") Integer merchantId, @RequestBody MerchantDTO dto){
+        Merchant merchant = Merchant.findMerchant(merchantId);
+        if(StringUtils.hasLength(dto.getContactAddress())){
+            merchant.setContactAddress(dto.getContactAddress());
+        }
+        if(StringUtils.hasLength(dto.getContactPhoneNumber())){
+            merchant.setContactPhoneNumber(dto.getContactPhoneNumber());
+        }
+        if(StringUtils.hasLength(dto.getDesc())){
+            merchant.setDescription(dto.getDesc());
+        }
+        if(StringUtils.hasLength(dto.getName())){
+            merchant.setName(dto.getName());
+        }
+        merchant.merge();
+        return response().success("修改成功");
+    }
+    
     @RequestMapping
     public 
     @ResponseBody
@@ -50,6 +76,12 @@ public class MerchantsController {
         return response().success("添加商户成功");
     }
     
+    /**
+     * 审核商户
+     * @param status #com.communityhelper.category.MerchantStatus
+     * @param merchantId
+     * @return
+     */
     @RequestMapping(value = "/{merchantId}/audit")
     public 
     @ResponseBody

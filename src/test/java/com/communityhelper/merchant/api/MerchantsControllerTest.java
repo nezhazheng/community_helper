@@ -35,7 +35,7 @@ public class MerchantsControllerTest extends MVCTestEnviroment {
         
         //Then
         List<Merchant> merchants = Merchant.findAllMerchants();
-        assertEquals(1, merchants.size());
+        assertEquals(6, merchants.size());
     }
     
     @Transactional

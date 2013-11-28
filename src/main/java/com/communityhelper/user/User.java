@@ -29,6 +29,10 @@ public class User {
     private String realName;
     @Column(name = "address")
     private String address; 
+    @Column
+    private String channel;
+    @Column
+    private String imei;
     
     @Transactional
     public boolean persist(){

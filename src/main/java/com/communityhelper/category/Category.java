@@ -17,7 +17,7 @@ import com.communityhelper.api.Page;
 @RooJson
 @RooJavaBean
 @RooEntity(versionField = "", table = "category")
-public class Category {
+public class Category implements Orderable, Comparable<Orderable> {
     public static final Integer DEFAULT_ROOT_ID = 0;
     
     @Id
@@ -28,6 +28,8 @@ public class Category {
     private Integer parentId;
     @Column(name = "name")
     private String name;
+    @Column(name = "corder")
+    private Integer order;
     
     public static List<Category> findRootCategories() {
         TypedQuery<Category> query = entityManager().createQuery(
@@ -52,5 +54,10 @@ public class Category {
     public static Integer countCategorysByParentId(Integer parentId) {
         return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Category o where o.parentId = :parentId ", Long.class)
                 .setParameter("parentId", parentId).getSingleResult().toString());
+    }
+
+    @Override
+    public int compareTo(Orderable o) {
+        return this.getOrder().compareTo(o.getOrder());
     }
 }
