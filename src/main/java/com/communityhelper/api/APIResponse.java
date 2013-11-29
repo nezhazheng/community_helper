@@ -77,7 +77,10 @@ public class APIResponse {
         PASSWORD_ERROR("002", "用户密码错误"), 
         USER_ALREADY_EXISTS("003", "用户已经存在"),
         NOT_HAVE_RECORD("999", "没有找到数据"), 
-        ALREADY_FEEDBACK("101","用户已经留言");
+        ALREADY_FEEDBACK("101","用户已经留言"), 
+        TOO_MANY_VALID_CODE("004", "验证码发送次数超出3次上限"), 
+        VALID_CODE_NOT_VALID("005", "验证码校验未通过"), 
+        SEND_SMS_ERROR("006", "发送短信失败");
         
         private String status;
         private String message;

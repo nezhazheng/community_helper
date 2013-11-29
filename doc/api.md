@@ -418,3 +418,37 @@ response
     "result": null
 }
 ```
+
+#### 发送验证码
+
+request
+
+URL:/sms/{phonenum}/sendvalidcode
+
+response
+
+```json
+{
+    "status": "000",
+    "message": "验证码发送成功",
+    "result": null
+}
+```
+
+#### 校验验证码
+
+request
+
+URL:/sms/{phonenum}/valid/{validCodeStr}
+
+* validCodeStr  验证码
+
+response
+
+```json
+{
+    "status": "000",
+    "message": "验证通过",
+    "result": null
+}
+```
