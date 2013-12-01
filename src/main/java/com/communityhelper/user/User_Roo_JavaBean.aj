@@ -3,6 +3,7 @@
 
 package com.communityhelper.user;
 
+import java.lang.Boolean;
 import java.lang.Integer;
 import java.lang.String;
 
@@ -62,6 +63,14 @@ privileged aspect User_Roo_JavaBean {
     
     public void User.setImei(String imei) {
         this.imei = imei;
+    }
+    
+    public Boolean User.getRealNameAuth() {
+        return this.realNameAuth;
+    }
+    
+    public void User.setRealNameAuth(Boolean realNameAuth) {
+        this.realNameAuth = realNameAuth;
     }
     
 }

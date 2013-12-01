@@ -23,7 +23,7 @@ public class SMSSerice {
     public boolean sendValidCode(String validCode, String... mobileArray) {
         try {
             String target=StringUtils.join(mobileArray,",");//多个号码已逗号分隔
-            String text = String.format("验证码: %s【宠物圈】", validCode);
+            String text = String.format("欢迎使用手机验证，验证码为%s，如非本人操作，请忽略本短信。【宠物圈】", validCode);
             logger.info("使用乐信给"+target+"发送短信:"+text);
             String url="http://www.lx198.com/sdk/send";
             StringBuffer params = new StringBuffer();

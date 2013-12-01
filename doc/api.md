@@ -320,6 +320,29 @@ response
 }
 ```
 
+#### 实名认证
+
+request
+
+URL:/user/{id}/realnameauth
+
+```json
+{
+  "address": "更新地址了",
+  "realName": "呵呵呵呵"
+}
+```
+
+response
+
+```json
+{
+    "status": "000",
+    "message": "实名认证成功",
+    "result": null
+}
+```
+
 #### 添加商户
 
 request

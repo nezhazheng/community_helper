@@ -33,6 +33,8 @@ public class User {
     private String channel;
     @Column
     private String imei;
+    @Column(name = "real_name_auth")
+    private Boolean realNameAuth;
     
     @Transactional
     public boolean persist(){

@@ -38,7 +38,7 @@ public class Category implements Orderable, Comparable<Orderable> {
 
     public static Page findChildCategories(Integer categoryId, Integer start, Integer size, Integer communityId) {
         TypedQuery<Category> query = entityManager().createQuery(
-                "select c from Category c where c.parentId = :parentId and c.communityId = :communityId", Category.class);
+                "select c from Category c where c.parentId = :parentId and c.communityId = :communityId order by c.order asc", Category.class);
         query.setParameter("parentId", categoryId)
         .setParameter("communityId", communityId)
         .setFirstResult(start)

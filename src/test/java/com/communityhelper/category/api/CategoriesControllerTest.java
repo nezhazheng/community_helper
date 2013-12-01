@@ -46,8 +46,9 @@ public class CategoriesControllerTest extends MVCTestEnviroment {
         device.setCommunityId(1);
         
         //When
-        ResultActions result = post("/category/1", device, 1, 2)
+        ResultActions result = post("/category/1?size=2", device)
         //Then
         .andExpect(status().isOk());
+        System.out.println(result.andReturn().getResponse().getContentAsString());
     }
 }

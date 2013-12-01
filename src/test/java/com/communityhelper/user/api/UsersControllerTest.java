@@ -3,6 +3,7 @@ package com.communityhelper.user.api;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.communityhelper.MVCTestEnviroment;
 import com.communityhelper.merchat.Merchant;
 import com.communityhelper.merchat.api.representation.MerchantDTO;
+import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 @DatabaseSetup("/User.yml")
@@ -65,5 +67,22 @@ public class UsersControllerTest extends MVCTestEnviroment {
         User valid = User.findUser(1);
         assertEquals("111111", valid.getPassword());
         assertNotEquals("admin", valid.getPhonenum());
+    }
+    
+    @Test
+    public void should_real_name_auth_success() throws Exception{
+        // Given
+        UserDTO user = new UserDTO();
+        user.setRealName("abc");
+        user.setAddress("bcd");
+        
+        // When
+        post("/user/{userId}/realnameauth", user, 1)
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.status", is("000")));
+        
+        RealNameAuth valid = RealNameAuth.findRealNameAuth(1);
+        assertEquals("abc", valid.getRealName());
+        assertThat(valid.getUserId(), is(1));
     }
 }

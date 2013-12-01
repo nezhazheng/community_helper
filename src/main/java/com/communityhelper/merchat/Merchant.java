@@ -62,7 +62,7 @@ public class Merchant implements Orderable, Comparable<Orderable> {
             Integer start, Integer size, Integer communityId) {
         TypedQuery<Merchant> query = entityManager().createQuery(
                 "from Merchant c where c.categoryId = :categoryId " +
-                "and c.communityId = :communityId and c.status = :status", Merchant.class);
+                "and c.communityId = :communityId and c.status = :status order by c.order asc", Merchant.class);
         query.setParameter("categoryId", categoryId)
         .setParameter("communityId", communityId)
         .setParameter("status", MerchantStatus.VALID)

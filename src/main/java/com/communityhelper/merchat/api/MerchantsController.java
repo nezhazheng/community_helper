@@ -1,6 +1,6 @@
 package com.communityhelper.merchat.api;
 
-import static com.communityhelper.api.APIResponse.response;
+import static com.communityhelper.api.APIResponse.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -38,7 +38,7 @@ public class MerchantsController {
         Merchant merchant = Merchant.findMerchant(merchantId);
         detailDTO.setMerchant(merchant);
         detailDTO.setFeedbackList(feedbackPage);
-        return response().success("查询成功").result(detailDTO);
+        return success("查询成功").result(detailDTO);
     }
     
     /**
@@ -63,9 +63,14 @@ public class MerchantsController {
             merchant.setName(dto.getName());
         }
         merchant.merge();
-        return response().success("修改成功");
+        return success("修改成功");
     }
     
+    /**
+     * 普通用户添加商户
+     * @param dto
+     * @return
+     */
     @RequestMapping
     public 
     @ResponseBody
@@ -73,7 +78,7 @@ public class MerchantsController {
         Merchant merchant = dto.toMerchant();
         merchant.setStatus(MerchantStatus.NOT_VALID);
         merchant.persist();
-        return response().success("添加商户成功");
+        return success("添加商户成功");
     }
     
     /**
@@ -89,6 +94,6 @@ public class MerchantsController {
         Merchant merchant = Merchant.findMerchant(merchantId);
         merchant.setStatus(MerchantStatus.valueOf(status));
         merchant.merge();
-        return response().success("审核成功");
+        return success("审核成功");
     }
 }

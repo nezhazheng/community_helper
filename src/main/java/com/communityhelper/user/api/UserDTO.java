@@ -1,6 +1,7 @@
 package com.communityhelper.user.api;
 
 import com.communityhelper.api.APIRequest;
+import com.communityhelper.user.RealNameAuth;
 
 public class UserDTO extends APIRequest{
     private Integer id;
@@ -45,5 +46,12 @@ public class UserDTO extends APIRequest{
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+    public RealNameAuth toRealNameAuth(Integer userId) {
+        RealNameAuth realNameAuth = new RealNameAuth();
+        realNameAuth.setUserId(userId);
+        realNameAuth.setRealName(this.getRealName());
+        realNameAuth.setContractAddress(this.getAddress());
+        return realNameAuth;
     }
 }

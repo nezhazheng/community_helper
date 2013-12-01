@@ -1,7 +1,6 @@
 package com.communityhelper.user.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -17,6 +16,7 @@ import com.communityhelper.category.MerchantStatus;
 import com.communityhelper.merchat.Merchant;
 import com.communityhelper.merchat.api.representation.MerchantDTO;
 import com.communityhelper.security.TokenService;
+import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;
 
 import static com.communityhelper.api.APIResponse.*;
@@ -59,6 +59,7 @@ public class UsersController {
         user.setRealName(userDTO.getRealName());
         user.setImei(userDTO.getImei());
         user.setChannel(userDTO.getChannel());
+        user.setRealNameAuth(false);
         
         if(user.persist()) {
             return success("注册成功").result(user);
@@ -85,6 +86,27 @@ public class UsersController {
         return success("完善成功");
     }
     
+    /**
+     * 实名认证
+     * @param id
+     * @param userDTO
+     * @return
+     */
+    @RequestMapping(value = "/{id}/realnameauth", method = RequestMethod.POST)
+    public 
+    @ResponseBody
+    APIResponse realNameAuth(@PathVariable Integer id, @RequestBody UserDTO userDTO){
+        RealNameAuth auth = userDTO.toRealNameAuth(id);
+        auth.persist();
+        return success("实名认证成功");
+    }
+    
+    /**
+     * 用户实名申请商户
+     * @param userId
+     * @param dto
+     * @return
+     */
     @RequestMapping(value = "/{userId}/merchant/auth", method = RequestMethod.POST)
     public 
     @ResponseBody

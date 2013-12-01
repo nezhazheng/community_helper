@@ -13,9 +13,10 @@
 10. sms related			DONE
 11. audit merchant		DONE
 12. user login and auth		DONE
-13. add realname authorization when post merchant feedback
+13. add realname authorization when post merchant feedback	DONE
 14. add software feedback api.	DONE
 15. add device info to User model	DONE
+16. add report merchant error api.
 
 #### performance and security
 1. add compress			DONE
@@ -24,8 +25,7 @@
 4. password encrypt		DONE
 
 #### other
-1. api doc			working on
-2. more test			working on
-3. refactor api representation to keep consistency
+1. api doc			DONE
+2. more merchant list test	working on
+3. refactor api representation to keep consistency	DONE
 4. create PageService
-5. handle 401 unauth senario
