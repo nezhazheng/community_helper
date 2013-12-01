@@ -21,6 +21,7 @@ public class CategoriesControllerTest extends MVCTestEnviroment {
         device.setChannel("5");
         device.setPlatform("ios");
         device.setVersion("3.12.0.1"); 
+        device.setCommunityId(1);
         
         //When
         post("/category", device)
@@ -42,6 +43,7 @@ public class CategoriesControllerTest extends MVCTestEnviroment {
         device.setChannel("5");
         device.setPlatform("ios");
         device.setVersion("3.12.0.1"); 
+        device.setCommunityId(1);
         
         //When
         ResultActions result = post("/category/1", device, 1, 2)

@@ -22,6 +22,7 @@
     platform;
     phonenum;
     imei;
+    communityId;		// 小区ID
 }
 ```
 

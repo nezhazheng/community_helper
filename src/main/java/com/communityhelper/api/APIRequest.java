@@ -6,6 +6,13 @@ public class APIRequest {
     private String platform;
     private String phonenum;
     private String imei;
+    private Integer communityId;
+    public Integer getCommunityId() {
+        return communityId;
+    }
+    public void setCommunityId(Integer communityId) {
+        this.communityId = communityId;
+    }
     public String getImei() {
         return imei;
     }

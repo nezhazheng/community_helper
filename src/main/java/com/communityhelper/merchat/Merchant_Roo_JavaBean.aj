@@ -34,6 +34,14 @@ privileged aspect Merchant_Roo_JavaBean {
         this.userId = userId;
     }
     
+    public Integer Merchant.getCommunityId() {
+        return this.communityId;
+    }
+    
+    public void Merchant.setCommunityId(Integer communityId) {
+        this.communityId = communityId;
+    }
+    
     public String Merchant.getName() {
         return this.name;
     }

@@ -24,6 +24,14 @@ privileged aspect Category_Roo_JavaBean {
         this.parentId = parentId;
     }
     
+    public Integer Category.getCommunityId() {
+        return this.communityId;
+    }
+    
+    public void Category.setCommunityId(Integer communityId) {
+        this.communityId = communityId;
+    }
+    
     public String Category.getName() {
         return this.name;
     }

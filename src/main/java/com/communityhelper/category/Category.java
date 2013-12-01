@@ -24,36 +24,38 @@ public class Category implements Orderable, Comparable<Orderable> {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
+    /** foreign keys */
     @Column(name = "parent_id")
     private Integer parentId;
+    @Column(name = "community_id")
+    private Integer communityId;
+    
     @Column(name = "name")
     private String name;
     @Column(name = "corder")
     private Integer order;
-    
-    public static List<Category> findRootCategories() {
-        TypedQuery<Category> query = entityManager().createQuery(
-                "select c from Category c where c.parentId = :parentId ", Category.class);
-        query.setParameter("parentId", DEFAULT_ROOT_ID);
-        return query.getResultList();
-    }
 
-    public static Page findChildCategories(Integer categoryId, Integer start, Integer size) {
+    public static Page findChildCategories(Integer categoryId, Integer start, Integer size, Integer communityId) {
         TypedQuery<Category> query = entityManager().createQuery(
-                "select c from Category c where c.parentId = :parentId ", Category.class);
+                "select c from Category c where c.parentId = :parentId and c.communityId = :communityId", Category.class);
         query.setParameter("parentId", categoryId)
+        .setParameter("communityId", communityId)
         .setFirstResult(start)
         .setMaxResults(size);
         List<Category> categories = query.getResultList();
         Page<Category> page = new Page<Category>(start, size);
         page.setList(categories);
-        page.setTotalResult(countCategorysByParentId(categoryId));
+        page.setTotalResult(countCategorysByParentId(categoryId, communityId));
         return page;
     }
     
-    public static Integer countCategorysByParentId(Integer parentId) {
-        return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Category o where o.parentId = :parentId ", Long.class)
-                .setParameter("parentId", parentId).getSingleResult().toString());
+    public static Integer countCategorysByParentId(Integer parentId, Integer communityId) {
+        return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Category o where o.parentId = :parentId " +
+        		" and o.communityId = :communityId", Long.class)
+                .setParameter("parentId", parentId)
+                .setParameter("communityId", communityId)
+                .getSingleResult().toString());
     }
 
     @Override

@@ -24,7 +24,6 @@ import com.communityhelper.feedback.Feedback;
 @RooJavaBean
 @RooEntity(versionField = "", table = "merchant")
 public class Merchant implements Orderable, Comparable<Orderable> {
-    
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +34,8 @@ public class Merchant implements Orderable, Comparable<Orderable> {
     private Integer categoryId;
     @Column(name = "user_id")
     private Integer userId;
+    @Column(name = "community_id")
+    private Integer communityId;
     
     @Column(name = "name")
     private String name;
@@ -58,27 +59,26 @@ public class Merchant implements Orderable, Comparable<Orderable> {
     private Integer order;
     
     public static Page findValidMerchantsByCategoryId(Integer categoryId,
-            Integer start, Integer size) {
+            Integer start, Integer size, Integer communityId) {
         TypedQuery<Merchant> query = entityManager().createQuery(
-                "from Merchant c where c.categoryId = :categoryId and c.status = :status", Merchant.class);
+                "from Merchant c where c.categoryId = :categoryId " +
+                "and c.communityId = :communityId and c.status = :status", Merchant.class);
         query.setParameter("categoryId", categoryId)
+        .setParameter("communityId", communityId)
         .setParameter("status", MerchantStatus.VALID)
         .setFirstResult(start)
         .setMaxResults(size);
         List<Merchant> merchants = query.getResultList();
         Page<Merchant> page = new Page<Merchant>(start, size);
         page.setList(merchants);
-        page.setTotalResult(countValidMerchantsByCategoryId(categoryId));
+        page.setTotalResult(countValidMerchantsByCategoryId(categoryId, communityId));
         return page;
     }
     
-    public static Integer countMerchantsByCategoryId(Integer parentId) {
-        return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Merchant o where o.categoryId = :categoryId ", Long.class)
-                .setParameter("categoryId", parentId).getSingleResult().toString());
-    }
-    
-    public static Integer countValidMerchantsByCategoryId(Integer parentId) {
-        return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Merchant o where o.categoryId = :categoryId  and o.status = :status", Long.class)
+    public static Integer countValidMerchantsByCategoryId(Integer parentId, Integer communityId) {
+        return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Merchant o where o.categoryId = :categoryId " +
+        		" and o.communityId = :communityId and o.status = :status", Long.class)
+                .setParameter("communityId", communityId)
                 .setParameter("categoryId", parentId)
                 .setParameter("status", MerchantStatus.VALID)
                 .getSingleResult().toString());

@@ -3,41 +3,50 @@ category:
     parent_id: 0
     name: '维修商'
     corder: 3
+    community_id: 1
   - id: 2
     parent_id: 0
     name: '物业服务商'
     corder: 1
+    community_id: 1
   - id: 3
     parent_id: 1
     name: '餐饮'
     corder: 2
+    community_id: 1
   - id: 4
     parent_id: 1
     name: '超市'
     corder: 4
+    community_id: 1
 merchant:
   - id: 1
     category_id: 0
     name: '大李维修商'
     status: 'VALID'
     morder: 6
+    community_id: 1
   - id: 2
     category_id: 0
     name: '小红物业服务商'
     status: 'VALID'
     morder: 5
+    community_id: 1
   - id: 3
     category_id: 1
     name: '小毛物业服务商'
     status: 'VALID'
     morder: 4
+    community_id: 1
   - id: 4
     category_id: 1
     name: '馄饨店'
     status: 'VALID'
     morder: 5
+    community_id: 1
   - id: 5
     category_id: 3
     name: '大黄馄饨店'
     status: 'NOT_VALID'
     morder: 6
+    community_id: 1

@@ -10,7 +10,7 @@
 7. add complete user info api	DONE
 8. add score avg and socre user count to merchant detail api.		DONE
 9. modify password		DONE
-10. sms related
+10. sms related			DONE
 11. audit merchant		DONE
 12. user login and auth		DONE
 13. add realname authorization when post merchant feedback

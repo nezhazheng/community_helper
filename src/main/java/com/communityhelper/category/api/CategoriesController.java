@@ -32,8 +32,8 @@ public class CategoriesController {
     public 
     @ResponseBody
     APIResponse index(@RequestBody APIRequest device){
-        Page categories = Category.findChildCategories(Category.DEFAULT_ROOT_ID, 0, 10);
-        Page merchants = Merchant.findValidMerchantsByCategoryId(Category.DEFAULT_ROOT_ID, 0, 10);
+        Page categories = Category.findChildCategories(Category.DEFAULT_ROOT_ID, 0, 10, device.getCommunityId());
+        Page merchants = Merchant.findValidMerchantsByCategoryId(Category.DEFAULT_ROOT_ID, 0, 10, device.getCommunityId());
         Page categoryPage = categoryService.createCategoryPage(categories, merchants);
         return response().success("查询成功").result(categoryPage);
     }
@@ -48,8 +48,8 @@ public class CategoriesController {
             @RequestParam(value = "start", defaultValue = "0") Integer start,
             @RequestParam(value = "size", defaultValue = "10") Integer size,
             @RequestBody APIRequest device){
-        Page categories = Category.findChildCategories(categoryId, start, size);
-        Page merchants = Merchant.findValidMerchantsByCategoryId(categoryId, start, size);
+        Page categories = Category.findChildCategories(categoryId, start, size, device.getCommunityId());
+        Page merchants = Merchant.findValidMerchantsByCategoryId(categoryId, start, size, device.getCommunityId());
         Page categoryPage = categoryService.createCategoryPage(categories, merchants);
         return response().success("查询成功").result(categoryPage);
     }
