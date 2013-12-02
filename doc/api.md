@@ -38,11 +38,15 @@ encrypt=1: 客户端request body是否加密(加密方式待定，开发中)
 {
     "status": "000",
     "message": "查询成功",
-    "result": null
+    "result": null		// 接口特有的返回数据都放在result中
 }
 ```
 
 #### Status状态码
+
+SUCCESS("000", "成功"), 
+
+ERROR("999", "系统错误"), 
 
 USER_NOT_FOUND("001", "用户不存在"), 
 
@@ -52,11 +56,13 @@ USER_ALREADY_EXISTS("003", "用户已经存在"),
 
 NOT_HAVE_RECORD("999", "没有找到数据"), 
 
-SUCCESS("000", "成功"), 
+ALREADY_FEEDBACK("101","用户已经留言"), 
 
-ALREADY_FEEDBACK("101","用户已经留言"),
+TOO_MANY_VALID_CODE("004", "验证码发送次数超出3次上限"), 
 
-ERROR("999", "系统错误");
+VALID_CODE_NOT_VALID("005", "验证码校验未通过"), 
+
+SEND_SMS_ERROR("006", "发送短信失败");
 
 ### API
 
