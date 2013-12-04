@@ -18,10 +18,10 @@
 ```json
 {
 	version;
-    channel;
-    platform;
+    channel;			// 问后台channel号是多少
+    platform;			// ios or android
     phonenum;
-    imei;
+    imei;				// 手机唯一标识
     communityId;		// 小区ID
 }
 ```
@@ -112,14 +112,13 @@ request
 
 URL:/category/{categoryId}?start=0&size=20
 
-* 返回的数据中类别和商户都有可能包含
+* 返回的数据中类别和商户都有可能包含,不返回子类别数据
 
 categoryId: 父类别ID			Optional	Default:0(根级类别)
 
 start: 分页开始位置			Optional	Default:0
 
-size: 父类别ID			Optional	Default:10
-
+size: 获取多少项数据			Optional	Default:10
 
 response
 
