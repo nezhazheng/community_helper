@@ -26,10 +26,12 @@ public class Category implements Orderable, Comparable<Orderable> {
     private Integer id;
     
     /** foreign keys */
-    @Column(name = "parent_id")
-    private Integer parentId;
+    @Column(name = "category_id")
+    private Integer categoryId;
     @Column(name = "community_id")
     private Integer communityId;
+    @Column(name = "icon_id")
+    private Integer iconId;
     
     @Column(name = "name")
     private String name;
@@ -38,11 +40,12 @@ public class Category implements Orderable, Comparable<Orderable> {
 
     public static Page findChildCategories(Integer categoryId, Integer start, Integer size, Integer communityId) {
         TypedQuery<Category> query = entityManager().createQuery(
-                "select c from Category c where c.parentId = :parentId and c.communityId = :communityId order by c.order asc", Category.class);
-        query.setParameter("parentId", categoryId)
+                "select c from Category c where c.categoryId = :categoryId and c.communityId = :communityId " +
+                "and (c.order >= :start and c.order <= :size) order by c.order asc", Category.class);
+        query.setParameter("categoryId", categoryId)
         .setParameter("communityId", communityId)
-        .setFirstResult(start)
-        .setMaxResults(size);
+        .setParameter("start", start)
+        .setParameter("size", size);
         List<Category> categories = query.getResultList();
         Page<Category> page = new Page<Category>(start, size);
         page.setList(categories);
@@ -50,10 +53,10 @@ public class Category implements Orderable, Comparable<Orderable> {
         return page;
     }
     
-    public static Integer countCategorysByParentId(Integer parentId, Integer communityId) {
-        return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Category o where o.parentId = :parentId " +
+    public static Integer countCategorysByParentId(Integer categoryId, Integer communityId) {
+        return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Category o where o.categoryId = :categoryId " +
         		" and o.communityId = :communityId", Long.class)
-                .setParameter("parentId", parentId)
+                .setParameter("categoryId", categoryId)
                 .setParameter("communityId", communityId)
                 .getSingleResult().toString());
     }

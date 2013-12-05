@@ -48,7 +48,8 @@ public class CategoriesControllerTest extends MVCTestEnviroment {
         //When
         ResultActions result = post("/category/1?size=2", device)
         //Then
-        .andExpect(status().isOk());
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.result.totalResult", is(4)));
         System.out.println(result.andReturn().getResponse().getContentAsString());
     }
 }

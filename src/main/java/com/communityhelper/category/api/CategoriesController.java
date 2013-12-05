@@ -13,6 +13,7 @@ import com.communityhelper.api.APIRequest;
 import com.communityhelper.api.APIResponse;
 import com.communityhelper.api.Page;
 import com.communityhelper.category.Category;
+import com.communityhelper.category.api.representation.CategoryListRequest;
 import com.communityhelper.category.service.CategoryService;
 import com.communityhelper.merchat.Merchant;
 
@@ -32,10 +33,10 @@ public class CategoriesController {
     public 
     @ResponseBody
     APIResponse index(@RequestBody APIRequest device){
-        Page categories = Category.findChildCategories(Category.DEFAULT_ROOT_ID, 0, 10, device.getCommunityId());
-        Page merchants = Merchant.findValidMerchantsByCategoryId(Category.DEFAULT_ROOT_ID, 0, 10, device.getCommunityId());
+        Page categories = Category.findChildCategories(Category.DEFAULT_ROOT_ID, 1, 10, device.getCommunityId());
+        Page merchants = Merchant.findValidMerchantsByCategoryId(Category.DEFAULT_ROOT_ID, 1, 10, device.getCommunityId());
         Page categoryPage = categoryService.createCategoryPage(categories, merchants);
-        return response().success("查询成功").result(categoryPage);
+        return success("查询成功").result(categoryPage);
     }
     
     /**
@@ -44,22 +45,13 @@ public class CategoriesController {
     @RequestMapping(value = "/{categoryId}")
     public
     @ResponseBody
-    APIResponse categoryList(@PathVariable("categoryId") Integer categoryId,
-            @RequestParam(value = "start", defaultValue = "0") Integer start,
-            @RequestParam(value = "size", defaultValue = "10") Integer size,
-            @RequestBody APIRequest device){
-        Page categories = Category.findChildCategories(categoryId, start, size, device.getCommunityId());
-        Page merchants = Merchant.findValidMerchantsByCategoryId(categoryId, start, size, device.getCommunityId());
+    APIResponse categoryList(@PathVariable(value = "categoryId") Integer categoryId,
+            @RequestBody CategoryListRequest request){
+        Page categories = Category.findChildCategories(categoryId,
+                request.getStart(), request.getSize(), request.getCommunityId());
+        Page merchants = Merchant.findValidMerchantsByCategoryId(categoryId,
+                request.getStart(), request.getSize(), request.getCommunityId());
         Page categoryPage = categoryService.createCategoryPage(categories, merchants);
-        return response().success("查询成功").result(categoryPage);
+        return success("查询成功").result(categoryPage);
     }
-    
-    /**
-     * 所有类别
-     * @return
-     */
-//    @RequestMapping(value = "/all")
-//    public APIResponse allCategory(Integer categoryId){
-//        
-//    }
 }

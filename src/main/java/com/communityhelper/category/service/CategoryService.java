@@ -8,28 +8,28 @@ import org.springframework.stereotype.Service;
 
 import com.communityhelper.api.Page;
 import com.communityhelper.category.Category;
+import com.communityhelper.category.api.representation.ItemDTO;
 import com.communityhelper.merchat.Merchant;
+import com.communityhelper.software.Image;
+import com.communityhelper.software.Image.ImageType;
 
 @Service
 public class CategoryService {
-    public List createCategoryList(List<Category> categories,
-            List<Merchant> merchants) {
-        List result = new ArrayList();
-        result.addAll(categories);
-        result.addAll(merchants);
-        return result;
-    }
-
-    public Page createCategoryPage(Page categories, Page merchants) {
+    public Page createCategoryPage(
+            Page<Category> categories, Page<Merchant> merchants) {
         Page categoryPage = new Page(categories.getPageIndex(), categories.getMaxResult());
         List result = new ArrayList();
-        result.addAll(categories.getList());
-        if(result.size() < categories.getMaxResult()){
-            int offset = categories.getMaxResult() - result.size();
-            if(offset > merchants.getList().size()) {
-                offset = merchants.getList().size();
+        for(Category category: categories.getList()){
+            ItemDTO dto = ItemDTO.categoryToItem(category);
+            Image icon = Image.findImage(category.getIconId());
+            if(null != icon){
+                dto.setIconURL(icon.getUrl());
             }
-            result.addAll(merchants.getList().subList(0, offset));
+            result.add(dto);
+        }
+        for(Merchant merchant : merchants.getList()){
+            ItemDTO dto = ItemDTO.merchantToItem(merchant);
+            result.add(dto);
         }
         Collections.sort(result);
         categoryPage.setTotalResult(categories.getTotalResult() + merchants.getTotalResult());

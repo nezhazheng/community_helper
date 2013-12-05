@@ -28,7 +28,8 @@ public class Image {
     private ImageType type;
     
     public enum ImageType{
-        LaunchImage
+        LaunchImage,
+        CategoryImage
     }
 
     public static Image findImageByTypeAndPlatform(ImageType launchimage,

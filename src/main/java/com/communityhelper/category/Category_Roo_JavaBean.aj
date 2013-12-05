@@ -16,12 +16,12 @@ privileged aspect Category_Roo_JavaBean {
         this.id = id;
     }
     
-    public Integer Category.getParentId() {
-        return this.parentId;
+    public Integer Category.getCategoryId() {
+        return this.categoryId;
     }
     
-    public void Category.setParentId(Integer parentId) {
-        this.parentId = parentId;
+    public void Category.setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
     
     public Integer Category.getCommunityId() {
@@ -30,6 +30,14 @@ privileged aspect Category_Roo_JavaBean {
     
     public void Category.setCommunityId(Integer communityId) {
         this.communityId = communityId;
+    }
+    
+    public Integer Category.getIconId() {
+        return this.iconId;
+    }
+    
+    public void Category.setIconId(Integer iconId) {
+        this.iconId = iconId;
     }
     
     public String Category.getName() {

@@ -23,7 +23,7 @@ import com.communityhelper.feedback.Feedback;
 @RooJson
 @RooJavaBean
 @RooEntity(versionField = "", table = "merchant")
-public class Merchant implements Orderable, Comparable<Orderable> {
+public class Merchant {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,12 +62,12 @@ public class Merchant implements Orderable, Comparable<Orderable> {
             Integer start, Integer size, Integer communityId) {
         TypedQuery<Merchant> query = entityManager().createQuery(
                 "from Merchant c where c.categoryId = :categoryId " +
-                "and c.communityId = :communityId and c.status = :status order by c.order asc", Merchant.class);
+                "and (c.order >= :start and c.order <= :size) and c.communityId = :communityId and c.status = :status order by c.order asc", Merchant.class);
         query.setParameter("categoryId", categoryId)
         .setParameter("communityId", communityId)
         .setParameter("status", MerchantStatus.VALID)
-        .setFirstResult(start)
-        .setMaxResults(size);
+        .setParameter("start", start)
+        .setParameter("size", size);
         List<Merchant> merchants = query.getResultList();
         Page<Merchant> page = new Page<Merchant>(start, size);
         page.setList(merchants);
@@ -98,10 +98,5 @@ public class Merchant implements Orderable, Comparable<Orderable> {
         this.setScore(0.0);
         this.setScoreUserCount(0);
         this.setOrder(0);
-    }
-    
-    @Override
-    public int compareTo(Orderable o) {
-        return this.getOrder().compareTo(o.getOrder());
     }
 }

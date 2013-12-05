@@ -110,57 +110,75 @@ response
 
 request
 
-URL:/category/{categoryId}?start=0&size=20
+URL:/category/{categoryId}?start=1&size=20
 
 * 返回的数据中类别和商户都有可能包含,不返回子类别数据
 
 categoryId: 父类别ID			Optional	Default:0(根级类别)
 
-start: 分页开始位置			Optional	Default:0
+start: 分页开始位置，从1开始	Optional	Default:1
 
 size: 获取多少项数据			Optional	Default:10
+
+```json
+{
+  "version": "3.12.0.1",
+  "channel": "5",
+  "platform": "ios"
+}
+```
 
 response
 
 ```json
 {
-  "status": "000",
-  "message": "查询成功",
-  "result": {
-    "pageIndex": 0,
-    "maxResult": 10,
-    "totalResult": 4,
-    "list": [
-      {
-        "id": 3,				// 类别模型
-        "parentId": 1,
-        "name": "餐饮"
-      },
-      {
-        "id": 4,
-        "parentId": 1,
-        "name": "超市"
-      },
-      {
-        "id": 3,				// 商户模型
-        "categoryId": 1,
-        "name": "小毛物业服务商",
-        "contactPhoneNumber": null,
-        "contactAddress": null,
-        "score": null			评分
-      },
-      {
-        "id": 4,
-        "categoryId": 1,
-        "name": "馄饨店",
-        "contactPhoneNumber": null,
-        "contactAddress": null,
-        "score": null
-      }
-    ],
-    "currentPageNo": 1,
-    "totalPage": 1
-  }
+    "status": "000",
+    "message": "查询成功",
+    "result": {
+        "pageIndex": 1,
+        "maxResult": 20,
+        "totalResult": 4,
+        "list": [
+            {
+                "id": 1,
+                "categoryId": 0,
+                "name": "维修商",
+                "score": 0,
+                "iconURL": "http://localhost/image/i.png",  // 类别对应图片
+                "isCategory": true,			// 是否是类别
+                "order": 1						// 后台会排好序，可以忽略
+            },
+            {
+                "id": 1,
+                "categoryId": 0,
+                "name": "大李维修商",
+                "score": 5,						// 平均评分
+                "iconURL": null,
+                "isCategory": false,
+                "order": 1
+            },
+            {
+                "id": 2,
+                "categoryId": 0,
+                "name": "物业服务商",
+                "score": 0,
+                "iconURL": null,
+                "isCategory": true,
+                "order": 2
+            },
+            {
+                "id": 2,
+                "categoryId": 0,
+                "name": "小红物业服务商",
+                "score": null,
+                "iconURL": null,
+                "isCategory": false,
+                "order": 2
+            }
+        ],
+        "currentPageNo": 1,
+        "totalPage": 1
+    }
 }
 ```
 

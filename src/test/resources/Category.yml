@@ -1,21 +1,21 @@
 category:
   - id: 1
-    parent_id: 0
+    category_id: 0
     name: '维修商'
     corder: 3
     community_id: 1
   - id: 2
-    parent_id: 0
+    category_id: 0
     name: '物业服务商'
     corder: 1
     community_id: 1
   - id: 3
-    parent_id: 1
+    category_id: 1
     name: '餐饮'
     corder: 2
     community_id: 1
   - id: 4
-    parent_id: 1
+    category_id: 1
     name: '超市'
     corder: 4
     community_id: 1
