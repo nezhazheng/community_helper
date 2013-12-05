@@ -110,7 +110,7 @@ response
 
 request
 
-URL:/category/{categoryId}?start=1&size=20
+URL:/category/{categoryId}
 
 * 返回的数据中类别和商户都有可能包含,不返回子类别数据
 
@@ -122,9 +122,8 @@ size: 获取多少项数据			Optional	Default:10
 
 ```json
 {
-  "version": "3.12.0.1",
-  "channel": "5",
-  "platform": "ios"
+  "start": "3.12.0.1",
+  "size": "5"
 }
 ```
 
