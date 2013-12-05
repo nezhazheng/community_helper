@@ -54,12 +54,12 @@ public class CategoriesController {
         return response().success("查询成功").result(categoryPage);
     }
     
-//    /**
-//     * 所有类别
-//     * @return
-//     */
+    /**
+     * 所有类别
+     * @return
+     */
 //    @RequestMapping(value = "/all")
-//    public APIResponse allCategory(){
+//    public APIResponse allCategory(Integer categoryId){
 //        
 //    }
 }

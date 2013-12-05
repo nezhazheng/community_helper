@@ -80,20 +80,4 @@ public class MerchantsController {
         merchant.persist();
         return success("添加商户成功");
     }
-    
-    /**
-     * 审核商户
-     * @param status #com.communityhelper.category.MerchantStatus
-     * @param merchantId
-     * @return
-     */
-    @RequestMapping(value = "/{merchantId}/audit")
-    public 
-    @ResponseBody
-    APIResponse audit(@RequestParam("status") String status, @PathVariable Integer merchantId){
-        Merchant merchant = Merchant.findMerchant(merchantId);
-        merchant.setStatus(MerchantStatus.valueOf(status));
-        merchant.merge();
-        return success("审核成功");
-    }
 }

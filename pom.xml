@@ -573,14 +573,11 @@
 		
 		<profile>
             <id>product</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <properties>
                 <database.url>jdbc:mysql://192.168.65.5:3306/community_helper?characterEncoding=utf-8</database.url>
                 <database.driverClassName>com.mysql.jdbc.Driver</database.driverClassName>
-                <database.username>jrtConsole</database.username>
-                <database.password>jrtConsole</database.password>
+                <database.username>root</database.username>
+                <database.password></database.password>
                 <logback.appender>STDOUT</logback.appender>
                 <log.file>${project.build.directoty}</log.file>
             </properties>
