@@ -253,7 +253,7 @@ request
 
 URL:/merchant/{merchantId}
 
-* 返回的数据中类别和商户都有可能包含
+* 返回的数据中类别和商户都有可能包含，下面的分页是反馈列表的分页
 
 start: 分页开始位置			Optional	Default:0
 
