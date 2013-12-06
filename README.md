@@ -17,6 +17,8 @@
 14. add software feedback api.	DONE
 15. add device info to User model	DONE
 16. add report merchant error api.
+17. add user createtime realnameauth createtime.
+18. add description to software update api.
 
 #### performance and security
 1. add compress			DONE

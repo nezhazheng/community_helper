@@ -80,7 +80,7 @@ public class UsersController {
             user.setRealName(userDTO.getRealName());
         }
         if(StringUtils.hasLength(userDTO.getPassword())) {
-            user.setPassword(userDTO.getPassword());
+            user.setPassword(PASSWORD_ENCODER.encode(userDTO.getPassword()));
         }
         user.merge();
         return success("完善成功");
