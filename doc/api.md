@@ -54,6 +54,10 @@ PASSWORD_ERROR("002", "用户密码错误"),
 
 USER_ALREADY_EXISTS("003", "用户已经存在"),
 
+WAIT_TO_AUTH("004", "实名认证审核中"),
+
+ALREADY_AUTH("005", "实名认证已审核"),
+
 NOT_HAVE_RECORD("999", "没有找到数据"), 
 
 ALREADY_FEEDBACK("101","用户已经留言"), 
@@ -94,6 +98,7 @@ response
             "version": "4.0.0",
             "channel": "5",
             "enableUpgrade": true,
+            "upgradeDesc": "happy",	//升级描述
             "updateURL": "http://localhost/image/ii.png"
         },
         "launchImage": {
@@ -316,7 +321,7 @@ response
 }
 ```
 
-#### 完善用户信息 修改密码
+#### 完善用户信息
 
 request
 
@@ -342,6 +347,43 @@ response
 }
 ```
 
+#### 修改密码
+
+request
+
+URL:/user/{id}/modifypassowrd
+
+```json
+{
+  "oldPassword]": "111111",
+  "password": "123456"
+}
+```
+
+response
+
+```json
+{
+    "status": "000",
+    "message": "修改密码成功",
+    "result": {
+        "version": null,
+        "channel": null,
+        "platform": null,
+        "phonenum": null,
+        "imei": null,
+        "communityId": null,
+        "id": null,
+        "password": "123456",
+        "oldPassword": "111111",
+        "realName": null,
+        "address": null,
+        "token": "MTM4NjM0MjQ2ODM2NTo1MDk0ZTU1NTY4OjEzMjk5OTk5OTk9OGM5MzkyMTRlNGM5N2NhOWNhMDRmYmE5ZWFmOWNlYTBjNTllOGY2NzllMWY2ZTI1MWFhZjg3MGUxMGQyZDE5NDUzOGYwZTc1ODQ4NTdiNWQ6MDRjNjI0ZTAyYjNlZTNiMjYzODE3MjgyZjhlZDUxYzAwOWY4ZDg5NGFiMjMwNDBkZTA0ZTQ5OTVmOWI2ZWNlYzM2NWQ1MjY2OGE1NjljNWQwYzVlMzhlYjZjZDAxNDdkOTExNTA3NGY3OTRlZTE4YjZjMTU0NDAyNDYyYzA1NDc="	// 使用新token 进行后续请求
+    }
+}
+```
+
+
 #### 实名认证
 
 request
@@ -359,7 +401,7 @@ response
 
 ```json
 {
-    "status": "000",
+    "status": "000",		// WAIT_TO_AUTH & ALREADY_AUTH is possible.
     "message": "实名认证成功",
     "result": null
 }

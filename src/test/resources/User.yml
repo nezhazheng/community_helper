@@ -4,3 +4,10 @@ user:
     password: '123456'
     address: 'myaddress'
     real_name: 'zhengzheng'
+    real_name_auth: 'HAS_NOT_AUTH'
+  - id: 2
+    phonenum: '13311008878'
+    password: '123456'
+    address: 'myaddress'
+    real_name: 'zhengzheng'
+    real_name_auth: 'WAIT_TO_AUTH'

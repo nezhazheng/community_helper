@@ -76,6 +76,8 @@ public class APIResponse {
         USER_NOT_FOUND("001", "用户不存在"), 
         PASSWORD_ERROR("002", "用户密码错误"), 
         USER_ALREADY_EXISTS("003", "用户已经存在"),
+        WAIT_TO_AUTH("004", "实名认证审核中"),
+        ALREADY_AUTH("005", "实名认证已审核"),
         NOT_HAVE_RECORD("999", "没有找到数据"), 
         ALREADY_FEEDBACK("101","用户已经留言"), 
         TOO_MANY_VALID_CODE("004", "验证码发送次数超出3次上限"), 

@@ -28,6 +28,8 @@ public class Software {
     private boolean enableUpgrade;
     @Column(name = "update_url")
     private String updateURL;
+    @Column(name = "upgrade_desc")
+    private String upgradeDesc;
     
     public static Software findCurrentUpdateSoftware(String channel,
             String platform) {

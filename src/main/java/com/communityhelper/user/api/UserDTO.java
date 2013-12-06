@@ -7,10 +7,16 @@ public class UserDTO extends APIRequest{
     private Integer id;
     private String phonenum;
     private String password;
+    private String oldPassword;
     private String realName;
     private String address;
     private String token;
-    
+    public String getOldPassword() {
+        return oldPassword;
+    }
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
     public Integer getId() {
         return id;
     }

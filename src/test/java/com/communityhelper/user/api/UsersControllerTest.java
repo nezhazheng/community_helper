@@ -56,7 +56,6 @@ public class UsersControllerTest extends MVCTestEnviroment {
         // Given
         UserDTO user = new UserDTO();
         user.setPhonenum("admin");
-        user.setPassword("111111");
         user.setAddress("test");
         
       //When
@@ -65,7 +64,6 @@ public class UsersControllerTest extends MVCTestEnviroment {
         .andExpect(jsonPath("$.status", is("000")));
         
         User valid = User.findUser(1);
-        assertEquals("111111", valid.getPassword());
         assertNotEquals("admin", valid.getPhonenum());
     }
     
@@ -84,5 +82,18 @@ public class UsersControllerTest extends MVCTestEnviroment {
         RealNameAuth valid = RealNameAuth.findRealNameAuth(1);
         assertEquals("abc", valid.getRealName());
         assertThat(valid.getUserId(), is(1));
+    }
+    
+    @Test
+    public void should_real_name_auth_return_wait() throws Exception{
+        // Given
+        UserDTO user = new UserDTO();
+        user.setRealName("abc");
+        user.setAddress("bcd");
+        
+        // When
+        post("/user/{userId}/realnameauth", user, 2)
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.status", is("004")));
     }
 }

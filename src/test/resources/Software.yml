@@ -5,9 +5,17 @@ software:
     channel: '5'
     enable_upgrade: true
     update_url: http://localhost/image/i.png
+    upgrade_desc: 'shengjihappy'
   - id: 2
     platform: 'ios'
     version: '4.0.0'
     channel: '5'
     enable_upgrade: false
     update_url: http://localhost/image/ii.png
+    upgrade_desc: 'shengjihappy'
+    
+image:
+  - id: 1
+    platform: 'ios'
+    type: 'LaunchImage'
+    url: http://localhost/image/i.png

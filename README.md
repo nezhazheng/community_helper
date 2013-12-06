@@ -18,7 +18,7 @@
 15. add device info to User model	DONE
 16. add report merchant error api.
 17. add user createtime realnameauth createtime.
-18. add description to software update api.
+18. add description to software update api.	DONE
 
 #### performance and security
 1. add compress			DONE
@@ -31,3 +31,4 @@
 2. more merchant list test	working on
 3. refactor api representation to keep consistency	DONE
 4. create PageService
+5. add log

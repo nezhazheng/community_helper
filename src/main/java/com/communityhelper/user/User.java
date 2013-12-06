@@ -1,6 +1,8 @@
 package com.communityhelper.user;
 
 import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,8 +35,10 @@ public class User {
     private String channel;
     @Column
     private String imei;
+    
+    @Enumerated(EnumType.STRING)
     @Column(name = "real_name_auth")
-    private Boolean realNameAuth;
+    private UserAuthStatus realNameAuth;
     
     @Transactional
     public boolean persist(){
@@ -58,5 +62,9 @@ public class User {
         catch (EmptyResultDataAccessException empty) {
             return null;
         }
+    }
+    
+    public enum UserAuthStatus {
+        HAS_NOT_AUTH,WAIT_TO_AUTH,ALREADY_AUTH
     }
 }

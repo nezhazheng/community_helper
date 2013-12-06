@@ -56,4 +56,12 @@ privileged aspect Software_Roo_JavaBean {
         this.updateURL = updateURL;
     }
     
+    public String Software.getUpgradeDesc() {
+        return this.upgradeDesc;
+    }
+    
+    public void Software.setUpgradeDesc(String upgradeDesc) {
+        this.upgradeDesc = upgradeDesc;
+    }
+    
 }

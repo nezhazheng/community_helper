@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.communityhelper.api.Page;
 import com.communityhelper.category.MerchantStatus;
-import com.communityhelper.category.Orderable;
 import com.communityhelper.feedback.Feedback;
 
 @RooJson

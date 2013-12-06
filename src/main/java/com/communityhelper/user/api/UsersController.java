@@ -18,6 +18,7 @@ import com.communityhelper.merchat.api.representation.MerchantDTO;
 import com.communityhelper.security.TokenService;
 import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;
+import com.communityhelper.user.User.UserAuthStatus;
 
 import static com.communityhelper.api.APIResponse.*;
 
@@ -59,7 +60,7 @@ public class UsersController {
         user.setRealName(userDTO.getRealName());
         user.setImei(userDTO.getImei());
         user.setChannel(userDTO.getChannel());
-        user.setRealNameAuth(false);
+        user.setRealNameAuth(UserAuthStatus.HAS_NOT_AUTH);
         
         if(user.persist()) {
             return success("注册成功").result(user);
@@ -79,11 +80,30 @@ public class UsersController {
         if(StringUtils.hasLength(userDTO.getRealName())) {
             user.setRealName(userDTO.getRealName());
         }
-        if(StringUtils.hasLength(userDTO.getPassword())) {
-            user.setPassword(PASSWORD_ENCODER.encode(userDTO.getPassword()));
-        }
         user.merge();
         return success("完善成功");
+    }
+    
+    
+    /**
+     * 修改密码
+     * @param id
+     * @param userDTO
+     * @return
+     */
+    @RequestMapping(value = "/{id}/modifypassowrd", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    APIResponse modifyPassword(@PathVariable Integer id, @RequestBody UserDTO userDTO){
+        User user = User.findUser(id);
+        if(!PASSWORD_ENCODER.matches(userDTO.getOldPassword(), user.getPassword())){
+            return response().status(Status.PASSWORD_ERROR);
+        }
+        user.setPassword(PASSWORD_ENCODER.encode(userDTO.getPassword()));
+        user.merge();
+        String token = service.getToken(user);
+        userDTO.setToken(token);
+        return success("修改密码成功").result(userDTO);
     }
     
     /**
@@ -96,6 +116,13 @@ public class UsersController {
     public 
     @ResponseBody
     APIResponse realNameAuth(@PathVariable Integer id, @RequestBody UserDTO userDTO){
+        User user = User.findUser(id);
+        if(UserAuthStatus.WAIT_TO_AUTH.equals(user.getRealNameAuth())){
+            return response().status(Status.WAIT_TO_AUTH);
+        }
+        if(UserAuthStatus.ALREADY_AUTH.equals(user.getRealNameAuth())){
+            return response().status(Status.ALREADY_AUTH);
+        }
         RealNameAuth auth = userDTO.toRealNameAuth(id);
         auth.persist();
         return success("实名认证成功");
