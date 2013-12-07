@@ -576,7 +576,7 @@ response
 
 ```json
 {
-    "status": "000",
+    "status": "000",				// USER_NOT_FOUND is possible.
     "message": "找回密码成功",
     "result": null
 }
