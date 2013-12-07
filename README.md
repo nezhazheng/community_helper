@@ -19,6 +19,9 @@
 16. add report merchant error api.
 17. add user createtime realnameauth createtime.
 18. add description to software update api.	DONE
+19. find password api.
+20. my merchant list api.
+21. user store api.
 
 #### performance and security
 1. add compress			DONE

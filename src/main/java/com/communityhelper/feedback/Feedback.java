@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.TypedQuery;
 
 import org.springframework.roo.addon.entity.RooEntity;
@@ -36,7 +37,18 @@ public class Feedback {
     private Date createDate;
     @Column(name = "score")
     private Integer score;
-    
+    @Transient
+    private String phonenum;
+    public Feedback(FeedbackPK id, String message, Date createDate,
+            Integer score, String phonenum) {
+        super();
+        this.id = id;
+        this.message = message;
+        this.createDate = createDate;
+        this.score = score;
+        this.phonenum = phonenum;
+    }
+
     @Transactional
     public boolean persist(){
         if (notPresent()) {
@@ -54,7 +66,8 @@ public class Feedback {
     public static Page<Feedback> findFeedbacksByMerchant(Integer merchantId,
             Integer start, Integer size) {
         TypedQuery<Feedback> query = entityManager().createQuery(
-                "select c from Feedback c where c.id.merchantId = :merchantId ", Feedback.class);
+                "select new com.communityhelper.feedback.Feedback(c.id,c.message,c.createDate,c.score,u.phonenum) " +
+                "from Feedback c, User u where c.id.userId = u.id and c.id.merchantId = :merchantId ", Feedback.class);
         query.setParameter("merchantId", merchantId)
         .setFirstResult(start)
         .setMaxResults(size);

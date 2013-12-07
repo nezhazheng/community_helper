@@ -42,4 +42,12 @@ privileged aspect Feedback_Roo_JavaBean {
         this.score = score;
     }
     
+    public String Feedback.getPhonenum() {
+        return this.phonenum;
+    }
+    
+    public void Feedback.setPhonenum(String phonenum) {
+        this.phonenum = phonenum;
+    }
+    
 }

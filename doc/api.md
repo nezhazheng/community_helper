@@ -1,4 +1,3 @@
-
 ### 接口约定
 
 * 所有请求HTTP METHOD都是POST，交互数据格式为JSON
@@ -286,6 +285,7 @@ response
                         "merchantId": 1
                     },
                     "message": "感觉非常好",
+                    "phonenum": "1329999999",	    // 用户手机号
                     "createDate": 1385345646000,  // 留言时间，根据需要进行格式化
                     "score": 5
                 }
