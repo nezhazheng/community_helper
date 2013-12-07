@@ -6,18 +6,23 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.persistence.TypedQuery;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.json.RooJson;
+import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 @RooJavaBean
 @RooEntity(versionField = "", table = "user", finders = "findUsersByPhonenumEquals")
 @RooJson
 public class User {
+    @Transient
+    public static final StandardPasswordEncoder PASSWORD_ENCODER = new StandardPasswordEncoder("community");
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -50,11 +55,11 @@ public class User {
     }
     
     public boolean notPresent() {
-        User tryUser = findUserByMobile(getPhonenum());
+        User tryUser = findUserByPhonenum(getPhonenum());
         return tryUser == null;
     }
     
-    public static User findUserByMobile(String mobile) {
+    public static User findUserByPhonenum(String mobile) {
         TypedQuery<User> userQuery = User.findUsersByPhonenumEquals(mobile);
         try {
             return userQuery.getSingleResult();

@@ -565,3 +565,19 @@ response
     "result": null
 }
 ```
+
+#### 找回密码
+
+request
+
+URL:/sms/{phonenum}/findpassword
+
+response
+
+```json
+{
+    "status": "000",
+    "message": "找回密码成功",
+    "result": null
+}
+```

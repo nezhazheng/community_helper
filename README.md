@@ -19,7 +19,7 @@
 16. add report merchant error api.	DONE
 17. add user createtime realnameauth createtime.
 18. add description to software update api.	DONE
-19. find password api.
+19. find password api.		DONE
 20. my merchant list api.
 21. user store api.
 

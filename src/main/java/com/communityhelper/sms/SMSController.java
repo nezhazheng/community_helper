@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.communityhelper.api.APIRequest;
 import com.communityhelper.api.APIResponse;
 import com.communityhelper.sms.service.SMSSerice;
+import com.communityhelper.user.User;
 
 import static com.communityhelper.api.APIResponse.*;
 
@@ -55,5 +56,23 @@ public class SMSController {
             return response().status(Status.VALID_CODE_NOT_VALID);
         }
         return success("验证通过"); 
+    }
+    
+    @RequestMapping(value = "/{phonenum}/findpassword")
+    public 
+    @ResponseBody
+    APIResponse findPassword(@PathVariable String phonenum, @RequestBody APIRequest device) {
+        User tryUser = User.findUserByPhonenum(phonenum);
+        if(tryUser == null){
+            return response().status(Status.USER_NOT_FOUND);
+        }
+        String randomPassword = ValidCode.generateRandomNum(5);
+        String encodeRandomPassword = User.PASSWORD_ENCODER.encode(randomPassword);
+        if(!smsService.sendFindPassword(randomPassword, phonenum)){
+            return response().status(Status.SEND_SMS_ERROR);
+        }
+        tryUser.setPassword(encodeRandomPassword);
+        tryUser.merge();
+        return success("找回密码成功"); 
     }
 }

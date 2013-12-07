@@ -28,17 +28,17 @@ public class UsersController {
     @Autowired
     private TokenService service;
     
-    private static final StandardPasswordEncoder PASSWORD_ENCODER = new StandardPasswordEncoder("community");
+    
     
     @RequestMapping(method = RequestMethod.POST, value = "/authenticate")
     public
     @ResponseBody
     APIResponse autheticate(@RequestBody UserDTO user) {
-        User tryUser = User.findUserByMobile(user.getPhonenum());
+        User tryUser = User.findUserByPhonenum(user.getPhonenum());
         if(tryUser == null){
             return response().status(Status.USER_NOT_FOUND);
         }
-        if(!PASSWORD_ENCODER.matches(user.getPassword(), tryUser.getPassword())){
+        if(!User.PASSWORD_ENCODER.matches(user.getPassword(), tryUser.getPassword())){
             return response().status(Status.PASSWORD_ERROR);
         }
         String token = service.getToken(tryUser);
@@ -55,7 +55,7 @@ public class UsersController {
     APIResponse register(@RequestBody UserDTO userDTO){
         User user = new User();
         user.setPhonenum(userDTO.getPhonenum());
-        user.setPassword(PASSWORD_ENCODER.encode(userDTO.getPassword()));
+        user.setPassword(User.PASSWORD_ENCODER.encode(userDTO.getPassword()));
         user.setAddress(userDTO.getAddress());
         user.setRealName(userDTO.getRealName());
         user.setImei(userDTO.getImei());
@@ -96,10 +96,10 @@ public class UsersController {
     @ResponseBody
     APIResponse modifyPassword(@PathVariable Integer id, @RequestBody UserDTO userDTO){
         User user = User.findUser(id);
-        if(!PASSWORD_ENCODER.matches(userDTO.getOldPassword(), user.getPassword())){
+        if(!User.PASSWORD_ENCODER.matches(userDTO.getOldPassword(), user.getPassword())){
             return response().status(Status.PASSWORD_ERROR);
         }
-        user.setPassword(PASSWORD_ENCODER.encode(userDTO.getPassword()));
+        user.setPassword(User.PASSWORD_ENCODER.encode(userDTO.getPassword()));
         user.merge();
         String token = service.getToken(user);
         userDTO.setToken(token);

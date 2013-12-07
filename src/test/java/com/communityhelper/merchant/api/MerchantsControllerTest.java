@@ -37,20 +37,6 @@ public class MerchantsControllerTest extends MVCTestEnviroment {
         List<Merchant> merchants = Merchant.findAllMerchants();
         assertEquals(6, merchants.size());
     }
-    
-    @Transactional
-    @Test
-    public void should_audit_success() throws Exception {
-        
-        //When
-        mockMvc.perform(MockMvcRequestBuilders.post("/merchant/5/audit")
-                .param("status", "VALID")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-        
-        Merchant valid = Merchant.findMerchant(5);
-        assertEquals(MerchantStatus.VALID, valid.getStatus());
-    }
 }
 
 

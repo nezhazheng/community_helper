@@ -27,7 +27,7 @@ public class TokenService {
             return false;
         }
         String[] information = verifyToken.getExtendedInformation().split("=");
-        User user = User.findUserByMobile(information[0]);
+        User user = User.findUserByPhonenum(information[0]);
         if(user == null){
             return false;
         }
@@ -40,7 +40,7 @@ public class TokenService {
     public UserDetails getUserFromToken(String token) {
         Token verifyToken = tokenService.verifyToken(token);
         String[] information = verifyToken.getExtendedInformation().split("=");
-        User user = User.findUserByMobile(information[0]);
+        User user = User.findUserByPhonenum(information[0]);
         RegisterUserDetails userDetails = new RegisterUserDetails(user);
         return userDetails;
     }
