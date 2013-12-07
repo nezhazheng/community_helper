@@ -17,7 +17,8 @@ import com.communityhelper.api.Page;
 import com.communityhelper.category.MerchantStatus;
 import com.communityhelper.feedback.Feedback;
 import com.communityhelper.merchat.Merchant;
-import com.communityhelper.merchat.api.representation.MerchantDTO;
+import com.communityhelper.merchat.MerchantErrorReport;
+import com.communityhelper.merchat.api.representation.MerchantRequest;
 import com.communityhelper.merchat.api.representation.MerchantsDetailDTO;
 
 @Controller
@@ -48,19 +49,20 @@ public class MerchantsController {
     @RequestMapping(value = "/{merchantId}/update")
     public 
     @ResponseBody
-    APIResponse update(@PathVariable("merchantId") Integer merchantId, @RequestBody MerchantDTO dto){
+    APIResponse update(@PathVariable("merchantId") Integer merchantId, 
+            @RequestBody MerchantRequest request){
         Merchant merchant = Merchant.findMerchant(merchantId);
-        if(StringUtils.hasLength(dto.getContactAddress())){
-            merchant.setContactAddress(dto.getContactAddress());
+        if(StringUtils.hasLength(request.getContactAddress())){
+            merchant.setContactAddress(request.getContactAddress());
         }
-        if(StringUtils.hasLength(dto.getContactPhoneNumber())){
-            merchant.setContactPhoneNumber(dto.getContactPhoneNumber());
+        if(StringUtils.hasLength(request.getContactPhoneNumber())){
+            merchant.setContactPhoneNumber(request.getContactPhoneNumber());
         }
-        if(StringUtils.hasLength(dto.getDesc())){
-            merchant.setDescription(dto.getDesc());
+        if(StringUtils.hasLength(request.getDesc())){
+            merchant.setDescription(request.getDesc());
         }
-        if(StringUtils.hasLength(dto.getName())){
-            merchant.setName(dto.getName());
+        if(StringUtils.hasLength(request.getName())){
+            merchant.setName(request.getName());
         }
         merchant.merge();
         return success("修改成功");
@@ -74,10 +76,26 @@ public class MerchantsController {
     @RequestMapping
     public 
     @ResponseBody
-    APIResponse addMerchant(@RequestBody MerchantDTO dto){
+    APIResponse addMerchant(@RequestBody MerchantRequest dto){
         Merchant merchant = dto.toMerchant();
         merchant.setStatus(MerchantStatus.NOT_VALID);
         merchant.persist();
         return success("添加商户成功");
+    }
+    
+    /**
+     * 商户报错
+     */
+    @RequestMapping("/{merchantId}/reporterror")
+    public 
+    @ResponseBody
+    APIResponse reportError(@PathVariable("merchantId") Integer merchantId, 
+            @RequestBody MerchantRequest request){
+        MerchantErrorReport errorReport = new MerchantErrorReport();
+        errorReport.setUserId(request.getUserId());
+        errorReport.setMerchantId(merchantId);
+        errorReport.setErrorCategory(request.getErrorCategory());
+        errorReport.persist();
+        return success("商户报错操作成功");
     }
 }

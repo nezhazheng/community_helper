@@ -16,7 +16,7 @@
 13. add realname authorization when post merchant feedback	DONE
 14. add software feedback api.	DONE
 15. add device info to User model	DONE
-16. add report merchant error api.
+16. add report merchant error api.	DONE
 17. add user createtime realnameauth createtime.
 18. add description to software update api.	DONE
 19. find password api.

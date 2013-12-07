@@ -2,12 +2,27 @@ package com.communityhelper.merchat.api.representation;
 
 import com.communityhelper.api.APIRequest;
 import com.communityhelper.merchat.Merchant;
+import com.communityhelper.merchat.MerchantErrorReport.MerchantErrorCategory;
 
-public class MerchantDTO extends APIRequest {
+public class MerchantRequest extends APIRequest {
     private String name;
     private String contactPhoneNumber;
     private String contactAddress;
     private String desc;
+    private MerchantErrorCategory errorCategory;
+    private Integer userId;
+    public MerchantErrorCategory getErrorCategory() {
+        return errorCategory;
+    }
+    public void setErrorCategory(MerchantErrorCategory errorCategory) {
+        this.errorCategory = errorCategory;
+    }
+    public Integer getUserId() {
+        return userId;
+    }
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
     public String getName() {
         return name;
     }

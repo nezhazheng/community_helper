@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.communityhelper.MVCTestEnviroment;
 import com.communityhelper.category.MerchantStatus;
 import com.communityhelper.merchat.Merchant;
-import com.communityhelper.merchat.api.representation.MerchantDTO;
+import com.communityhelper.merchat.api.representation.MerchantRequest;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 
 @DatabaseSetup("/Category.yml")
@@ -24,7 +24,7 @@ public class MerchantsControllerTest extends MVCTestEnviroment {
     @Test
     public void should_add_merchant_success() throws Exception{
         //Given
-        MerchantDTO dto = new MerchantDTO();
+        MerchantRequest dto = new MerchantRequest();
         dto.setName("测试商户");
         dto.setDesc("测试描述");
         

@@ -457,6 +457,31 @@ response
 }
 ```
 
+#### 商户报错
+
+request
+
+URL:/merchant/{merchantId}/reporterror
+
+```json
+{
+  "platform": "android",
+  "userId": 3,									// 报错用户ID
+  "errorCategory": "ADDRESS_ERROR",			// ADDRESS_ERROR or PHONE_ERROR
+  "communityId": 1
+}
+```
+
+response
+
+```json
+{
+    "status": "000",
+    "message": "商户报错操作成功",
+    "result": null
+}
+```
+
 #### 用户认证商户
 
 request

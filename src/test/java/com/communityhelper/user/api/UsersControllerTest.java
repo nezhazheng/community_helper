@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.communityhelper.MVCTestEnviroment;
 import com.communityhelper.merchat.Merchant;
-import com.communityhelper.merchat.api.representation.MerchantDTO;
+import com.communityhelper.merchat.api.representation.MerchantRequest;
 import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
@@ -38,7 +38,7 @@ public class UsersControllerTest extends MVCTestEnviroment {
     @Test
     public void should_add_merchant_correct() throws Exception {
         //Given
-        MerchantDTO dto = new MerchantDTO();
+        MerchantRequest dto = new MerchantRequest();
         dto.setName("测试商户");
         dto.setDesc("测试描述");
         

@@ -14,7 +14,7 @@ import com.communityhelper.api.APIResponse;
 import com.communityhelper.api.APIResponse.Status;
 import com.communityhelper.category.MerchantStatus;
 import com.communityhelper.merchat.Merchant;
-import com.communityhelper.merchat.api.representation.MerchantDTO;
+import com.communityhelper.merchat.api.representation.MerchantRequest;
 import com.communityhelper.security.TokenService;
 import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;
@@ -137,7 +137,7 @@ public class UsersController {
     @RequestMapping(value = "/{userId}/merchant/auth", method = RequestMethod.POST)
     public 
     @ResponseBody
-    APIResponse merchantAuth(@PathVariable Integer userId, @RequestBody MerchantDTO dto) {
+    APIResponse merchantAuth(@PathVariable Integer userId, @RequestBody MerchantRequest dto) {
         Merchant merchant = dto.toMerchant();
         merchant.setUserId(userId);
         merchant.setStatus(MerchantStatus.NOT_VALID);
