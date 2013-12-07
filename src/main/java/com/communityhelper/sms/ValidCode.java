@@ -46,7 +46,7 @@ public class ValidCode {
     }
 
     public static String generate(String phonenum, String type) {
-        String today = new DateTime().toString("yyyy-MM-dd HH:mm:ss");
+        String today = new DateTime().toString("yyyy-MM-dd");
         String validCodeStr = generateRandomNum(5);
         
         ValidCode validCode = new ValidCode();
