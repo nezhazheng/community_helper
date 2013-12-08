@@ -20,7 +20,7 @@
 17. add user createtime realnameauth createtime.
 18. add description to software update api.	DONE
 19. find password api.		DONE
-20. my merchant list api.
+20. my merchant list api.	DONE
 21. user store api.
 
 #### performance and security
@@ -35,3 +35,4 @@
 3. refactor api representation to keep consistency	DONE
 4. create PageService
 5. add log
+6. run test first when deploy

@@ -1,7 +1,11 @@
 package com.communityhelper.user.api;
 
+import static com.communityhelper.api.APIResponse.response;
+import static com.communityhelper.api.APIResponse.success;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,15 +24,11 @@ import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;
 import com.communityhelper.user.User.UserAuthStatus;
 
-import static com.communityhelper.api.APIResponse.*;
-
 @Controller
 @RequestMapping("/user")
 public class UsersController {
     @Autowired
     private TokenService service;
-    
-    
     
     @RequestMapping(method = RequestMethod.POST, value = "/authenticate")
     public
@@ -143,5 +143,19 @@ public class UsersController {
         merchant.setStatus(MerchantStatus.NOT_VALID);
         merchant.persist();
         return success("商户添加认证成功");
+    }
+    
+    /**
+     * 我的商户
+     * @param userId
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/{userId}/merchant", method = RequestMethod.POST)
+    public 
+    @ResponseBody
+    APIResponse myMerchants(@PathVariable Integer userId, @RequestBody MerchantRequest request) {
+        List<Merchant> merchants = Merchant.findMerchantsByUserId(userId);
+        return success("我的商户查询成功").result(merchants);
     }
 }

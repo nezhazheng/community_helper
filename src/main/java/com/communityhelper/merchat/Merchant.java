@@ -98,4 +98,10 @@ public class Merchant {
         this.setScoreUserCount(0);
         this.setOrder(0);
     }
+
+    public static List<Merchant> findMerchantsByUserId(Integer userId) {
+        TypedQuery<Merchant> query = entityManager().createQuery("from Merchant o where o.userId = :userId", Merchant.class);
+        query.setParameter("userId", userId);
+        return query.getResultList();
+    }
 }

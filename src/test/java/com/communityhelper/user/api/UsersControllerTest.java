@@ -1,6 +1,6 @@
 package com.communityhelper.user.api;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
@@ -48,7 +48,7 @@ public class UsersControllerTest extends MVCTestEnviroment {
         .andExpect(jsonPath("$.status", is("000")));
         //Then
         List<Merchant> merchants = Merchant.findAllMerchants();
-        assertEquals(1, merchants.size());
+        assertEquals(3, merchants.size());
     }
     
     @Test
@@ -93,7 +93,24 @@ public class UsersControllerTest extends MVCTestEnviroment {
         
         // When
         post("/user/{userId}/realnameauth", user, 2)
+        
+        // Then
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.status", is("004")));
+    }
+    
+    @Test
+    public void should_return_all_my_merchants() throws Exception{
+        // Given
+        MerchantRequest dto = new MerchantRequest();
+        dto.setVersion("1.0.0");
+        
+        // When
+        post("/user/{userId}/merchant", dto, 1)
+        
+        // Then
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.status", is("000")))
+        .andExpect(jsonPath("$.result", hasSize(2)));
     }
 }

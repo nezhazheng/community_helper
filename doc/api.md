@@ -482,6 +482,51 @@ response
 }
 ```
 
+#### 我的商户
+
+request
+
+URL:/user/{userId}/merchant
+
+response
+
+```json
+{
+    "status": "000",
+    "message": "我的商户查询成功",
+    "result": [
+        {
+            "id": 3,
+            "categoryId": 1,
+            "userId": 1,
+            "communityId": 1,
+            "name": "测试商户",
+            "contactPhoneNumber": "123456789",
+            "contactAddress": "呵呵呵呵",
+            "description": "测试描述",
+            "score": 0,
+            "scoreUserCount": 0,
+            "status": "VALID",
+            "order": 3
+        },
+        {
+            "id": 4,
+            "categoryId": 1,
+            "userId": 1,
+            "communityId": 1,
+            "name": "测试用户认证商户",
+            "contactPhoneNumber": "123456789",
+            "contactAddress": "呵呵呵呵",
+            "description": "测试用户认证商户描述",
+            "score": 0,
+            "scoreUserCount": 0,
+            "status": "VALID",
+            "order": 4
+        }
+    ]
+}
+```
+
 #### 用户认证商户
 
 request

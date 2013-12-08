@@ -11,3 +11,19 @@ user:
     address: 'myaddress'
     real_name: 'zhengzheng'
     real_name_auth: 'WAIT_TO_AUTH'
+
+merchant:
+  - id: 1
+    category_id: 0
+    name: '大李维修商'
+    status: 'VALID'
+    morder: 6
+    community_id: 1
+    user_id: 1
+  - id: 2
+    category_id: 0
+    name: '小李维修商'
+    status: 'NOT_VALID'
+    morder: 6
+    community_id: 1
+    user_id: 1
