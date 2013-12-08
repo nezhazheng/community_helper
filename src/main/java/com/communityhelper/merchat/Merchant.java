@@ -67,6 +67,17 @@ public class Merchant {
     
     public Merchant() {}
 
+    public static Merchant findMerchant(Integer merchantId, Integer userId) {
+        Merchant merchant = Merchant.findMerchant(merchantId);
+        MyMerchantCollection collection = MyMerchantCollection.find(userId, merchantId);
+        if(collection != null){
+            merchant.setCollected(true);
+        }else {
+            merchant.setCollected(false);
+        }
+        return merchant;
+    }
+    
     public static Page findValidMerchantsByCategoryId(Integer categoryId,
             Integer start, Integer size, Integer communityId) {
         TypedQuery<Merchant> query = entityManager().createQuery(

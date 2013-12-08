@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.communityhelper.api.APIRequest;
 import com.communityhelper.api.APIResponse;
 import com.communityhelper.api.Page;
 import com.communityhelper.category.MerchantStatus;
@@ -32,12 +31,11 @@ public class MerchantsController {
     public 
     @ResponseBody
     APIResponse detail(@PathVariable("merchantId") Integer merchantId,
-            @RequestParam(value = "start", defaultValue = "0") Integer start,
-            @RequestParam(value = "size", defaultValue = "4") Integer size,
-            @RequestBody APIRequest request){
+            @RequestBody MerchantRequest request){
         MerchantsDetailDTO detailDTO = new MerchantsDetailDTO();
-        Page<Feedback> feedbackPage =Feedback.findFeedbacksByMerchant(merchantId, start, size);
-        Merchant merchant = Merchant.findMerchant(merchantId);
+        Page<Feedback> feedbackPage =Feedback.findFeedbacksByMerchant(
+                merchantId, request.getStart(), request.getSize());
+        Merchant merchant = Merchant.findMerchant(merchantId, request.getUserId());
         detailDTO.setMerchant(merchant);
         detailDTO.setFeedbackList(feedbackPage);
         return success("查询成功").result(detailDTO);

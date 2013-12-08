@@ -1,6 +1,6 @@
 package com.communityhelper.software.api;
 
-import static com.communityhelper.api.APIResponse.response;
+import static com.communityhelper.api.APIResponse.success;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,7 +37,7 @@ public class SoftwareController {
         }
         dto.setLaunchImage(launchImage);
         
-        return response().success("查询成功").result(dto);
+        return success("查询成功").result(dto);
     }
     
     /** 我要反馈 */
@@ -46,6 +46,7 @@ public class SoftwareController {
     @ResponseBody
     APIResponse feedback(@PathVariable Integer userId, @RequestBody SoftwareFeedbackDTO dto) {
         SoftwareFeedback feedback = new SoftwareFeedback();
+        feedback.setUserId(userId);
         feedback.setMessage(dto.getMessage());
         Software software = Software.findSoftwareByPlatformAndVersionAndChannel(
                 dto.getPlatform(), dto.getVersion(), dto.getChannel());
@@ -53,6 +54,6 @@ public class SoftwareController {
             feedback.setSoftwareId(software.getId());
         }
         feedback.persist();
-        return response().success("反馈成功");
+        return success("反馈成功");
     }
 }

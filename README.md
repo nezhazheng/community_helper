@@ -21,7 +21,7 @@
 18. add description to software update api.	DONE
 19. find password api.		DONE
 20. my merchant list api.	DONE
-21. user store api.
+21. user store api.		DONE
 
 #### performance and security
 1. add compress			DONE

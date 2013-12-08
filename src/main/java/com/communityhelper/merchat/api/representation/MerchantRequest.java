@@ -11,6 +11,20 @@ public class MerchantRequest extends APIRequest {
     private String desc;
     private MerchantErrorCategory errorCategory;
     private Integer userId;
+    private Integer start = 0;
+    private Integer size = 4;
+    public Integer getStart() {
+        return start;
+    }
+    public void setStart(Integer start) {
+        this.start = start;
+    }
+    public Integer getSize() {
+        return size;
+    }
+    public void setSize(Integer size) {
+        this.size = size;
+    }
     public MerchantErrorCategory getErrorCategory() {
         return errorCategory;
     }

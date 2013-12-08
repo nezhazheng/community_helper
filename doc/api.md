@@ -252,11 +252,17 @@ request
 
 URL:/merchant/{merchantId}
 
-* 返回的数据中类别和商户都有可能包含，下面的分页是反馈列表的分页
+* 请求中的分页是反馈列表的分页
 
-start: 分页开始位置			Optional	Default:0
-
-size: 父类别ID			Optional	Default:10
+```json
+{
+  "platform": "android",
+  "communityId": 1,
+  "userId": 3,			// current user id
+  "start": 0,
+  "size": 2
+}
+```
 
 response
 
@@ -273,6 +279,9 @@ response
             "contactAddress": "海上海花园",
             "score": 5,					// 评分
             "scoreUserCount": 1			// 评分人数
+            "status": "VALID",
+            "order": 3,
+            "collected": true			// true 代表已收藏 false代表未收藏
         },
         "feedbackList": {		//商户反馈列表
             "pageIndex": 0,
