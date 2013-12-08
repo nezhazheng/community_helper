@@ -18,6 +18,7 @@ import com.communityhelper.category.MerchantStatus;
 import com.communityhelper.feedback.Feedback;
 import com.communityhelper.merchat.Merchant;
 import com.communityhelper.merchat.MerchantErrorReport;
+import com.communityhelper.merchat.MyMerchantCollection;
 import com.communityhelper.merchat.api.representation.MerchantRequest;
 import com.communityhelper.merchat.api.representation.MerchantsDetailDTO;
 
@@ -97,5 +98,20 @@ public class MerchantsController {
         errorReport.setErrorCategory(request.getErrorCategory());
         errorReport.persist();
         return success("商户报错操作成功");
+    }
+    
+    /**
+     * 添加或取消收藏
+     */
+    @RequestMapping("/{merchantId}/collection")
+    public 
+    @ResponseBody
+    APIResponse addMyMerchantCollection(@PathVariable("merchantId") Integer merchantId, 
+            @RequestBody MerchantRequest request){
+        boolean success = MyMerchantCollection.setting(request.getUserId(), merchantId);
+        if(success) {
+            return success("添加收藏成功");
+        }
+        return success("取消收藏成功");
     }
 }

@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.communityhelper.MVCTestEnviroment;
+import com.communityhelper.api.APIRequest;
 import com.communityhelper.merchat.Merchant;
 import com.communityhelper.merchat.api.representation.MerchantRequest;
 import com.communityhelper.user.RealNameAuth;
@@ -102,15 +103,30 @@ public class UsersControllerTest extends MVCTestEnviroment {
     @Test
     public void should_return_all_my_merchants() throws Exception{
         // Given
-        MerchantRequest dto = new MerchantRequest();
-        dto.setVersion("1.0.0");
+        APIRequest request = new APIRequest();
+        request.setVersion("1.0.0");
         
         // When
-        post("/user/{userId}/merchant", dto, 1)
+        post("/user/{userId}/mymerchant", request, 1)
         
         // Then
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.status", is("000")))
         .andExpect(jsonPath("$.result", hasSize(2)));
+    }
+    
+    @Test
+    public void should_got_my_collection() throws Exception{
+        // Given
+        APIRequest request = new APIRequest();
+        request.setVersion("1.0.0");
+        
+        // When
+        post("/user/{userId}/merchantcollection", request, 1)
+        
+        // Then
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.status", is("000")))
+        .andExpect(jsonPath("$.result", hasSize(1)));
     }
 }

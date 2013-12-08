@@ -3,19 +3,35 @@
 
 package com.communityhelper.feedback;
 
-import com.communityhelper.feedback.FeedbackPK;
+import com.communityhelper.user.User;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.Date;
 
 privileged aspect Feedback_Roo_JavaBean {
     
-    public FeedbackPK Feedback.getId() {
+    public Integer Feedback.getId() {
         return this.id;
     }
     
-    public void Feedback.setId(FeedbackPK id) {
+    public void Feedback.setId(Integer id) {
         this.id = id;
+    }
+    
+    public User Feedback.getUser() {
+        return this.user;
+    }
+    
+    public void Feedback.setUser(User user) {
+        this.user = user;
+    }
+    
+    public Integer Feedback.getMerchantId() {
+        return this.merchantId;
+    }
+    
+    public void Feedback.setMerchantId(Integer merchantId) {
+        this.merchantId = merchantId;
     }
     
     public String Feedback.getMessage() {

@@ -4,7 +4,7 @@
 package com.communityhelper.feedback;
 
 import com.communityhelper.feedback.Feedback;
-import com.communityhelper.feedback.FeedbackPK;
+import java.lang.Integer;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -70,7 +70,7 @@ privileged aspect Feedback_Roo_Entity {
         return entityManager().createQuery("SELECT o FROM Feedback o", Feedback.class).getResultList();
     }
     
-    public static Feedback Feedback.findFeedback(FeedbackPK id) {
+    public static Feedback Feedback.findFeedback(Integer id) {
         if (id == null) return null;
         return entityManager().find(Feedback.class, id);
     }

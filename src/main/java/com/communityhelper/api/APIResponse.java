@@ -69,6 +69,13 @@ public class APIResponse {
         return apiResponse;
     }
     
+    public static APIResponse fail(String message){
+        APIResponse apiResponse = response();
+        apiResponse.setErrorCode(Status.ERROR);
+        apiResponse.setMessage(message);
+        return apiResponse;
+    }
+    
     public enum Status{
         /** User API Status Code */
         SUCCESS("000", "成功"), 

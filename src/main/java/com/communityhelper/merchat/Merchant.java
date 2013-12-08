@@ -8,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import javax.persistence.TypedQuery;
 
 import org.springframework.roo.addon.entity.RooEntity;
@@ -57,6 +58,15 @@ public class Merchant {
     @Column(name = "morder")
     private Integer order;
     
+    @Transient
+    private boolean collected;
+    
+    public Merchant(Integer merchantId) {
+        this.id = merchantId;
+    }
+    
+    public Merchant() {}
+
     public static Page findValidMerchantsByCategoryId(Integer categoryId,
             Integer start, Integer size, Integer communityId) {
         TypedQuery<Merchant> query = entityManager().createQuery(

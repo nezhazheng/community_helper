@@ -3,8 +3,14 @@ package com.communityhelper.feedback;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -17,19 +23,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.communityhelper.api.Page;
 import com.communityhelper.feedback.api.FeedbackDTO;
+import com.communityhelper.user.User;
 @RooJson
 @RooJavaBean
-@RooEntity(versionField = "", table = "feedback", identifierField = "id")
+@RooEntity(versionField = "", table = "feedback")
 public class Feedback {
-    public Feedback(FeedbackDTO feedbackDTO, Integer merchantId) {
-        this.setCreateDate(new Date());
-        this.setMessage(feedbackDTO.getMessage());
-        this.setScore(feedbackDTO.getScore());
-        this.setId(new FeedbackPK(feedbackDTO.getUserId(), merchantId));
-    }
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     
-    @EmbeddedId
-    private FeedbackPK id;
+    /** foreign keys */
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "user_id")
+    private User user;
+    @Column(name = "merchant_id")
+    private Integer merchantId;
+    
     @Column(name = "message", length = 500)
     private String message;
     @Column(name = "create_date")
@@ -39,14 +49,24 @@ public class Feedback {
     private Integer score;
     @Transient
     private String phonenum;
-    public Feedback(FeedbackPK id, String message, Date createDate,
+    /** 查询使用 */
+    public Feedback(Integer merchantId, String message, Date createDate,
             Integer score, String phonenum) {
         super();
-        this.id = id;
+        this.merchantId = merchantId;
         this.message = message;
         this.createDate = createDate;
         this.score = score;
         this.phonenum = phonenum;
+    }
+    
+    /** 创建使用 */
+    public Feedback(FeedbackDTO feedbackDTO, Integer merchantId) {
+        this.setCreateDate(new Date());
+        this.setMessage(feedbackDTO.getMessage());
+        this.setScore(feedbackDTO.getScore());
+        this.setUser(new User(feedbackDTO.getUserId()));
+        this.setMerchantId(merchantId);
     }
 
     @Transactional
@@ -66,8 +86,8 @@ public class Feedback {
     public static Page<Feedback> findFeedbacksByMerchant(Integer merchantId,
             Integer start, Integer size) {
         TypedQuery<Feedback> query = entityManager().createQuery(
-                "select new com.communityhelper.feedback.Feedback(c.id,c.message,c.createDate,c.score,u.phonenum) " +
-                "from Feedback c, User u where c.id.userId = u.id and c.id.merchantId = :merchantId ", Feedback.class);
+                "select new com.communityhelper.feedback.Feedback(c.merchantId,c.message,c.createDate,c.score,u.phonenum) " +
+                "from Feedback c inner join c.user u where c.user.id = u.id and c.merchantId = :merchantId ", Feedback.class);
         query.setParameter("merchantId", merchantId)
         .setFirstResult(start)
         .setMaxResults(size);
@@ -79,7 +99,7 @@ public class Feedback {
     }
 
     private static Integer countFeedbacksByMerchantId(Integer merchantId) {
-        return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Feedback o where o.id.merchantId = :merchantId ", Long.class)
+        return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Feedback o where o.merchantId = :merchantId ", Long.class)
                 .setParameter("merchantId", merchantId).getSingleResult().toString());
     }
 }

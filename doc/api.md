@@ -486,7 +486,7 @@ response
 
 request
 
-URL:/user/{userId}/merchant
+URL:/user/{userId}/mymerchant
 
 response
 
@@ -522,6 +522,70 @@ response
             "scoreUserCount": 0,
             "status": "VALID",
             "order": 4
+        }
+    ]
+}
+```
+
+#### 添加或取消收藏
+
+* 添加取消都是使用此API，如果已添加则设置取消
+
+request
+
+URL:/merchant/{userId}/collection
+
+```json
+{
+  "userId": 3,
+  "communityId": 1
+}
+```
+
+response
+
+```json
+{
+    "status": "000",
+    "message": "添加收藏成功",
+    "result": null
+}
+```
+
+#### 我的收藏
+
+request
+
+URL:/user/3/merchantcollection
+
+```json
+{
+  "platform": "android",
+  "communityId": 1
+}
+```
+
+response
+
+```json
+{
+    "status": "000",
+    "message": "我的收藏查询成功",
+    "result": [
+        {
+            "id": 1,
+            "categoryId": 0,
+            "userId": null,
+            "communityId": 1,
+            "name": "大李维修商",
+            "contactPhoneNumber": "11111222",
+            "contactAddress": "海上海花园",
+            "description": null,
+            "score": 5,
+            "scoreUserCount": 1,
+            "status": "VALID",
+            "order": 3,
+            "collected": false
         }
     ]
 }

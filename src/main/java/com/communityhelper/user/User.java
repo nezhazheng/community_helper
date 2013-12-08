@@ -45,6 +45,12 @@ public class User {
     @Column(name = "real_name_auth")
     private UserAuthStatus realNameAuth;
     
+    public User(Integer userId) {
+        this.id = userId;
+    }
+    
+    public User(){}
+
     @Transactional
     public boolean persist(){
         if (notPresent()) {

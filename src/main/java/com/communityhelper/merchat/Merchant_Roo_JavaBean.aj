@@ -106,4 +106,12 @@ privileged aspect Merchant_Roo_JavaBean {
         this.order = order;
     }
     
+    public boolean Merchant.isCollected() {
+        return this.collected;
+    }
+    
+    public void Merchant.setCollected(boolean collected) {
+        this.collected = collected;
+    }
+    
 }

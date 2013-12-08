@@ -1,3 +1,8 @@
+feedback:
+  - id: 1
+    user_id: 1
+    merchant_id: 1
+    message: 'messmess'
 user:
   - id: 1
     phonenum: '13311008877'
@@ -5,9 +10,4 @@ user:
     address: 'myaddress'
     real_name: 'zhengzheng'
     real_name_auth: 'HAS_NOT_AUTH'
-
-feedback:
-  - user_id: 1
-    merchant_id: 1
-    message: 'messmess'
 

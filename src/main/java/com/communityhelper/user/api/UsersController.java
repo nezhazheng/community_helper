@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.communityhelper.api.APIRequest;
 import com.communityhelper.api.APIResponse;
 import com.communityhelper.api.APIResponse.Status;
 import com.communityhelper.category.MerchantStatus;
 import com.communityhelper.merchat.Merchant;
+import com.communityhelper.merchat.MyMerchantCollection;
 import com.communityhelper.merchat.api.representation.MerchantRequest;
 import com.communityhelper.security.TokenService;
 import com.communityhelper.user.RealNameAuth;
@@ -30,6 +32,11 @@ public class UsersController {
     @Autowired
     private TokenService service;
     
+    /**
+     * 用户登录
+     * @param user
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/authenticate")
     public
     @ResponseBody
@@ -49,6 +56,11 @@ public class UsersController {
         return success("用户登录成功").result(user);
     }
     
+    /**
+     * 用户注册
+     * @param userDTO
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST)
     public
     @ResponseBody
@@ -151,11 +163,25 @@ public class UsersController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/{userId}/merchant", method = RequestMethod.POST)
+    @RequestMapping(value = "/{userId}/mymerchant", method = RequestMethod.POST)
     public 
     @ResponseBody
     APIResponse myMerchants(@PathVariable Integer userId, @RequestBody MerchantRequest request) {
         List<Merchant> merchants = Merchant.findMerchantsByUserId(userId);
         return success("我的商户查询成功").result(merchants);
+    }
+    
+    /**
+     * 我的收藏
+     * @param userId
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/{userId}/merchantcollection", method = RequestMethod.POST)
+    public 
+    @ResponseBody
+    APIResponse myMerchants(@PathVariable Integer userId, @RequestBody APIRequest request) {
+        List<Merchant> merchants = MyMerchantCollection.findMyMerchantCollectionByUserId(userId);
+        return success("我的收藏查询成功").result(merchants);
     }
 }
