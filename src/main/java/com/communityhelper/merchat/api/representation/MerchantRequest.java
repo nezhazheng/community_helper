@@ -67,6 +67,7 @@ public class MerchantRequest extends APIRequest {
         merchant.setContactAddress(this.getContactAddress());
         merchant.setDescription(this.getDesc());
         merchant.setContactPhoneNumber(this.getContactPhoneNumber());
+        merchant.setCommunityId(this.getCommunityId());
         merchant.setDefault();
         return merchant;
     }
