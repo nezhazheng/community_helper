@@ -18,6 +18,7 @@ import com.communityhelper.merchat.Merchant;
 import com.communityhelper.merchat.api.representation.MerchantRequest;
 import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;
+import com.communityhelper.user.api.representation.UserDTO;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 @DatabaseSetup("/User.yml")
 public class UsersControllerTest extends MVCTestEnviroment {
@@ -93,7 +94,14 @@ public class UsersControllerTest extends MVCTestEnviroment {
         user.setAddress("bcd");
         
         // When
-        post("/user/{userId}/realnameauth", user, 2)
+        post("/user/{userId}/realnameauth", user, 1)
+        
+        // Then
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.status", is("000")));
+        
+        // When
+        post("/user/{userId}/realnameauth", user, 1)
         
         // Then
         .andExpect(status().isOk())
@@ -107,12 +115,13 @@ public class UsersControllerTest extends MVCTestEnviroment {
         request.setVersion("1.0.0");
         
         // When
-        post("/user/{userId}/mymerchant", request, 1)
+        post("/user/{userId}/my", request, 1)
         
         // Then
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.status", is("000")))
-        .andExpect(jsonPath("$.result", hasSize(2)));
+        .andExpect(jsonPath("$.result.merchants", hasSize(2)))
+        .andExpect(jsonPath("$.result.user.realNameAuth", is("HAS_NOT_AUTH")));
     }
     
     @Test

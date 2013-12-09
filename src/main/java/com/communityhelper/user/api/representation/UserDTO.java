@@ -1,7 +1,8 @@
-package com.communityhelper.user.api;
+package com.communityhelper.user.api.representation;
 
 import com.communityhelper.api.APIRequest;
 import com.communityhelper.user.RealNameAuth;
+import com.communityhelper.user.User.UserAuthStatus;
 
 public class UserDTO extends APIRequest{
     private Integer id;
@@ -11,6 +12,13 @@ public class UserDTO extends APIRequest{
     private String realName;
     private String address;
     private String token;
+    private UserAuthStatus userAuthStatus;
+    public UserAuthStatus getUserAuthStatus() {
+        return userAuthStatus;
+    }
+    public void setUserAuthStatus(UserAuthStatus userAuthStatus) {
+        this.userAuthStatus = userAuthStatus;
+    }
     public String getOldPassword() {
         return oldPassword;
     }

@@ -491,50 +491,63 @@ response
 }
 ```
 
-#### 我的商户
+#### 我的信息
 
 request
 
-URL:/user/{userId}/mymerchant
+URL:/user/{userId}/my
 
 response
 
 ```json
 {
     "status": "000",
-    "message": "我的商户查询成功",
-    "result": [
-        {
-            "id": 3,
-            "categoryId": 1,
-            "userId": 1,
-            "communityId": 1,
-            "name": "测试商户",
-            "contactPhoneNumber": "123456789",
-            "contactAddress": "呵呵呵呵",
-            "description": "测试描述",
-            "score": 0,
-            "scoreUserCount": 0,
-            "status": "VALID",
-            "order": 3
+    "message": "我的信息查询成功",
+    "result": {
+        "user": {
+            "id": 1,
+            "phonenum": "admin",
+            "password": "111111",
+            "realName": "呵呵呵呵",
+            "address": "更新地址了",
+            "channel": null,
+            "imei": null,
+            "realNameAuth": "HAS_NOT_AUTH"
         },
-        {
-            "id": 4,
-            "categoryId": 1,
-            "userId": 1,
-            "communityId": 1,
-            "name": "测试用户认证商户",
-            "contactPhoneNumber": "123456789",
-            "contactAddress": "呵呵呵呵",
-            "description": "测试用户认证商户描述",
-            "score": 0,
-            "scoreUserCount": 0,
-            "status": "VALID",
-            "order": 4
-        }
-    ]
-}
-```
+        "merchants": [
+            {
+                "id": 3,
+                "categoryId": 1,
+                "userId": 1,
+                "communityId": 1,
+                "name": "测试商户",
+                "contactPhoneNumber": "123456789",
+                "contactAddress": "呵呵呵呵",
+                "description": "测试描述",
+                "score": 0,
+                "scoreUserCount": 0,
+                "status": "VALID",
+                "order": 3,
+                "collected": false
+            },
+            {
+                "id": 4,
+                "categoryId": 1,
+                "userId": 1,
+                "communityId": 1,
+                "name": "测试用户认证商户",
+                "contactPhoneNumber": "123456789",
+                "contactAddress": "呵呵呵呵",
+                "description": "测试用户认证商户描述",
+                "score": 0,
+                "scoreUserCount": 0,
+                "status": "VALID",
+                "order": 4,
+                "collected": false
+            }
+        ]
+    }
+}```
 
 #### 添加或取消收藏
 

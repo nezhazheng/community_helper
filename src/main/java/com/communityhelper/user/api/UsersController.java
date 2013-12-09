@@ -25,6 +25,8 @@ import com.communityhelper.security.TokenService;
 import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;
 import com.communityhelper.user.User.UserAuthStatus;
+import com.communityhelper.user.api.representation.MyDTO;
+import com.communityhelper.user.api.representation.UserDTO;
 
 @Controller
 @RequestMapping("/user")
@@ -52,6 +54,7 @@ public class UsersController {
         user.setToken(token);
         user.setAddress(tryUser.getAddress());
         user.setRealName(tryUser.getRealName());
+        user.setUserAuthStatus(tryUser.getRealNameAuth());
         user.setId(tryUser.getId());
         return success("用户登录成功").result(user);
     }
@@ -135,6 +138,8 @@ public class UsersController {
         if(UserAuthStatus.ALREADY_AUTH.equals(user.getRealNameAuth())){
             return response().status(Status.ALREADY_AUTH);
         }
+        user.setRealNameAuth(UserAuthStatus.WAIT_TO_AUTH);
+        user.merge();
         RealNameAuth auth = userDTO.toRealNameAuth(id);
         auth.persist();
         return success("实名认证成功");
@@ -158,17 +163,21 @@ public class UsersController {
     }
     
     /**
-     * 我的商户
+     * 我的信息（含商户）
      * @param userId
      * @param request
      * @return
      */
-    @RequestMapping(value = "/{userId}/mymerchant", method = RequestMethod.POST)
+    @RequestMapping(value = "/{userId}/my", method = RequestMethod.POST)
     public 
     @ResponseBody
     APIResponse myMerchants(@PathVariable Integer userId, @RequestBody MerchantRequest request) {
         List<Merchant> merchants = Merchant.findMerchantsByUserId(userId);
-        return success("我的商户查询成功").result(merchants);
+        MyDTO my = new MyDTO();
+        my.setMerchants(merchants);
+        User user = User.findUser(userId);
+        my.setUser(user);
+        return success("我的信息查询成功").result(my);
     }
     
     /**
