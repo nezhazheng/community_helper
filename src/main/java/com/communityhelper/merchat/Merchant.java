@@ -1,5 +1,6 @@
 package com.communityhelper.merchat;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -57,6 +58,8 @@ public class Merchant {
     private MerchantStatus status;
     @Column(name = "morder")
     private Integer order;
+    @Column(name = "create_date")
+    private Date createDate;
     
     @Transient
     private boolean collected;

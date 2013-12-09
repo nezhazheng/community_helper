@@ -1,5 +1,7 @@
 package com.communityhelper.user.api.representation;
 
+import java.util.Date;
+
 import com.communityhelper.api.APIRequest;
 import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User.UserAuthStatus;
@@ -66,6 +68,7 @@ public class UserDTO extends APIRequest{
         realNameAuth.setUserId(userId);
         realNameAuth.setRealName(this.getRealName());
         realNameAuth.setContractAddress(this.getAddress());
+        realNameAuth.setCreateDate(new Date());
         return realNameAuth;
     }
 }

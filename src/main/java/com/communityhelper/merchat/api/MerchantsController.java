@@ -2,6 +2,8 @@ package com.communityhelper.merchat.api;
 
 import static com.communityhelper.api.APIResponse.*;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -77,6 +79,7 @@ public class MerchantsController {
     APIResponse addMerchant(@RequestBody MerchantRequest dto){
         Merchant merchant = dto.toMerchant();
         merchant.setStatus(MerchantStatus.NOT_VALID);
+        merchant.setCreateDate(new Date());
         merchant.persist();
         return success("添加商户成功");
     }

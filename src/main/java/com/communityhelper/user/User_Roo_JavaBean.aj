@@ -5,6 +5,7 @@ package com.communityhelper.user;
 
 import java.lang.Integer;
 import java.lang.String;
+import java.util.Date;
 
 privileged aspect User_Roo_JavaBean {
     
@@ -70,6 +71,14 @@ privileged aspect User_Roo_JavaBean {
     
     public void User.setRealNameAuth(UserAuthStatus realNameAuth) {
         this.realNameAuth = realNameAuth;
+    }
+    
+    public Date User.getCreateDate() {
+        return this.createDate;
+    }
+    
+    public void User.setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
     
 }

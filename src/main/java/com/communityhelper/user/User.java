@@ -1,5 +1,7 @@
 package com.communityhelper.user;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -44,6 +46,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "real_name_auth")
     private UserAuthStatus realNameAuth;
+
+    @Column(name = "create_date")
+    private Date createDate;
     
     public User(Integer userId) {
         this.id = userId;

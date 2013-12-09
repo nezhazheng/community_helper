@@ -17,14 +17,14 @@
 14. add software feedback api.	DONE
 15. add device info to User model	DONE
 16. add report merchant error api.	DONE
-17. add user createtime realnameauth createtime.
+17. add user createtime realnameauth createtime.	DONE
 18. add description to software update api.	DONE
 19. find password api.		DONE
 20. my merchant list api.	DONE
 21. user store api.		DONE
 
 #### performance and security
-1. add compress			DONE
+1. add compress			
 2. add encrypt
 3. caching
 4. password encrypt		DONE

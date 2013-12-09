@@ -1,5 +1,7 @@
 package com.communityhelper.user;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,4 +27,6 @@ public class RealNameAuth {
     private String realName;
     @Column(name = "contract_address")
     private String contractAddress;
+    @Column(name = "create_date")
+    private Date createDate;
 }

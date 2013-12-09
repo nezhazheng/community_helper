@@ -3,6 +3,7 @@ package com.communityhelper.user.api;
 import static com.communityhelper.api.APIResponse.response;
 import static com.communityhelper.api.APIResponse.success;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -79,6 +80,7 @@ public class UsersController {
         user.setRealName(userDTO.getRealName());
         user.setImei(userDTO.getImei());
         user.setChannel(userDTO.getChannel());
+        user.setCreateDate(new Date());
         user.setRealNameAuth(UserAuthStatus.HAS_NOT_AUTH);
         
         if(user.persist()) {
@@ -162,6 +164,7 @@ public class UsersController {
         Merchant merchant = dto.toMerchant();
         merchant.setUserId(userId);
         merchant.setStatus(MerchantStatus.NOT_VALID);
+        merchant.setCreateDate(new Date());
         merchant.persist();
         return success("商户添加认证成功");
     }

@@ -5,6 +5,7 @@ package com.communityhelper.user;
 
 import java.lang.Integer;
 import java.lang.String;
+import java.util.Date;
 
 privileged aspect RealNameAuth_Roo_JavaBean {
     
@@ -38,6 +39,14 @@ privileged aspect RealNameAuth_Roo_JavaBean {
     
     public void RealNameAuth.setContractAddress(String contractAddress) {
         this.contractAddress = contractAddress;
+    }
+    
+    public Date RealNameAuth.getCreateDate() {
+        return this.createDate;
+    }
+    
+    public void RealNameAuth.setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
     
 }

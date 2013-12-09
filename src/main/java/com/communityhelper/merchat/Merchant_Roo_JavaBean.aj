@@ -7,6 +7,7 @@ import com.communityhelper.category.MerchantStatus;
 import java.lang.Double;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.Date;
 
 privileged aspect Merchant_Roo_JavaBean {
     
@@ -104,6 +105,14 @@ privileged aspect Merchant_Roo_JavaBean {
     
     public void Merchant.setOrder(Integer order) {
         this.order = order;
+    }
+    
+    public Date Merchant.getCreateDate() {
+        return this.createDate;
+    }
+    
+    public void Merchant.setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
     
     public boolean Merchant.isCollected() {
