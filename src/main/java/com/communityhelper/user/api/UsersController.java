@@ -5,6 +5,8 @@ import static com.communityhelper.api.APIResponse.success;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -31,6 +33,7 @@ import com.communityhelper.user.api.representation.UserDTO;
 @Controller
 @RequestMapping("/user")
 public class UsersController {
+    private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
     @Autowired
     private TokenService service;
     
@@ -56,6 +59,7 @@ public class UsersController {
         user.setRealName(tryUser.getRealName());
         user.setUserAuthStatus(tryUser.getRealNameAuth());
         user.setId(tryUser.getId());
+        logger.info("用户登陆成功，phonenum:"+user.getPhonenum());
         return success("用户登录成功").result(user);
     }
     

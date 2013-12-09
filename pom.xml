@@ -14,6 +14,7 @@
 		<roo.version>1.1.5.RELEASE</roo.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<spring.version>3.2.2.RELEASE</spring.version>
+		<logback.version>0.9.30</logback.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -67,6 +68,21 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 		</dependency>
+		<dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.4</version>
+        </dependency>
+		<dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -574,8 +590,8 @@
 				<database.driverClassName>com.mysql.jdbc.Driver</database.driverClassName>
 				<database.username>root</database.username>
 				<database.password>zhengshuli</database.password>
-				<logback.appender>STDOUT</logback.appender>
-				<log.file>${project.build.directoty}</log.file>
+				<logback.appender>CommunityLogFile</logback.appender>
+				<log.file>/Users/nezhazheng/communityhelper.log</log.file>
 				<tomcat.manager.url>http://localhost:8080/manager</tomcat.manager.url>
                 <tomcat.manager.port>8080</tomcat.manager.port>
 			</properties>
@@ -588,8 +604,8 @@
                 <database.driverClassName>com.mysql.jdbc.Driver</database.driverClassName>
                 <database.username>root</database.username>
                 <database.password></database.password>
-                <logback.appender>STDOUT</logback.appender>
-                <log.file>${project.build.directoty}</log.file>
+                <logback.appender>CommunityLogFile</logback.appender>
+                <log.file>/home/appusr/logs/communityhelper.log</log.file>
                 <tomcat.manager.url>http://58.83.193.119/manager</tomcat.manager.url>
                 <tomcat.manager.port>80</tomcat.manager.port>
             </properties>
