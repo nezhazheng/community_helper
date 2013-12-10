@@ -555,7 +555,7 @@ response
 
 request
 
-URL:/merchant/{userId}/collection
+URL:/merchant/{merchantId}/collection
 
 ```json
 {
@@ -578,7 +578,7 @@ response
 
 request
 
-URL:/user/3/merchantcollection
+URL:/user/{userId}/merchantcollection
 
 ```json
 {
