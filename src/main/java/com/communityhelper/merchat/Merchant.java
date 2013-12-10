@@ -90,7 +90,7 @@ public class Merchant {
         .setParameter("communityId", communityId)
         .setParameter("status", MerchantStatus.VALID)
         .setParameter("start", start)
-        .setParameter("size", size);
+        .setParameter("size", start + size -1);
         List<Merchant> merchants = query.getResultList();
         Page<Merchant> page = new Page<Merchant>(start, size);
         page.setList(merchants);

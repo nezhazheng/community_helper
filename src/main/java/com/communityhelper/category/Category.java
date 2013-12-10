@@ -45,7 +45,7 @@ public class Category implements Orderable, Comparable<Orderable> {
         query.setParameter("categoryId", categoryId)
         .setParameter("communityId", communityId)
         .setParameter("start", start)
-        .setParameter("size", size);
+        .setParameter("size", start + size - 1);
         List<Category> categories = query.getResultList();
         Page<Category> page = new Page<Category>(start, size);
         page.setList(categories);
