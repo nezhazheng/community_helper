@@ -72,13 +72,13 @@ public class Merchant {
 
     public static Merchant findMerchant(Integer merchantId, Integer userId) {
         Merchant merchant = Merchant.findMerchant(merchantId);
-        MyMerchantCollection collection = MyMerchantCollection.find(userId, merchantId);
-        if(collection != null){
-            merchant.setCollected(true);
-        }else {
-            merchant.setCollected(false);
-        }
+        merchant.setCollected(merchantCollected(merchantId, userId));
         return merchant;
+    }
+    
+    public static boolean merchantCollected(Integer merchantId, Integer userId){
+        MyMerchantCollection collection = MyMerchantCollection.find(userId, merchantId);
+        return collection != null;
     }
     
     public static Page findValidMerchantsByCategoryId(Integer categoryId,
@@ -126,6 +126,10 @@ public class Merchant {
     public static List<Merchant> findMerchantsByUserId(Integer userId) {
         TypedQuery<Merchant> query = entityManager().createQuery("from Merchant o where o.userId = :userId", Merchant.class);
         query.setParameter("userId", userId);
-        return query.getResultList();
+        List<Merchant> merchants = query.getResultList();
+        for(Merchant merchant : merchants){
+            merchant.setCollected(merchantCollected(merchant.getId(), userId));
+        }
+        return merchants;
     }
 }
