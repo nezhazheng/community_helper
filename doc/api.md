@@ -279,7 +279,7 @@ response
             "contactAddress": "海上海花园",
             "score": 5,					// 评分
             "scoreUserCount": 1			// 评分人数
-            "status": "VALID",
+            "status": "VALID",			// VALID,NOT_VALID
             "order": 3,
             "collected": true			// true 代表已收藏 false代表未收藏
         },
