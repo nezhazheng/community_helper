@@ -1,4 +1,4 @@
-package com.communityhelper.merchat.api.representation;
+package com.communityhelper.merchat.api;
 
 import com.communityhelper.api.APIRequest;
 import com.communityhelper.merchat.Merchant;
@@ -9,10 +9,17 @@ public class MerchantRequest extends APIRequest {
     private String contactPhoneNumber;
     private String contactAddress;
     private String desc;
+    private Integer standardCategoryId;
     private MerchantErrorCategory errorCategory;
     private Integer userId;
     private Integer start = 0;
     private Integer size = 4;
+    public Integer getStandardCategoryId() {
+        return standardCategoryId;
+    }
+    public void setStandardCategoryId(Integer standardCategoryId) {
+        this.standardCategoryId = standardCategoryId;
+    }
     public Integer getStart() {
         return start;
     }
@@ -64,6 +71,7 @@ public class MerchantRequest extends APIRequest {
     public Merchant toMerchant() {
         Merchant merchant = new Merchant();
         merchant.setName(this.getName());
+        merchant.setStandardCategoryId(this.getStandardCategoryId());
         merchant.setContactAddress(this.getContactAddress());
         merchant.setDescription(this.getDesc());
         merchant.setContactPhoneNumber(this.getContactPhoneNumber());

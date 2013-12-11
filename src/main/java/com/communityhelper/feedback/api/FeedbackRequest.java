@@ -2,7 +2,7 @@ package com.communityhelper.feedback.api;
 
 import com.communityhelper.api.APIRequest;
 
-public class FeedbackDTO extends APIRequest{
+public class FeedbackRequest extends APIRequest{
     private Integer userId;
     private String message;
     private Integer score;

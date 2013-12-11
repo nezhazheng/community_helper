@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.communityhelper.MVCTestEnviroment;
 import com.communityhelper.api.APIRequest;
 import com.communityhelper.merchat.Merchant;
-import com.communityhelper.merchat.api.representation.MerchantRequest;
+import com.communityhelper.merchat.api.MerchantRequest;
 import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;
 import com.communityhelper.user.api.representation.UserDTO;

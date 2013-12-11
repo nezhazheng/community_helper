@@ -19,7 +19,6 @@ import com.communityhelper.feedback.Feedback;
 import com.communityhelper.merchat.Merchant;
 import com.communityhelper.merchat.MerchantErrorReport;
 import com.communityhelper.merchat.MyMerchantCollection;
-import com.communityhelper.merchat.api.representation.MerchantRequest;
 import com.communityhelper.merchat.api.representation.MerchantsDetailDTO;
 
 @Controller
@@ -52,17 +51,20 @@ public class MerchantsController {
     APIResponse update(@PathVariable("merchantId") Integer merchantId, 
             @RequestBody MerchantRequest request){
         Merchant merchant = Merchant.findMerchant(merchantId);
-        if(StringUtils.hasLength(request.getContactAddress())){
+        if(StringUtils.hasLength(request.getContactAddress())) {
             merchant.setContactAddress(request.getContactAddress());
         }
-        if(StringUtils.hasLength(request.getContactPhoneNumber())){
+        if(StringUtils.hasLength(request.getContactPhoneNumber())) {
             merchant.setContactPhoneNumber(request.getContactPhoneNumber());
         }
-        if(StringUtils.hasLength(request.getDesc())){
+        if(StringUtils.hasLength(request.getDesc())) {
             merchant.setDescription(request.getDesc());
         }
-        if(StringUtils.hasLength(request.getName())){
+        if(StringUtils.hasLength(request.getName())) {
             merchant.setName(request.getName());
+        }
+        if(null != request.getStandardCategoryId() && request.getStandardCategoryId() != 0) {
+            merchant.setStandardCategoryId(request.getStandardCategoryId());
         }
         merchant.merge();
         return success("修改成功");

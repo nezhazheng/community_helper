@@ -1,8 +1,8 @@
-package com.communityhelper.software.api.representation;
+package com.communityhelper.software.api;
 
 import com.communityhelper.api.APIRequest;
 
-public class SoftwareFeedbackDTO extends APIRequest{
+public class SoftwareFeedbackRequest extends APIRequest{
     private String message;
 
     public String getMessage() {

@@ -1,4 +1,4 @@
-package com.communityhelper.category.api.representation;
+package com.communityhelper.category.api;
 
 import com.communityhelper.api.APIRequest;
 

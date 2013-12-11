@@ -15,7 +15,7 @@ import com.communityhelper.MVCTestEnviroment;
 import com.communityhelper.api.APIRequest;
 import com.communityhelper.merchat.Merchant;
 import com.communityhelper.merchat.MyMerchantCollection;
-import com.communityhelper.merchat.api.representation.MerchantRequest;
+import com.communityhelper.merchat.api.MerchantRequest;
 import com.communityhelper.user.User;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 

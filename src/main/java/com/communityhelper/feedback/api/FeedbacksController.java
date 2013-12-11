@@ -1,6 +1,6 @@
 package com.communityhelper.feedback.api;
 
-import static com.communityhelper.api.APIResponse.response;
+import static com.communityhelper.api.APIResponse.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,13 +22,13 @@ public class FeedbacksController {
     public 
     @ResponseBody
     APIResponse publishFeedback(@PathVariable Integer merchantId,
-            @RequestBody FeedbackDTO feedbackDTO){
+            @RequestBody FeedbackRequest feedbackDTO){
         Feedback feedback = new Feedback(feedbackDTO, merchantId);
         if(!feedback.persist()){
             return response().status(Status.ALREADY_FEEDBACK);
         }
         Merchant.findMerchant(merchantId).updateScore(feedback);
         
-        return response().success("留言成功");
+        return success("留言成功");
     }
 }

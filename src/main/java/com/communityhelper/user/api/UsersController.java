@@ -23,7 +23,7 @@ import com.communityhelper.api.APIResponse.Status;
 import com.communityhelper.category.MerchantStatus;
 import com.communityhelper.merchat.Merchant;
 import com.communityhelper.merchat.MyMerchantCollection;
-import com.communityhelper.merchat.api.representation.MerchantRequest;
+import com.communityhelper.merchat.api.MerchantRequest;
 import com.communityhelper.security.TokenService;
 import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;

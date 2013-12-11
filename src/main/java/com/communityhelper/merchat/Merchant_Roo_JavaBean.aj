@@ -43,6 +43,14 @@ privileged aspect Merchant_Roo_JavaBean {
         this.communityId = communityId;
     }
     
+    public Integer Merchant.getStandardCategoryId() {
+        return this.standardCategoryId;
+    }
+    
+    public void Merchant.setStandardCategoryId(Integer standardCategoryId) {
+        this.standardCategoryId = standardCategoryId;
+    }
+    
     public String Merchant.getName() {
         return this.name;
     }

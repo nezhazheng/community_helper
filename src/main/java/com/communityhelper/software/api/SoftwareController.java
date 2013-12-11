@@ -15,7 +15,6 @@ import com.communityhelper.software.Image;
 import com.communityhelper.software.SoftwareFeedback;
 import com.communityhelper.software.Image.ImageType;
 import com.communityhelper.software.Software;
-import com.communityhelper.software.api.representation.SoftwareFeedbackDTO;
 import com.communityhelper.software.api.representation.SoftwareLaunchDTO;
 
 @RequestMapping("/software")
@@ -44,7 +43,7 @@ public class SoftwareController {
     @RequestMapping("/user/{userId}/feedback")
     public 
     @ResponseBody
-    APIResponse feedback(@PathVariable Integer userId, @RequestBody SoftwareFeedbackDTO dto) {
+    APIResponse feedback(@PathVariable Integer userId, @RequestBody SoftwareFeedbackRequest dto) {
         SoftwareFeedback feedback = new SoftwareFeedback();
         feedback.setUserId(userId);
         feedback.setMessage(dto.getMessage());

@@ -416,6 +416,31 @@ response
 }
 ```
 
+#### 标准类别查询
+
+request
+
+URL:/category/standard
+
+response
+
+```json
+{
+    "status": "000",
+    "message": "查询成功",
+    "result": [
+        {
+            "id": 1,
+            "name": "维修"
+        },
+        {
+            "id": 2,
+            "name": "保洁"
+        }
+    ]
+}
+```
+
 #### 添加商户
 
 request
@@ -427,7 +452,8 @@ URL:/merchant
   "name": "测试商户",
   "contactPhoneNumber": "123456789",
   "contactAddress": "呵呵呵呵",
-  "desc": "测试描述"
+  "desc": "测试描述",
+  "standardCategoryId": 1				// 标准类别ID
 }
 ```
 
@@ -452,7 +478,8 @@ URL:/merchant/{merchantId}/update
   "name": "测试商户",
   "contactPhoneNumber": "123456789",
   "contactAddress": "呵呵呵呵",
-  "desc": "测试描述"
+  "desc": "测试描述",
+  "standardCategoryId": 1
 }
 ```
 
@@ -624,7 +651,8 @@ URL:/user/{userId}/merchant/auth
   "name": "测试商户",
   "contactPhoneNumber": "123456789",
   "contactAddress": "呵呵呵呵",
-  "desc": "测试描述"
+  "desc": "测试描述",
+  "standardCategoryId": 1				// 标准类别ID
 }
 ```
 

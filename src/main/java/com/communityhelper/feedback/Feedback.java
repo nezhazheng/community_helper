@@ -22,7 +22,7 @@ import org.springframework.roo.addon.json.RooJson;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.communityhelper.api.Page;
-import com.communityhelper.feedback.api.FeedbackDTO;
+import com.communityhelper.feedback.api.FeedbackRequest;
 import com.communityhelper.user.User;
 @RooJson
 @RooJavaBean
@@ -61,7 +61,7 @@ public class Feedback {
     }
     
     /** 创建使用 */
-    public Feedback(FeedbackDTO feedbackDTO, Integer merchantId) {
+    public Feedback(FeedbackRequest feedbackDTO, Integer merchantId) {
         this.setCreateDate(new Date());
         this.setMessage(feedbackDTO.getMessage());
         this.setScore(feedbackDTO.getScore());

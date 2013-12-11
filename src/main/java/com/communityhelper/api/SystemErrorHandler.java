@@ -1,6 +1,6 @@
 package com.communityhelper.api;
 
-import static com.communityhelper.api.APIResponse.fail;
+import static com.communityhelper.api.APIResponse.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

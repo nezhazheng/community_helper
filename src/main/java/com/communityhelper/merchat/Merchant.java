@@ -37,6 +37,8 @@ public class Merchant {
     private Integer userId;
     @Column(name = "community_id")
     private Integer communityId;
+    @Column(name = "standard_category_id")
+    private Integer standardCategoryId;
     
     @Column(name = "name")
     private String name;
