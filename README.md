@@ -34,5 +34,6 @@
 2. more merchant list test	working on
 3. refactor api representation to keep consistency	DONE
 4. create PageService
-5. add log
+5. add log			DONE
 6. run test first when deploy
+7. add code quality tool	DONE
