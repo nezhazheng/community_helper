@@ -35,6 +35,7 @@
 	</repositories>
 	<modules>
 		<module>community-api</module>
+		<module>community-mgr</module>
 		<module>core</module>
 	</modules>
 	<pluginRepositories>
@@ -551,6 +552,8 @@
 				<log.file>/Users/nezhazheng/communityhelper.log</log.file>
 				<tomcat.manager.url>http://localhost:8080/manager</tomcat.manager.url>
                 <tomcat.manager.port>8080</tomcat.manager.port>
+                <imageServerURL>http://localhost/images/</imageServerURL>
+                <imageServerDir>/Users/nezhazheng/</imageServerDir>
 			</properties>
 		</profile>
 		
@@ -565,6 +568,8 @@
                 <log.file>/home/appusr/logs/communityhelper.log</log.file>
                 <tomcat.manager.url>http://58.83.193.119/manager</tomcat.manager.url>
                 <tomcat.manager.port>80</tomcat.manager.port>
+                <imageServerURL>http://58.83.193.119/images/</imageServerURL>
+                <imageServerDir>/home/appusr/images/</imageServerDir>
             </properties>
         </profile>
 	</profiles>
