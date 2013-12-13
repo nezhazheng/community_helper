@@ -1,4 +1,4 @@
-package com.communityhelper.category;
+package com.communityhelper.merchant;
 
 public enum MerchantStatus {
     VALID,NOT_VALID;

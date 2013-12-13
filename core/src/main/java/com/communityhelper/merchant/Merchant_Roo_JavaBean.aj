@@ -3,7 +3,6 @@
 
 package com.communityhelper.merchant;
 
-import com.communityhelper.category.MerchantStatus;
 import java.lang.Double;
 import java.lang.Integer;
 import java.lang.String;

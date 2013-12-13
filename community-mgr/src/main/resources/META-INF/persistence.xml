@@ -5,6 +5,19 @@
 	<persistence-unit name="persistenceUnit"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>com.communityhelper.user.RealNameAuth</class>
+        <class>com.communityhelper.user.User</class>
+        <class>com.communityhelper.category.Category</class>
+        <class>com.communityhelper.category.StandardCategory</class>
+        <class>com.communityhelper.merchant.Merchant</class>
+        <class>com.communityhelper.sms.ValidCode</class>
+        <class>com.communityhelper.feedback.Feedback</class>
+        <class>com.communityhelper.community.Community</class>
+        <class>com.communityhelper.software.Image</class>
+        <class>com.communityhelper.software.Software</class>
+        <class>com.communityhelper.software.SoftwareFeedback</class>
+        <class>com.communityhelper.merchant.MerchantErrorReport</class>
+        <class>com.communityhelper.merchant.MyMerchantCollection</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="none" />
@@ -16,6 +29,19 @@
 	<persistence-unit name="persistenceUnitTest"
         transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>com.communityhelper.user.RealNameAuth</class>
+        <class>com.communityhelper.user.User</class>
+        <class>com.communityhelper.category.Category</class>
+        <class>com.communityhelper.category.StandardCategory</class>
+        <class>com.communityhelper.merchant.Merchant</class>
+        <class>com.communityhelper.sms.ValidCode</class>
+        <class>com.communityhelper.feedback.Feedback</class>
+        <class>com.communityhelper.community.Community</class>
+        <class>com.communityhelper.software.Image</class>
+        <class>com.communityhelper.software.Software</class>
+        <class>com.communityhelper.software.SoftwareFeedback</class>
+        <class>com.communityhelper.merchant.MerchantErrorReport</class>
+        <class>com.communityhelper.merchant.MyMerchantCollection</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
             <property name="hibernate.hbm2ddl.auto" value="none" />

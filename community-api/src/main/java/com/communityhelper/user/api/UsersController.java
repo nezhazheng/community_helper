@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.communityhelper.api.APIRequest;
 import com.communityhelper.api.APIResponse;
 import com.communityhelper.api.APIResponse.Status;
-import com.communityhelper.category.MerchantStatus;
 import com.communityhelper.merchant.Merchant;
+import com.communityhelper.merchant.MerchantStatus;
 import com.communityhelper.merchant.MyMerchantCollection;
 import com.communityhelper.merchat.api.MerchantRequest;
 import com.communityhelper.security.TokenService;
 import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;
-import com.communityhelper.user.User.UserAuthStatus;
+import com.communityhelper.user.UserAuthStatus;
 import com.communityhelper.user.api.representation.MyDTO;
 import com.communityhelper.user.api.representation.UserDTO;
 

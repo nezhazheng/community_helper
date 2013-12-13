@@ -1,6 +1,7 @@
 package com.communityhelper.user;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.EnumType;
@@ -17,6 +18,8 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.json.RooJson;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.communityhelper.api.Page;
 
 @RooJavaBean
 @RooEntity(versionField = "", table = "user", finders = "findUsersByPhonenumEquals")
@@ -79,8 +82,15 @@ public class User {
             return null;
         }
     }
-    
-    public enum UserAuthStatus {
-        HAS_NOT_AUTH,WAIT_TO_AUTH,ALREADY_AUTH
+
+    public static Page<User> findUsersPage(Integer start, Integer limit) {
+        List<User> users = entityManager().createQuery("from User", User.class)
+        .setFirstResult(start)
+        .setMaxResults(limit)
+        .getResultList();
+        Page<User> page = new Page<User>();
+        page.setList(users);
+        page.setTotalResult(Integer.parseInt((User.countUsers() + "")));
+        return page;
     }
 }

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.communityhelper.api.APIResponse;
-import com.communityhelper.category.MerchantStatus;
-import com.communityhelper.merchat.Merchant;
+import com.communityhelper.merchant.Merchant;
+import com.communityhelper.merchant.MerchantStatus;
 
 @Controller
 @RequestMapping(value = "/merchant", method = RequestMethod.GET)

@@ -3,7 +3,7 @@
 
 package com.communityhelper.feedback;
 
-import com.communityhelper.merchat.Merchant;
+import com.communityhelper.merchant.Merchant;
 import com.communityhelper.user.User;
 import java.lang.Integer;
 import java.lang.String;

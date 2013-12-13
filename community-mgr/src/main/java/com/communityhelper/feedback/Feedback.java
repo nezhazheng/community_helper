@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.communityhelper.api.Page;
 import com.communityhelper.feedback.api.FeedbackDTO;
-import com.communityhelper.merchat.Merchant;
+import com.communityhelper.merchant.Merchant;
 import com.communityhelper.user.User;
 @RooJson
 @RooJavaBean

@@ -65,4 +65,13 @@ public class Category implements Orderable, Comparable<Orderable> {
     public int compareTo(Orderable o) {
         return this.getOrder().compareTo(o.getOrder());
     }
+    
+    public static List<Category> findAllCategories(Integer communityId) {
+        TypedQuery<Category> query = entityManager().createQuery(
+                "select c from Category c where c.communityId = :communityId", Category.class)
+                .setParameter("communityId", communityId);
+        
+        List<Category> categories = query.getResultList();
+        return categories;
+    }
 }

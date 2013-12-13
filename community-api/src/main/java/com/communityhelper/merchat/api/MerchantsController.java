@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.communityhelper.api.APIResponse;
 import com.communityhelper.api.Page;
-import com.communityhelper.category.MerchantStatus;
 import com.communityhelper.feedback.Feedback;
 import com.communityhelper.merchant.Merchant;
 import com.communityhelper.merchant.MerchantErrorReport;
+import com.communityhelper.merchant.MerchantStatus;
 import com.communityhelper.merchant.MyMerchantCollection;
 import com.communityhelper.merchat.api.representation.MerchantsDetailDTO;
 

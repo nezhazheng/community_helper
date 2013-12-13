@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.communityhelper.api.Page;
 import com.communityhelper.category.Category;
 import com.communityhelper.category.api.CategoryDTO;
-import com.communityhelper.merchat.Merchant;
+import com.communityhelper.merchant.Merchant;
 
 @Service
 public class CategoryService {

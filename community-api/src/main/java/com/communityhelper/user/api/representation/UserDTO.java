@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.communityhelper.api.APIRequest;
 import com.communityhelper.user.RealNameAuth;
-import com.communityhelper.user.User.UserAuthStatus;
+import com.communityhelper.user.UserAuthStatus;
 
 public class UserDTO extends APIRequest{
     private Integer id;

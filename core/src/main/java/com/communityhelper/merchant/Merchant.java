@@ -18,7 +18,6 @@ import org.springframework.roo.addon.json.RooJson;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.communityhelper.api.Page;
-import com.communityhelper.category.MerchantStatus;
 import com.communityhelper.feedback.Feedback;
 
 @RooJson
@@ -133,5 +132,12 @@ public class Merchant {
             merchant.setCollected(merchantCollected(merchant.getId(), userId));
         }
         return merchants;
+    }
+    
+    public static List<Merchant> findMerchantsByAuthStatus(
+            MerchantStatus notValid) {
+        TypedQuery<Merchant> query = entityManager().createQuery("from Merchant o where o.status = :status", Merchant.class);
+        query.setParameter("status", notValid);
+        return query.getResultList();
     }
 }

@@ -16,6 +16,11 @@
 	</properties>
 
 	<dependencies>
+	   <dependency>
+            <groupId>com.communityhelper</groupId>
+            <artifactId>core</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
 		<!-- security for api authentication -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
