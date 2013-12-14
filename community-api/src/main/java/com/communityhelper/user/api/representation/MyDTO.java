@@ -3,6 +3,7 @@ package com.communityhelper.user.api.representation;
 import java.util.List;
 
 import com.communityhelper.merchant.Merchant;
+import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;
 
 /**
@@ -13,6 +14,13 @@ import com.communityhelper.user.User;
 public class MyDTO {
     private User user;
     private List<Merchant> merchants;
+    private RealNameAuth realNameAuth;
+    public RealNameAuth getRealNameAuth() {
+        return realNameAuth;
+    }
+    public void setRealNameAuth(RealNameAuth realNameAuth) {
+        this.realNameAuth = realNameAuth;
+    }
     public User getUser() {
         return user;
     }

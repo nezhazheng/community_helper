@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.json.RooJson;
@@ -19,14 +20,27 @@ public class RealNameAuth {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    
+
     @Column(name = "user_id")
     private Integer userId;
-    
+
     @Column(name = "real_name")
     private String realName;
+
     @Column(name = "contract_address")
     private String contractAddress;
+
     @Column(name = "create_date")
     private Date createDate;
+
+    public static RealNameAuth findRealNameAuthByUserId(Integer userId) {
+        try {
+            return entityManager().createQuery("from RealNameAuth o where o.userId = :userId",
+                            RealNameAuth.class).setParameter("userId", userId)
+                    .getSingleResult();
+        }
+        catch (EmptyResultDataAccessException empty) {
+            return null;
+        }
+    }
 }

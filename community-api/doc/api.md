@@ -573,7 +573,14 @@ response
                 "order": 4,
                 "collected": false
             }
-        ]
+        ],
+        "realNameAuth": {		// when realNameAuthStatus equals WAIT_TO_AUTH that will get this info
+            "id": 1,
+            "userId": 4,
+            "realName": "牛牛",
+            "contractAddress": "更新地址了",
+            "createDate": 1387029328000
+        }
     }
 }```
 

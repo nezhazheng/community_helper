@@ -35,3 +35,8 @@ my_merchant_collection:
   - id: 2
     merchant_id: 1
     user_id: 2
+
+realnameauth:
+  - id: 1
+    real_name: 'zhengzhengzheng'
+    user_id: 2

@@ -184,6 +184,8 @@ public class UsersController {
         my.setMerchants(merchants);
         User user = User.findUser(userId);
         my.setUser(user);
+        RealNameAuth realNameAuth = RealNameAuth.findRealNameAuthByUserId(userId);
+        my.setRealNameAuth(realNameAuth);
         return success("我的信息查询成功").result(my);
     }
     

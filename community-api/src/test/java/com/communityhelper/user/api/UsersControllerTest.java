@@ -81,7 +81,7 @@ public class UsersControllerTest extends MVCTestEnviroment {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.status", is("000")));
         
-        RealNameAuth valid = RealNameAuth.findRealNameAuth(1);
+        RealNameAuth valid = RealNameAuth.findRealNameAuthByUserId(1);
         assertEquals("abc", valid.getRealName());
         assertThat(valid.getUserId(), is(1));
     }
@@ -109,7 +109,7 @@ public class UsersControllerTest extends MVCTestEnviroment {
     }
     
     @Test
-    public void should_return_all_my_merchants() throws Exception{
+    public void should_return_all_my_info() throws Exception{
         // Given
         APIRequest request = new APIRequest();
         request.setVersion("1.0.0");
@@ -121,7 +121,14 @@ public class UsersControllerTest extends MVCTestEnviroment {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.status", is("000")))
         .andExpect(jsonPath("$.result.merchants", hasSize(2)))
-        .andExpect(jsonPath("$.result.user.realNameAuthStatus", is("HAS_NOT_AUTH")));
+        .andExpect(jsonPath("$.result.user.realNameAuthStatus", is("HAS_NOT_AUTH")))
+        .andExpect(jsonPath("$.result.realNameAuth", nullValue()));
+        
+        // When WAIT_TO_AUTH will got realNameAuth info
+        post("/user/{userId}/my", request, 2)
+        .andExpect(jsonPath("$.status", is("000")))
+        .andExpect(jsonPath("$.result.user.realNameAuthStatus", is("WAIT_TO_AUTH")))
+        .andExpect(jsonPath("$.result.realNameAuth.realName", is("zhengzhengzheng")));
     }
     
     @Test
