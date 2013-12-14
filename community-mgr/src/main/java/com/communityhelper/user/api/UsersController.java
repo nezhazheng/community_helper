@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.communityhelper.api.Page;
 import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;
-import com.communityhelper.user.UserAuthStatus;
+import com.communityhelper.user.RealNameAuthStatus;
 
 @Controller
 @RequestMapping("/user")
@@ -37,9 +37,11 @@ public class UsersController {
     @RequestMapping(value = "/realnameauth", method = RequestMethod.POST)
     public 
     @ResponseBody
-    String realNameAuth(@RequestParam Integer authId, @RequestParam Integer userId, @RequestParam("status") UserAuthStatus status) {
+    String realNameAuth(@RequestParam Integer authId, 
+            @RequestParam Integer userId, 
+            @RequestParam("status") RealNameAuthStatus status) {
         User user = User.findUser(userId);
-        user.setRealNameAuth(status);
+        user.setRealNameAuthStatus(status);
         user.merge();
         RealNameAuth.findRealNameAuth(authId).remove();
         return "success";

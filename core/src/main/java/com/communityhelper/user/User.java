@@ -48,7 +48,7 @@ public class User {
     
     @Enumerated(EnumType.STRING)
     @Column(name = "real_name_auth")
-    private UserAuthStatus realNameAuth;
+    private RealNameAuthStatus realNameAuthStatus;
 
     @Column(name = "create_date")
     private Date createDate;

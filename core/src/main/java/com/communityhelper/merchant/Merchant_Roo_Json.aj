@@ -4,7 +4,6 @@
 package com.communityhelper.merchant;
 
 import com.communityhelper.merchant.Merchant;
-
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
 import java.lang.String;

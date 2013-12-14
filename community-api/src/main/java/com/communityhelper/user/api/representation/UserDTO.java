@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.communityhelper.api.APIRequest;
 import com.communityhelper.user.RealNameAuth;
-import com.communityhelper.user.UserAuthStatus;
+import com.communityhelper.user.RealNameAuthStatus;
 
 public class UserDTO extends APIRequest{
     private Integer id;
@@ -14,12 +14,12 @@ public class UserDTO extends APIRequest{
     private String realName;
     private String address;
     private String token;
-    private UserAuthStatus userAuthStatus;
-    public UserAuthStatus getUserAuthStatus() {
-        return userAuthStatus;
+    private RealNameAuthStatus realNameAuthStatus;
+    public RealNameAuthStatus getRealNameAuthStatus() {
+        return realNameAuthStatus;
     }
-    public void setUserAuthStatus(UserAuthStatus userAuthStatus) {
-        this.userAuthStatus = userAuthStatus;
+    public void setRealNameAuthStatus(RealNameAuthStatus realNameAuthStatus) {
+        this.realNameAuthStatus = realNameAuthStatus;
     }
     public String getOldPassword() {
         return oldPassword;

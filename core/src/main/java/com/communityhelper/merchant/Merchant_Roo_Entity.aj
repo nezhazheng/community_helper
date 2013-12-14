@@ -4,7 +4,6 @@
 package com.communityhelper.merchant;
 
 import com.communityhelper.merchant.Merchant;
-
 import java.lang.Integer;
 import java.util.List;
 import javax.persistence.Entity;

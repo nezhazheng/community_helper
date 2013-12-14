@@ -25,7 +25,7 @@
 22. keep consistent on page request param(start).
 23. keep consistent on userAuthStatus response.
 24. add real name auth info to my info api.
-25. feedback order.
+25. feedback order.		DONE
 
 #### mgr feature
 1. give image a flag.

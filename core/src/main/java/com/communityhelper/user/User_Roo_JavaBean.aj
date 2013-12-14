@@ -3,6 +3,7 @@
 
 package com.communityhelper.user;
 
+import com.communityhelper.user.RealNameAuthStatus;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.Date;
@@ -65,12 +66,12 @@ privileged aspect User_Roo_JavaBean {
         this.imei = imei;
     }
     
-    public UserAuthStatus User.getRealNameAuth() {
-        return this.realNameAuth;
+    public RealNameAuthStatus User.getRealNameAuthStatus() {
+        return this.realNameAuthStatus;
     }
     
-    public void User.setRealNameAuth(UserAuthStatus realNameAuth) {
-        this.realNameAuth = realNameAuth;
+    public void User.setRealNameAuthStatus(RealNameAuthStatus realNameAuthStatus) {
+        this.realNameAuthStatus = realNameAuthStatus;
     }
     
     public Date User.getCreateDate() {

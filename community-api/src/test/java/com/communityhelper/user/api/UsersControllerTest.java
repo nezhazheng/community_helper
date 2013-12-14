@@ -121,7 +121,7 @@ public class UsersControllerTest extends MVCTestEnviroment {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.status", is("000")))
         .andExpect(jsonPath("$.result.merchants", hasSize(2)))
-        .andExpect(jsonPath("$.result.user.realNameAuth", is("HAS_NOT_AUTH")));
+        .andExpect(jsonPath("$.result.user.realNameAuthStatus", is("HAS_NOT_AUTH")));
     }
     
     @Test

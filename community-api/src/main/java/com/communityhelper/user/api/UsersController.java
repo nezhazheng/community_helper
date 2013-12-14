@@ -27,7 +27,7 @@ import com.communityhelper.merchat.api.MerchantRequest;
 import com.communityhelper.security.TokenService;
 import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;
-import com.communityhelper.user.UserAuthStatus;
+import com.communityhelper.user.RealNameAuthStatus;
 import com.communityhelper.user.api.representation.MyDTO;
 import com.communityhelper.user.api.representation.UserDTO;
 
@@ -58,7 +58,7 @@ public class UsersController {
         user.setToken(token);
         user.setAddress(tryUser.getAddress());
         user.setRealName(tryUser.getRealName());
-        user.setUserAuthStatus(tryUser.getRealNameAuth());
+        user.setRealNameAuthStatus(tryUser.getRealNameAuthStatus());
         user.setId(tryUser.getId());
         logger.info("用户登陆成功，phonenum:"+user.getPhonenum());
         return success("用户登录成功").result(user);
@@ -81,7 +81,7 @@ public class UsersController {
         user.setImei(userDTO.getImei());
         user.setChannel(userDTO.getChannel());
         user.setCreateDate(new Date());
-        user.setRealNameAuth(UserAuthStatus.HAS_NOT_AUTH);
+        user.setRealNameAuthStatus(RealNameAuthStatus.HAS_NOT_AUTH);
         
         if(user.persist()) {
             return success("注册成功").result(user);
@@ -138,13 +138,13 @@ public class UsersController {
     @ResponseBody
     APIResponse realNameAuth(@PathVariable Integer id, @RequestBody UserDTO userDTO){
         User user = User.findUser(id);
-        if(UserAuthStatus.WAIT_TO_AUTH.equals(user.getRealNameAuth())){
+        if(RealNameAuthStatus.WAIT_TO_AUTH.equals(user.getRealNameAuthStatus())){
             return response().status(Status.WAIT_TO_AUTH);
         }
-        if(UserAuthStatus.ALREADY_AUTH.equals(user.getRealNameAuth())){
+        if(RealNameAuthStatus.ALREADY_AUTH.equals(user.getRealNameAuthStatus())){
             return response().status(Status.ALREADY_AUTH);
         }
-        user.setRealNameAuth(UserAuthStatus.WAIT_TO_AUTH);
+        user.setRealNameAuthStatus(RealNameAuthStatus.WAIT_TO_AUTH);
         user.merge();
         RealNameAuth auth = userDTO.toRealNameAuth(id);
         auth.persist();

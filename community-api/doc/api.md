@@ -241,6 +241,7 @@ response
         "realName": null,
         "address": null,
         "token": "xxx",
+        "realNameAuthStatus": "HAS_NOT_AUTH",
         "id": 1				// User ID
     }
 }
@@ -539,7 +540,7 @@ response
             "address": "更新地址了",
             "channel": null,
             "imei": null,
-            "realNameAuth": "HAS_NOT_AUTH"
+            "realNameAuthStatus": "HAS_NOT_AUTH"
         },
         "merchants": [
             {
