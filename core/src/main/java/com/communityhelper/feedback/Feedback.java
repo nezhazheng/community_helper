@@ -77,7 +77,7 @@ public class Feedback {
             Integer start, Integer size) {
         TypedQuery<Feedback> query = entityManager().createQuery(
                 "select new com.communityhelper.feedback.Feedback(c.merchantId,c.message,c.createDate,c.score,u.phonenum) " +
-                "from Feedback c inner join c.user u where c.user.id = u.id and c.merchantId = :merchantId ", Feedback.class);
+                "from Feedback c inner join c.user u where c.user.id = u.id and c.merchantId = :merchantId order by c.createDate desc", Feedback.class);
         query.setParameter("merchantId", merchantId)
         .setFirstResult(start)
         .setMaxResults(size);

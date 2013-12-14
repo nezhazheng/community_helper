@@ -112,7 +112,7 @@ public class Merchant {
     @Transactional
     public void updateScore(Feedback feedback) {
         // update score avg
-        double total = feedback.getScore().doubleValue()+ this.getScore();
+        double total = feedback.getScore().doubleValue()+ (this.getScore() * this.getScoreUserCount());
         double score = total / (this.getScoreUserCount() + 1);
         this.setScore(score);
         this.setScoreUserCount(this.getScoreUserCount() + 1);
