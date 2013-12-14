@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,12 +56,14 @@ public class CategoriesController {
     String addCategory(@RequestParam("name") String name,
             @RequestParam("order") Integer order,
             @RequestParam(value = "categoryId") Integer categoryId,
+            @RequestParam(value = "iconId") Integer iconId,
             @RequestParam(value = "communityId") Integer communityId) {
         categoryService.inrcOrder(categoryId, order);
         Category category = new Category();
         category.setCategoryId(categoryId);
         category.setCommunityId(communityId);
         category.setName(name);
+        category.setIconId(iconId);
         category.setOrder(order);
         category.persist();
         return "success";
@@ -75,6 +78,7 @@ public class CategoriesController {
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public
     @ResponseBody
+    @Transactional
     String deleteCategory(@RequestParam(value = "id") Integer id, @RequestParam(value = "isCategory") Boolean isCategory) {
         Integer order = 0;
         Integer categoryId = 0;
@@ -94,24 +98,30 @@ public class CategoriesController {
     }
     
     /**
-     * 审核商户
+     * 修改商户
      * @param status #com.communityhelper.category.MerchantStatus
      * @param merchantId
      * @return
      */
-    @RequestMapping(value = "/audit", method = RequestMethod.POST)
+    @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public 
     @ResponseBody
-    APIResponse audit(@RequestParam("status") String status,
+    APIResponse modify(@RequestParam("status") String status,
             @RequestParam("merchantId") Integer merchantId,
             @RequestParam("categoryId") Integer categoryId,
-            @RequestParam("order") Integer order){
+            @RequestParam("order") Integer order,
+            @RequestParam("contactAddress") String contactAddress,
+            @RequestParam("name") String name,
+            @RequestParam("contactPhoneNumber") String contactPhoneNumber){
         Merchant merchant = Merchant.findMerchant(merchantId);
-        if(!order.equals(merchant.getOrder())){
-            categoryService.inrcOrder(categoryId, order);
-        }
-        merchant.setStatus(MerchantStatus.valueOf(status));
+        
+        categoryService.updateRelatedOrder(merchant, order, categoryId);
+        
         merchant.setOrder(order);
+        merchant.setContactAddress(contactAddress);
+        merchant.setContactPhoneNumber(contactPhoneNumber);
+        merchant.setName(name);
+        merchant.setStatus(MerchantStatus.valueOf(status));
         merchant.setCategoryId(categoryId);
         merchant.merge();
         return success("审核成功");

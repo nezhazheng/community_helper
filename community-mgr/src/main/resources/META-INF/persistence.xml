@@ -11,7 +11,7 @@
         <class>com.communityhelper.category.StandardCategory</class>
         <class>com.communityhelper.merchant.Merchant</class>
         <class>com.communityhelper.sms.ValidCode</class>
-        <class>com.communityhelper.feedback.Feedback</class>
+        <class>com.communityhelper.mgr.feedback.Feedback</class>
         <class>com.communityhelper.community.Community</class>
         <class>com.communityhelper.software.Image</class>
         <class>com.communityhelper.software.Software</class>

@@ -25,7 +25,7 @@ Ext.define('Mgr.view.Merchant', {
     	dataIndex: 'id',
     	flex: 1
     }, {
-    	ext: '商户ID',
+    	text: '商户ID',
     	dataIndex: 'merchantId',
     	flex: 1
     }],

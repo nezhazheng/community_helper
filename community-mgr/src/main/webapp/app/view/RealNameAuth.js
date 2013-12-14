@@ -53,5 +53,5 @@ Ext.define('Mgr.view.RealNameAuth', {
         }
     }], 
 	store: 'RealNameAuth',
-    title: '所有待审核商户'
+    title: '用户实名认证'
 });

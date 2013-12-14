@@ -6,9 +6,9 @@ Ext.application({
 	requires: ['Ext.container.Viewport',
 	           'Mgr.view.Navigator'],
 	appFolder: 'app',
-	models: ['User', 'RealNameAuth', 'Image'],
+	models: ['User', 'RealNameAuth', 'Image', 'Feedback', 'MerchantAllField'],
 	controllers: ['Merchant'],
-	stores: ['AllMerchants', 'WaitToAuthMerchants', 'RealNameAuth'],
+	stores: ['AllMerchants', 'RealNameAuth'],
 	launch: function() {
         Ext.create('Ext.container.Viewport', {
             layout: 'border',

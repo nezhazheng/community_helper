@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.communityhelper.api.Page;
-import com.communityhelper.feedback.Feedback;
+import com.communityhelper.mgr.feedback.Feedback;
 
 @Controller
 @RequestMapping("/merchant/feedback")
@@ -20,5 +20,13 @@ public class FeedbacksController {
             @RequestParam Integer limit){
         
         return Feedback.findAllFeedbacks(start, limit);
+    }
+    
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public 
+    @ResponseBody
+    String delete(@RequestParam("id") Integer id){
+        Feedback.findFeedback(id).remove();
+        return "success";
     }
 }

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 import javax.persistence.TypedQuery;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.json.RooJson;
@@ -139,5 +140,23 @@ public class Merchant {
         TypedQuery<Merchant> query = entityManager().createQuery("from Merchant o where o.status = :status", Merchant.class);
         query.setParameter("status", notValid);
         return query.getResultList();
+    }
+
+    public static List<Merchant> findMerchantsPage(Integer communityId,
+            Integer start, Integer limit) {
+        return null;
+    }
+
+    public static Merchant findMerchantByOrderAndCategoryId(Integer order,
+            Integer categoryId) {
+        try {
+            Merchant merchant = entityManager().createQuery("from Merchant o where o.categoryId = :categoryId and o.order = :order"
+                    , Merchant.class).setParameter("categoryId", categoryId)
+                    .setParameter("order", order).getSingleResult();
+            return merchant;
+        }
+        catch (EmptyResultDataAccessException empty) {
+            return null;
+        }
     }
 }

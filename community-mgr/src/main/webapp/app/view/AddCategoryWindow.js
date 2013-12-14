@@ -25,6 +25,10 @@ Ext.define('Mgr.view.AddCategoryWindow', {
             name: 'order',
             allowBlank: false
         },{
+            fieldLabel: '图片ID',
+            name: 'iconId',
+            allowBlank: false
+        },{
             fieldLabel: 'categoryId',
             name: 'categoryId',
             allowBlank: false

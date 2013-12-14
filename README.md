@@ -1,5 +1,5 @@
 ### TODO
-#### feature
+#### api feature
 
 1. query category children 	DONE
 2. query merchant detail	DONE
@@ -22,6 +22,15 @@
 19. find password api.		DONE
 20. my merchant list api.	DONE
 21. user store api.		DONE
+22. keep consistent on page request param(start).
+23. keep consistent on userAuthStatus response.
+24. add real name auth info to my info api.
+25. feedback order.
+
+#### mgr feature
+1. give image a flag.
+2. could add image id when create category.	DONE
+3. made platform iamge type to column box.
 
 #### performance and security
 1. add compress			

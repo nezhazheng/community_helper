@@ -1,4 +1,4 @@
-package com.communityhelper.feedback;
+package com.communityhelper.mgr.feedback;
 
 import java.util.Date;
 import java.util.List;
@@ -54,9 +54,10 @@ public class Feedback {
     @Transient
     private String merchantName;
     /** 查询使用 */
-    public Feedback(String merchantName, String message, Date createDate,
+    public Feedback(Integer id, String merchantName, String message, Date createDate,
             Integer score, String phonenum) {
         super();
+        this.id = id;
         this.merchantName = merchantName;
         this.message = message;
         this.createDate = createDate;
@@ -89,7 +90,7 @@ public class Feedback {
     public static Page<Feedback> findFeedbacksByMerchant(Integer merchantId,
             Integer start, Integer size) {
         TypedQuery<Feedback> query = entityManager().createQuery(
-                "select new com.communityhelper.feedback.Feedback(c.merchantId,c.message,c.createDate,c.score,u.phonenum) " +
+                "select new com.communityhelper.mgr.feedback.Feedback(c.merchantId,c.message,c.createDate,c.score,u.phonenum) " +
                 "from Feedback c inner join c.user u where c.user.id = u.id and c.merchantId = :merchantId ", Feedback.class);
         query.setParameter("merchantId", merchantId)
         .setFirstResult(start)
@@ -102,14 +103,14 @@ public class Feedback {
     }
 
     private static Integer countFeedbacksByMerchantId(Integer merchantId) {
-        return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Feedback o where o.merchantId = :merchantId ", Long.class)
+        return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM com.communityhelper.mgr.feedback.Feedback o where o.merchantId = :merchantId ", Long.class)
                 .setParameter("merchantId", merchantId).getSingleResult().toString());
     }
     
     public static Page<Feedback> findAllFeedbacks(Integer start, Integer limit) {
         TypedQuery<Feedback> query = entityManager().createQuery(
-                "select new com.communityhelper.feedback.Feedback(m.name,c.message,c.createDate,c.score,u.phonenum) " +
-                "from Feedback c inner join c.user u inner join c.merchant m where m.id = c.merchant.id c.user.id = u.id and c.merchantId = :merchantId ", Feedback.class);
+                "select new com.communityhelper.mgr.feedback.Feedback(c.id, m.name,c.message,c.createDate,c.score,u.phonenum) " +
+                "from Feedback c inner join c.user u inner join c.merchant m where m.id = c.merchant.id and c.user.id = u.id", Feedback.class);
         List<Feedback> feedbacks = query.setFirstResult(start)
         .setMaxResults(limit).getResultList();
         

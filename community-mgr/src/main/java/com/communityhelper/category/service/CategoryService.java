@@ -58,6 +58,12 @@ public class CategoryService {
         return categoryPage;
     }
     
+    /**
+     * 插入用
+     * @param categoryId
+     * @param order
+     * @return
+     */
     @Transactional
     public Integer inrcOrder(Integer categoryId, Integer order) {
         int merchantCount = entityManager.createNativeQuery("update merchant set morder = morder + 1 where category_id = "+categoryId+" and morder >= " + order).executeUpdate();
@@ -65,10 +71,45 @@ public class CategoryService {
         return categoryCount + merchantCount;
     }
     
+    /**
+     * 删除用
+     * @param categoryId
+     * @param order
+     * @return
+     */
     @Transactional
     public Integer reduceOrder(Integer categoryId, Integer order) {
         int merchantCount = entityManager.createNativeQuery("update merchant set morder = morder - 1 where category_id = "+categoryId+" and morder > " + order).executeUpdate();
         int categoryCount = entityManager.createNativeQuery("update category set corder = corder - 1 where category_id = "+categoryId+" and corder > " + order).executeUpdate();
         return categoryCount + merchantCount;
+    }
+    
+    /**
+     * 更新此商户相关的顺序
+     * @param updateMerchant
+     * @param updateOrder
+     * @return
+     */
+    @Transactional
+    public void updateRelatedOrder(Merchant updateMerchant, Integer updateOrder, Integer categoryId) {
+     // 审核情况，order顺序递增
+        if(0 == updateMerchant.getOrder() && updateOrder > updateMerchant.getOrder()){
+            this.inrcOrder(categoryId, updateOrder);
+        }
+        // 更新情况, order调换
+        if(0 != updateMerchant.getOrder() && updateOrder != updateMerchant.getOrder()){
+            Merchant replacedMerchant = Merchant.findMerchantByOrderAndCategoryId(updateOrder, categoryId);
+            // TODO 如果找不着 找类别最大的那个做递增
+            if(replacedMerchant != null){
+                replacedMerchant.setOrder(updateMerchant.getOrder());
+                replacedMerchant.merge();
+            } else {
+                Category replacedCategory = Category.findCategoryByOrderAndCategoryId(updateOrder, categoryId);
+                if(replacedCategory != null) {
+                    replacedCategory.setOrder(updateMerchant.getOrder());
+                    replacedCategory.merge();
+                }
+            }
+        }
     }
 }

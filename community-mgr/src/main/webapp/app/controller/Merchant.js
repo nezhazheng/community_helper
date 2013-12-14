@@ -2,12 +2,13 @@ Ext.define('Mgr.controller.Merchant',{
 	extend: 'Ext.app.Controller',
     views: [
         'Merchant',
-        'WaitToAuthMerchant',
+        'AllMerchants',
         'UserList',
         'RealNameAuth',
         'AddCategoryWindow',
         'ImageList',
-        'AddImageWindow'
+        'AddImageWindow',
+        'FeedbackList'
     ],
 	init: function() {
         this.control({

@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.TypedQuery;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.json.RooJson;
@@ -73,5 +74,18 @@ public class Category implements Orderable, Comparable<Orderable> {
         
         List<Category> categories = query.getResultList();
         return categories;
+    }
+
+    public static Category findCategoryByOrderAndCategoryId(Integer order,
+            Integer categoryId) {
+        try {
+            Category category = entityManager().createQuery("from Category o where o.categoryId = :categoryId and o.order = :order"
+                    , Category.class).setParameter("categoryId", categoryId)
+                    .setParameter("order", order).getSingleResult();
+            return category;
+        }
+        catch (EmptyResultDataAccessException empty) {
+            return null;
+        }
     }
 }

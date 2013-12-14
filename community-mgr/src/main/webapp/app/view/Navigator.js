@@ -19,17 +19,20 @@ Ext.define('Mgr.view.Navigator', {
                     	   title : '用户列表',
                     	   widgetId: 'usersgrid'
                        }, {
-                    	   title : '商户列表',
+                    	   title : '类别商户列表',
                     	   widgetId: 'merchanttree'
                        }, {
-                    	   title : '待审核商户',
-                    	   widgetId: 'waittoauth'
+                    	   title : '商户列表',
+                    	   widgetId: 'allmerchantsgrid'
                        }, {
                     	   title : '用户实名认证',
                     	   widgetId: 'realnameauthgrid'
                        }, {
                     	   title : '图片列表',
                     	   widgetId: 'imagegrid'
+                       }, {
+                    	   title : '评论列表',
+                    	   widgetId: 'feedbackgrid'
                        }
                 ]
             }),
