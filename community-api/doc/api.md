@@ -12,7 +12,10 @@
 
 * 接口权限验证失败返回http status 401
 
+* 分页采用开始位置，取值量的方式进行分页，参数统一为start,size，起始索引为0
+
 * 所有接口都需要传递如下数据
+
 
 ```json
 {
@@ -118,16 +121,10 @@ URL:/category/{categoryId}
 
 * 返回的数据中类别和商户都有可能包含,不返回子类别数据
 
-categoryId: 父类别ID			Optional	Default:0(根级类别)
-
-start: 分页开始位置，从1开始	Optional	Default:1
-
-size: 获取多少项数据			Optional	Default:10
-
 ```json
 {
-  "start": 1,
-  "size": 5
+  "start": 1,		// 分页开始位置，从0开始	Optional Default:0
+  "size": 5			// 获取多少项数据			Optional Default:10
 }
 ```
 

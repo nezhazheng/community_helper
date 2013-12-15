@@ -14,10 +14,10 @@ import com.communityhelper.software.Image;
 
 @Service
 public class CategoryService {
-    public Page createCategoryPage(
+    public Page<ItemDTO> createCategoryPage(
             Page<Category> categories, Page<Merchant> merchants) {
-        Page categoryPage = new Page(categories.getPageIndex(), categories.getMaxResult());
-        List result = new ArrayList();
+        Page<ItemDTO> categoryPage = new Page<ItemDTO>(categories.getPageIndex(), categories.getMaxResult());
+        List<ItemDTO> result = new ArrayList<ItemDTO>();
         for(Category category: categories.getList()){
             ItemDTO dto = ItemDTO.categoryToItem(category);
             Image icon = Image.findImage(category.getIconId());

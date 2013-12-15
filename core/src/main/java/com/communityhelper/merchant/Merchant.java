@@ -88,7 +88,7 @@ public class Merchant {
         return collection != null;
     }
     
-    public static Page findValidMerchantsByCategoryId(Integer categoryId,
+    public static Page<Merchant> findValidMerchantsByCategoryId(Integer categoryId,
             Integer start, Integer size, Integer communityId) {
         TypedQuery<Merchant> query = entityManager().createQuery(
                 "from Merchant c where c.categoryId = :categoryId " +
@@ -96,8 +96,8 @@ public class Merchant {
         query.setParameter("categoryId", categoryId)
         .setParameter("communityId", communityId)
         .setParameter("status", MerchantStatus.VALID)
-        .setParameter("start", start)
-        .setParameter("size", start + size -1);
+        .setParameter("start", start + 1)
+        .setParameter("size", start + size);
         List<Merchant> merchants = query.getResultList();
         Page<Merchant> page = new Page<Merchant>(start, size);
         page.setList(merchants);

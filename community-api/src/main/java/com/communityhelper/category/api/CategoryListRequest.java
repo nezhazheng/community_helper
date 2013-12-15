@@ -3,7 +3,7 @@ package com.communityhelper.category.api;
 import com.communityhelper.api.APIRequest;
 
 public class CategoryListRequest extends APIRequest{
-    private Integer start = 1;
+    private Integer start = 0;
     private Integer size = 10;
     public Integer getStart() {
         return start;

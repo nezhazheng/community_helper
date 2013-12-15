@@ -15,6 +15,7 @@ import com.communityhelper.api.APIResponse;
 import com.communityhelper.api.Page;
 import com.communityhelper.category.Category;
 import com.communityhelper.category.StandardCategory;
+import com.communityhelper.category.api.representation.ItemDTO;
 import com.communityhelper.category.service.CategoryService;
 import com.communityhelper.merchant.Merchant;
 
@@ -27,20 +28,6 @@ public class CategoriesController {
     private CategoryService categoryService;
     
     /**
-     * 商户首页
-     * @return
-     */
-    @RequestMapping
-    public 
-    @ResponseBody
-    APIResponse index(@RequestBody APIRequest request){
-        Page categories = Category.findChildCategories(Category.DEFAULT_ROOT_ID, 1, 10, request.getCommunityId());
-        Page merchants = Merchant.findValidMerchantsByCategoryId(Category.DEFAULT_ROOT_ID, 1, 10, request.getCommunityId());
-        Page categoryPage = categoryService.createCategoryPage(categories, merchants);
-        return success("查询成功").result(categoryPage);
-    }
-    
-    /**
      * 类别列表（含商户）
      */
     @RequestMapping(value = "/{categoryId}")
@@ -48,14 +35,19 @@ public class CategoriesController {
     @ResponseBody
     APIResponse categoryList(@PathVariable(value = "categoryId") Integer categoryId,
             @RequestBody CategoryListRequest request){
-        Page categories = Category.findChildCategories(categoryId,
+        Page<Category> categories = Category.findChildCategories(categoryId,
                 request.getStart(), request.getSize(), request.getCommunityId());
-        Page merchants = Merchant.findValidMerchantsByCategoryId(categoryId,
+        Page<Merchant> merchants = Merchant.findValidMerchantsByCategoryId(categoryId,
                 request.getStart(), request.getSize(), request.getCommunityId());
-        Page categoryPage = categoryService.createCategoryPage(categories, merchants);
+        Page<ItemDTO> categoryPage = categoryService.createCategoryPage(categories, merchants);
         return success("查询成功").result(categoryPage);
     }
     
+    /**
+     * 标准类别列表
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/standard")
     public
     @ResponseBody

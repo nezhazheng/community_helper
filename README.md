@@ -22,9 +22,9 @@
 19. find password api.		DONE
 20. my merchant list api.	DONE
 21. user store api.		DONE
-22. keep consistent on page request param(start).
-23. keep consistent on userAuthStatus response.
-24. add real name auth info to my info api.
+22. keep consistent on page request param(start).	DONE
+23. keep consistent on userAuthStatus response.		DONE
+24. add real name auth info to my info api.		DONE
 25. feedback order.		DONE
 
 #### mgr feature

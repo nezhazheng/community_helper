@@ -19,8 +19,6 @@ import com.communityhelper.api.Page;
 @RooJavaBean
 @RooEntity(versionField = "", table = "category")
 public class Category implements Orderable, Comparable<Orderable> {
-    public static final Integer DEFAULT_ROOT_ID = 0;
-    
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,14 +37,19 @@ public class Category implements Orderable, Comparable<Orderable> {
     @Column(name = "corder")
     private Integer order;
 
-    public static Page findChildCategories(Integer categoryId, Integer start, Integer size, Integer communityId) {
+    @Override
+    public int compareTo(Orderable o) {
+        return this.getOrder().compareTo(o.getOrder());
+    }
+    
+    public static Page<Category> findChildCategories(Integer categoryId, Integer start, Integer size, Integer communityId) {
         TypedQuery<Category> query = entityManager().createQuery(
                 "select c from Category c where c.categoryId = :categoryId and c.communityId = :communityId " +
                 "and (c.order >= :start and c.order <= :size) order by c.order asc", Category.class);
         query.setParameter("categoryId", categoryId)
         .setParameter("communityId", communityId)
-        .setParameter("start", start)
-        .setParameter("size", start + size - 1);
+        .setParameter("start", start + 1)
+        .setParameter("size", start + size);
         List<Category> categories = query.getResultList();
         Page<Category> page = new Page<Category>(start, size);
         page.setList(categories);
@@ -62,11 +65,6 @@ public class Category implements Orderable, Comparable<Orderable> {
                 .getSingleResult().toString());
     }
 
-    @Override
-    public int compareTo(Orderable o) {
-        return this.getOrder().compareTo(o.getOrder());
-    }
-    
     public static List<Category> findAllCategories(Integer communityId) {
         TypedQuery<Category> query = entityManager().createQuery(
                 "select c from Category c where c.communityId = :communityId", Category.class)
