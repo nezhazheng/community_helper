@@ -63,6 +63,9 @@ public class MerchantsController {
         if(StringUtils.hasLength(request.getName())) {
             merchant.setName(request.getName());
         }
+        if(null != request.getServiceEnable()) {
+            merchant.setServiceEnable(request.getServiceEnable());
+        }
         if(null != request.getStandardCategoryId() && request.getStandardCategoryId() != 0) {
             merchant.setStandardCategoryId(request.getStandardCategoryId());
         }
@@ -79,11 +82,26 @@ public class MerchantsController {
     public 
     @ResponseBody
     APIResponse addMerchant(@RequestBody MerchantRequest dto){
-        Merchant merchant = dto.toMerchant();
-        merchant.setStatus(MerchantStatus.NOT_VALID);
-        merchant.setCreateDate(new Date());
+        Merchant merchant = dto.createMerchant();
         merchant.persist();
         return success("添加商户成功");
+    }
+    
+
+    /**
+     * 用户实名申请商户
+     * @param userId
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/auth", method = RequestMethod.POST)
+    public 
+    @ResponseBody
+    APIResponse merchantAuth(@RequestBody MerchantRequest request) {
+        Merchant merchant = request.createMerchant();
+        merchant.setUserId(request.getUserId());
+        merchant.persist();
+        return success("商户添加认证成功");
     }
     
     /**

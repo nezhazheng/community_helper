@@ -12,6 +12,13 @@ public class ItemDTO implements Orderable, Comparable<Orderable> {
     private String iconURL;
     private Boolean isCategory;
     private Integer order;
+    private Boolean serviceEnable;
+    public Boolean getServiceEnable() {
+        return serviceEnable;
+    }
+    public void setServiceEnable(Boolean serviceEnable) {
+        this.serviceEnable = serviceEnable;
+    }
     public Integer getOrder() {
         return order;
     }
@@ -63,6 +70,7 @@ public class ItemDTO implements Orderable, Comparable<Orderable> {
         item.setScore(0.0);
         item.setOrder(category.getOrder());
         item.setCategoryId(category.getCategoryId());
+        item.setServiceEnable(true);
         return item;
     }
     
@@ -74,6 +82,7 @@ public class ItemDTO implements Orderable, Comparable<Orderable> {
         item.setScore(merchant.getScore());
         item.setOrder(merchant.getOrder());
         item.setCategoryId(merchant.getCategoryId());
+        item.setServiceEnable(merchant.getServiceEnable());
         return item;
     }
     

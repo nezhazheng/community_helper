@@ -1,7 +1,5 @@
 package com.communityhelper.category.api;
 
-import static com.communityhelper.api.APIResponse.success;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,16 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.communityhelper.api.APIResponse;
 import com.communityhelper.api.Page;
 import com.communityhelper.category.Category;
 import com.communityhelper.category.service.CategoryService;
 import com.communityhelper.merchant.Merchant;
-import com.communityhelper.merchant.MerchantStatus;
 @Controller
 @RequestMapping(value = "/category")
 public class CategoriesController {
-    
     @Autowired
     private CategoryService categoryService;
     
@@ -95,36 +90,6 @@ public class CategoriesController {
         }
         categoryService.reduceOrder(categoryId, order);
         return "success";
-    }
-    
-    /**
-     * 修改商户
-     * @param status #com.communityhelper.category.MerchantStatus
-     * @param merchantId
-     * @return
-     */
-    @RequestMapping(value = "/modify", method = RequestMethod.POST)
-    public 
-    @ResponseBody
-    APIResponse modify(@RequestParam("status") String status,
-            @RequestParam("merchantId") Integer merchantId,
-            @RequestParam("categoryId") Integer categoryId,
-            @RequestParam("order") Integer order,
-            @RequestParam("contactAddress") String contactAddress,
-            @RequestParam("name") String name,
-            @RequestParam("contactPhoneNumber") String contactPhoneNumber){
-        Merchant merchant = Merchant.findMerchant(merchantId);
-        
-        categoryService.updateRelatedOrder(merchant, order, categoryId);
-        
-        merchant.setOrder(order);
-        merchant.setContactAddress(contactAddress);
-        merchant.setContactPhoneNumber(contactPhoneNumber);
-        merchant.setName(name);
-        merchant.setStatus(MerchantStatus.valueOf(status));
-        merchant.setCategoryId(categoryId);
-        merchant.merge();
-        return success("审核成功");
     }
     
     /**

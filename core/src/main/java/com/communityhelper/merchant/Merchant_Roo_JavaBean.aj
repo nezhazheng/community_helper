@@ -4,6 +4,7 @@
 package com.communityhelper.merchant;
 
 import com.communityhelper.merchant.MerchantStatus;
+import java.lang.Boolean;
 import java.lang.Double;
 import java.lang.Integer;
 import java.lang.String;
@@ -99,12 +100,12 @@ privileged aspect Merchant_Roo_JavaBean {
         this.scoreUserCount = scoreUserCount;
     }
     
-    public MerchantStatus Merchant.getStatus() {
-        return this.status;
+    public MerchantStatus Merchant.getAuthStatus() {
+        return this.authStatus;
     }
     
-    public void Merchant.setStatus(MerchantStatus status) {
-        this.status = status;
+    public void Merchant.setAuthStatus(MerchantStatus authStatus) {
+        this.authStatus = authStatus;
     }
     
     public Integer Merchant.getOrder() {
@@ -121,6 +122,14 @@ privileged aspect Merchant_Roo_JavaBean {
     
     public void Merchant.setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+    
+    public Boolean Merchant.getServiceEnable() {
+        return this.serviceEnable;
+    }
+    
+    public void Merchant.setServiceEnable(Boolean serviceEnable) {
+        this.serviceEnable = serviceEnable;
     }
     
     public boolean Merchant.isCollected() {

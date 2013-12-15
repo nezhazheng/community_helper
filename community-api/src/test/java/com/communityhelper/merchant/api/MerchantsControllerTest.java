@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.communityhelper.MVCTestEnviroment;
 import com.communityhelper.api.APIRequest;
 import com.communityhelper.merchant.Merchant;
+import com.communityhelper.merchant.MerchantStatus;
 import com.communityhelper.merchant.MyMerchantCollection;
 import com.communityhelper.merchat.api.MerchantRequest;
 import com.communityhelper.user.User;
@@ -37,6 +38,28 @@ public class MerchantsControllerTest extends MVCTestEnviroment {
         //Then
         List<Merchant> merchants = Merchant.findAllMerchants();
         assertEquals(6, merchants.size());
+    }
+    
+    @Transactional
+    @Test
+    public void should_user_auth_merchant_correct() throws Exception {
+        //Given
+        MerchantRequest dto = new MerchantRequest();
+        dto.setName("测试商户");
+        dto.setDesc("测试描述");
+        dto.setUserId(1);
+        
+        //When
+        post("/merchant/auth", dto)
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.status", is("000")));
+        //Then
+        List<Merchant> merchants = Merchant.findMerchantsByUserId(1);
+        assertEquals(1, merchants.size());
+        // the default serviceEnable is false
+        assertEquals(false, merchants.get(0).getServiceEnable());
+        // the default authStatus is NOT_VALID
+        assertEquals(MerchantStatus.NOT_VALID, merchants.get(0).getAuthStatus());
     }
     
     @Transactional
@@ -69,6 +92,7 @@ public class MerchantsControllerTest extends MVCTestEnviroment {
         post("/merchant/{merchantId}", request, 1)
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.status", is("000")))
+        .andExpect(jsonPath("$.result.merchant.authStatus", is("VALID")))
         .andExpect(jsonPath("$.result.feedbackList.list", hasSize(1)))
         .andExpect(jsonPath("$.result.feedbackList.list[0].phonenum", is("13311008877")));
     }

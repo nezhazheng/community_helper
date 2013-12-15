@@ -55,14 +55,19 @@ public class Merchant {
     /** 评分人数 */
     @Column(name = "score_user_count")
     private Integer scoreUserCount;
-    /** 商户当前状态 */
+    /** 商户当前审核状态 */
+    @Column(name = "auth_status")
     @Enumerated(EnumType.STRING)
-    private MerchantStatus status;
+    private MerchantStatus authStatus;
     @Column(name = "morder")
     private Integer order;
     @Column(name = "create_date")
     private Date createDate;
+    /** 商户服务状态 - 是否可用 */
+    @Column(name = "service_enable")
+    private Boolean serviceEnable;
     
+    /** 用户是否收藏了 */
     @Transient
     private boolean collected;
     
@@ -87,7 +92,7 @@ public class Merchant {
             Integer start, Integer size, Integer communityId) {
         TypedQuery<Merchant> query = entityManager().createQuery(
                 "from Merchant c where c.categoryId = :categoryId " +
-                "and (c.order >= :start and c.order <= :size) and c.communityId = :communityId and c.status = :status order by c.order asc", Merchant.class);
+                "and (c.order >= :start and c.order <= :size) and c.communityId = :communityId and c.authStatus = :status order by c.order asc", Merchant.class);
         query.setParameter("categoryId", categoryId)
         .setParameter("communityId", communityId)
         .setParameter("status", MerchantStatus.VALID)
@@ -102,7 +107,7 @@ public class Merchant {
     
     public static Integer countValidMerchantsByCategoryId(Integer parentId, Integer communityId) {
         return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Merchant o where o.categoryId = :categoryId " +
-        		" and o.communityId = :communityId and o.status = :status", Long.class)
+        		" and o.communityId = :communityId and o.authStatus = :status", Long.class)
                 .setParameter("communityId", communityId)
                 .setParameter("categoryId", parentId)
                 .setParameter("status", MerchantStatus.VALID)
@@ -123,6 +128,7 @@ public class Merchant {
         this.setScore(0.0);
         this.setScoreUserCount(0);
         this.setOrder(0);
+        this.setServiceEnable(false);
     }
 
     public static List<Merchant> findMerchantsByUserId(Integer userId) {
@@ -137,7 +143,7 @@ public class Merchant {
     
     public static List<Merchant> findMerchantsByAuthStatus(
             MerchantStatus notValid) {
-        TypedQuery<Merchant> query = entityManager().createQuery("from Merchant o where o.status = :status", Merchant.class);
+        TypedQuery<Merchant> query = entityManager().createQuery("from Merchant o where o.authStatus = :status", Merchant.class);
         query.setParameter("status", notValid);
         return query.getResultList();
     }

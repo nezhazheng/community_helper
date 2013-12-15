@@ -36,23 +36,6 @@ public class UsersControllerTest extends MVCTestEnviroment {
         .andExpect(status().isOk());
     }
     
-    @Transactional
-    @Test
-    public void should_add_merchant_correct() throws Exception {
-        //Given
-        MerchantRequest dto = new MerchantRequest();
-        dto.setName("测试商户");
-        dto.setDesc("测试描述");
-        
-        //When
-        post("/user/{userId}/merchant/auth", dto, 1)
-        .andExpect(status().isOk())
-        .andExpect(jsonPath("$.status", is("000")));
-        //Then
-        List<Merchant> merchants = Merchant.findAllMerchants();
-        assertEquals(3, merchants.size());
-    }
-    
     @Test
     public void should_update_user() throws Exception{
         // Given

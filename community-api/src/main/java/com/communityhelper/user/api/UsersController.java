@@ -152,24 +152,6 @@ public class UsersController {
     }
     
     /**
-     * 用户实名申请商户
-     * @param userId
-     * @param dto
-     * @return
-     */
-    @RequestMapping(value = "/{userId}/merchant/auth", method = RequestMethod.POST)
-    public 
-    @ResponseBody
-    APIResponse merchantAuth(@PathVariable Integer userId, @RequestBody MerchantRequest dto) {
-        Merchant merchant = dto.toMerchant();
-        merchant.setUserId(userId);
-        merchant.setStatus(MerchantStatus.NOT_VALID);
-        merchant.setCreateDate(new Date());
-        merchant.persist();
-        return success("商户添加认证成功");
-    }
-    
-    /**
      * 我的信息（含商户）
      * @param userId
      * @param request

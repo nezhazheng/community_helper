@@ -11,7 +11,6 @@ import com.communityhelper.category.Category;
 import com.communityhelper.category.api.representation.ItemDTO;
 import com.communityhelper.merchant.Merchant;
 import com.communityhelper.software.Image;
-import com.communityhelper.software.Image.ImageType;
 
 @Service
 public class CategoryService {

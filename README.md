@@ -31,6 +31,7 @@
 1. give image a flag.
 2. could add image id when create category.	DONE
 3. made platform iamge type to column box.
+4. fix left navigation panel load view bug.
 
 #### performance and security
 1. add compress			

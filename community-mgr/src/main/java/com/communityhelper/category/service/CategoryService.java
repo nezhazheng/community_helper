@@ -45,7 +45,7 @@ public class CategoryService {
         for(Merchant merchant : merchants.getList()){
             CategoryDTO dto = new CategoryDTO();
             dto.setLeaf(true);
-            dto.setStatus(merchant.getStatus().name());
+            dto.setStatus(merchant.getAuthStatus().name());
             dto.setName(merchant.getName());
             dto.setCategoryId(merchant.getCategoryId());
             dto.setOrder(merchant.getOrder());

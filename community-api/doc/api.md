@@ -149,7 +149,8 @@ response
                 "score": 0,
                 "iconURL": "http://localhost/image/i.png",  // 类别对应图片
                 "isCategory": true,			// 是否是类别
-                "order": 1						// 后台会排好序，可以忽略
+                "order": 1,						// 后台会排好序，可以忽略
+                "serviceEnable": true			// 服务是否可用
             },
             {
                 "id": 1,
@@ -158,7 +159,8 @@ response
                 "score": 5,						// 平均评分
                 "iconURL": null,
                 "isCategory": false,
-                "order": 1
+                "order": 1,
+                "serviceEnable": true
             },
             {
                 "id": 2,
@@ -167,7 +169,8 @@ response
                 "score": 0,
                 "iconURL": null,
                 "isCategory": true,
-                "order": 2
+                "order": 2,
+                "serviceEnable": true
             },
             {
                 "id": 2,
@@ -176,7 +179,8 @@ response
                 "score": null,
                 "iconURL": null,
                 "isCategory": false,
-                "order": 2
+                "order": 2,
+                "serviceEnable": true
             }
         ],
         "currentPageNo": 1,
@@ -278,9 +282,10 @@ response
             "name": "大李维修商",
             "contactPhoneNumber": "11111222",
             "contactAddress": "海上海花园",
+            "serviceEnable": false,		// 服务状态
             "score": 5,					// 评分
             "scoreUserCount": 1			// 评分人数
-            "status": "VALID",			// VALID:审核,NOT_VALID:未审核
+            "authStatus": "VALID",			// VALID:审核,NOT_VALID:未审核
             "order": 3,
             "collected": true			// true 代表已收藏 false代表未收藏
         },
@@ -480,7 +485,8 @@ URL:/merchant/{merchantId}/update
   "contactPhoneNumber": "123456789",
   "contactAddress": "呵呵呵呵",
   "desc": "测试描述",
-  "standardCategoryId": 1
+  "standardCategoryId": 1,
+  "serviceEnable": false
 }
 ```
 
@@ -554,7 +560,8 @@ response
                 "description": "测试描述",
                 "score": 0,
                 "scoreUserCount": 0,
-                "status": "VALID",
+                "authStatus": "VALID",
+                "serviceEnable": false,		// 服务状态
                 "order": 3,
                 "collected": false
             },
@@ -574,7 +581,7 @@ response
                 "collected": false
             }
         ],
-        "realNameAuth": {		// when realNameAuthStatus equals WAIT_TO_AUTH that will get this info
+        "realNameAuth": {		// when realNameAuthStatus is not equals WAIT_TO_AUTH that will get null
             "id": 1,
             "userId": 4,
             "realName": "牛牛",
@@ -652,7 +659,7 @@ response
 
 request
 
-URL:/user/{userId}/merchant/auth
+URL:/merchant/auth
 
 ```json
 {
@@ -660,6 +667,7 @@ URL:/user/{userId}/merchant/auth
   "contactPhoneNumber": "123456789",
   "contactAddress": "呵呵呵呵",
   "desc": "测试描述",
+  "userId": 2,
   "standardCategoryId": 1				// 标准类别ID
 }
 ```

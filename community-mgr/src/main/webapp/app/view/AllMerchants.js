@@ -92,13 +92,25 @@ Ext.define('Mgr.view.AllMerchants', {
         }
     }, {
         text: '审核状态',
-        dataIndex: 'status',
+        dataIndex: 'authStatus',
         width: 150,
         editor: new Ext.form.field.ComboBox({
     		typeAhead: true,
     		store: [
                     ['VALID','VALID'],
                     ['NOT_VALID','NOT_VALID']
+                ],
+            triggerAction: 'last'
+    	})
+    }, {
+    	text: '是否可用',
+    	dataIndex: 'serviceEnable',
+    	width: 150,
+        editor: new Ext.form.field.ComboBox({
+    		typeAhead: true,
+    		store: [
+                    ['true','true'],
+                    ['false','false']
                 ],
             triggerAction: 'last'
     	})
@@ -137,16 +149,17 @@ Ext.define('Mgr.view.AllMerchants', {
         handler: function(){
         	var data = Ext.getCmp('allmerchants').getSelectionModel().getSelection()[0].data;
         	Ext.Ajax.request({
-        	    url: '/mgr/category/modify',
+        	    url: '/mgr/merchant/modify',
         	    method: 'POST',
         	    params: {
-        	    	status: data.status,
+        	    	status: data.authStatus,
         	    	merchantId: data.id,
         	    	categoryId: data.categoryId,
         	    	name: data.name,
         	    	contactPhoneNumber: data.contactPhoneNumber,
         	    	contactAddress: data.contactAddress,
-        	    	order: data.order
+        	    	order: data.order,
+        	    	serviceEnable: data.serviceEnable
         	    },
         	    success: function(response){
         	        var text = response.responseText;
