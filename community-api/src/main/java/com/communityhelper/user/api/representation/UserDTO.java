@@ -5,6 +5,7 @@ import java.util.Date;
 import com.communityhelper.api.APIRequest;
 import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.RealNameAuthStatus;
+import com.communityhelper.user.UserServiceStatus;
 
 public class UserDTO extends APIRequest{
     private Integer id;
@@ -15,6 +16,8 @@ public class UserDTO extends APIRequest{
     private String address;
     private String token;
     private RealNameAuthStatus realNameAuthStatus;
+    private UserServiceStatus userServiceStatus;
+    
     public RealNameAuthStatus getRealNameAuthStatus() {
         return realNameAuthStatus;
     }
@@ -70,5 +73,11 @@ public class UserDTO extends APIRequest{
         realNameAuth.setContractAddress(this.getAddress());
         realNameAuth.setCreateDate(new Date());
         return realNameAuth;
+    }
+    public UserServiceStatus getUserServiceStatus() {
+        return userServiceStatus;
+    }
+    public void setUserServiceStatus(UserServiceStatus userServiceStatus) {
+        this.userServiceStatus = userServiceStatus;
     }
 }

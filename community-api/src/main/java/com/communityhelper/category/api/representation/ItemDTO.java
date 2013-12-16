@@ -3,6 +3,7 @@ package com.communityhelper.category.api.representation;
 import com.communityhelper.category.Category;
 import com.communityhelper.category.Orderable;
 import com.communityhelper.merchant.Merchant;
+import com.communityhelper.user.UserServiceStatus;
 
 public class ItemDTO implements Orderable, Comparable<Orderable> {
     private Integer id;
@@ -13,6 +14,13 @@ public class ItemDTO implements Orderable, Comparable<Orderable> {
     private Boolean isCategory;
     private Integer order;
     private Boolean serviceEnable;
+    private UserServiceStatus userServiceStatus;
+    public UserServiceStatus getUserServiceStatus() {
+        return userServiceStatus;
+    }
+    public void setUserServiceStatus(UserServiceStatus userServiceStatus) {
+        this.userServiceStatus = userServiceStatus;
+    }
     public Boolean getServiceEnable() {
         return serviceEnable;
     }
@@ -71,6 +79,7 @@ public class ItemDTO implements Orderable, Comparable<Orderable> {
         item.setOrder(category.getOrder());
         item.setCategoryId(category.getCategoryId());
         item.setServiceEnable(true);
+        item.setUserServiceStatus(UserServiceStatus.DO_BUSINESS);
         return item;
     }
     

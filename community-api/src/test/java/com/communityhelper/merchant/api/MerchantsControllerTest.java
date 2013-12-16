@@ -64,7 +64,7 @@ public class MerchantsControllerTest extends MVCTestEnviroment {
     
     @Transactional
     @Test
-    public void should_add_merchant_collection_success() throws Exception{
+    public void should_add_merchant_collection_success() throws Exception {
         //Given
         MerchantRequest request = new MerchantRequest();
         request.setUserId(1);
@@ -80,20 +80,27 @@ public class MerchantsControllerTest extends MVCTestEnviroment {
         //Then
         User tryUser = User.findUser(1);
         assertEquals("zhengzheng", tryUser.getRealName());
+        
+        // When
+        post("/merchant/{merchantId}", request, 1)
+        .andExpect(jsonPath("$.status", is("000")))
+        .andExpect(jsonPath("$.result.merchant.collected", is(true)));
     }
     
     @Test
     public void should_got_merchant_detail() throws Exception{
-        //Given
-        APIRequest request = new APIRequest();
+        // Given
+        MerchantRequest request = new MerchantRequest();
         request.setChannel("1");
+        request.setUserId(1);
         
-        //When
+        // When
         post("/merchant/{merchantId}", request, 1)
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.status", is("000")))
         .andExpect(jsonPath("$.result.merchant.authStatus", is("VALID")))
         .andExpect(jsonPath("$.result.feedbackList.list", hasSize(1)))
+        .andExpect(jsonPath("$.result.merchant.collected", is(false)))
         .andExpect(jsonPath("$.result.feedbackList.list[0].phonenum", is("13311008877")));
     }
 }

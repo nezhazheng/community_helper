@@ -67,27 +67,12 @@ public class Merchant {
     @Column(name = "service_enable")
     private Boolean serviceEnable;
     
-    /** 用户是否收藏了 */
-    @Transient
-    private boolean collected;
-    
     public Merchant(Integer merchantId) {
         this.id = merchantId;
     }
     
     public Merchant() {}
 
-    public static Merchant findMerchant(Integer merchantId, Integer userId) {
-        Merchant merchant = Merchant.findMerchant(merchantId);
-        merchant.setCollected(merchantCollected(merchantId, userId));
-        return merchant;
-    }
-    
-    public static boolean merchantCollected(Integer merchantId, Integer userId){
-        MyMerchantCollection collection = MyMerchantCollection.find(userId, merchantId);
-        return collection != null;
-    }
-    
     public static Page<Merchant> findValidMerchantsByCategoryId(Integer categoryId,
             Integer start, Integer size, Integer communityId) {
         TypedQuery<Merchant> query = entityManager().createQuery(
@@ -135,9 +120,6 @@ public class Merchant {
         TypedQuery<Merchant> query = entityManager().createQuery("from Merchant o where o.userId = :userId", Merchant.class);
         query.setParameter("userId", userId);
         List<Merchant> merchants = query.getResultList();
-        for(Merchant merchant : merchants){
-            merchant.setCollected(merchantCollected(merchant.getId(), userId));
-        }
         return merchants;
     }
     
@@ -146,11 +128,6 @@ public class Merchant {
         TypedQuery<Merchant> query = entityManager().createQuery("from Merchant o where o.authStatus = :status", Merchant.class);
         query.setParameter("status", notValid);
         return query.getResultList();
-    }
-
-    public static List<Merchant> findMerchantsPage(Integer communityId,
-            Integer start, Integer limit) {
-        return null;
     }
 
     public static Merchant findMerchantByOrderAndCategoryId(Integer order,

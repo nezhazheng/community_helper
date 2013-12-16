@@ -11,6 +11,8 @@ import com.communityhelper.category.Category;
 import com.communityhelper.category.api.representation.ItemDTO;
 import com.communityhelper.merchant.Merchant;
 import com.communityhelper.software.Image;
+import com.communityhelper.user.User;
+import com.communityhelper.user.UserServiceStatus;
 
 @Service
 public class CategoryService {
@@ -28,6 +30,11 @@ public class CategoryService {
         }
         for(Merchant merchant : merchants.getList()){
             ItemDTO dto = ItemDTO.merchantToItem(merchant);
+            if(merchant.getUserId() != null && 0 != merchant.getUserId()) {
+                dto.setUserServiceStatus(User.findUser(merchant.getUserId()).getUserServiceStatus());
+            } else {
+                dto.setUserServiceStatus(UserServiceStatus.DO_BUSINESS);
+            }
             result.add(dto);
         }
         Collections.sort(result);

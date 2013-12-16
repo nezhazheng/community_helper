@@ -54,7 +54,7 @@ public class MyMerchantCollection {
         return null;
     }
     
-    public static boolean setting(Integer userId, Integer merchantId) {
+    public static boolean addCollection(Integer userId, Integer merchantId) {
         MyMerchantCollection collection = find(userId, merchantId);
         if(collection != null){
             collection.remove();

@@ -132,12 +132,4 @@ privileged aspect Merchant_Roo_JavaBean {
         this.serviceEnable = serviceEnable;
     }
     
-    public boolean Merchant.isCollected() {
-        return this.collected;
-    }
-    
-    public void Merchant.setCollected(boolean collected) {
-        this.collected = collected;
-    }
-    
 }

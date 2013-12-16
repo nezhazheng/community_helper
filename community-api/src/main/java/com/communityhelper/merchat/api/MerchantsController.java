@@ -2,8 +2,8 @@ package com.communityhelper.merchat.api;
 
 import static com.communityhelper.api.APIResponse.*;
 
-import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,13 +17,17 @@ import com.communityhelper.api.Page;
 import com.communityhelper.feedback.Feedback;
 import com.communityhelper.merchant.Merchant;
 import com.communityhelper.merchant.MerchantErrorReport;
-import com.communityhelper.merchant.MerchantStatus;
 import com.communityhelper.merchant.MyMerchantCollection;
 import com.communityhelper.merchat.api.representation.MerchantsDetailDTO;
+import com.communityhelper.merchat.api.representation.UserMerchantDTO;
+import com.communityhelper.merchat.service.MerchantService;
 
 @Controller
 @RequestMapping(value = "/merchant", method = RequestMethod.POST)
 public class MerchantsController {
+    @Autowired
+    private MerchantService merchantService;
+    
     /**
      * 商户详情
      */
@@ -35,7 +39,7 @@ public class MerchantsController {
         MerchantsDetailDTO detailDTO = new MerchantsDetailDTO();
         Page<Feedback> feedbackPage =Feedback.findFeedbacksByMerchant(
                 merchantId, request.getStart(), request.getSize());
-        Merchant merchant = Merchant.findMerchant(merchantId, request.getUserId());
+        UserMerchantDTO merchant = merchantService.findMerchant(merchantId, request.getUserId());
         detailDTO.setMerchant(merchant);
         detailDTO.setFeedbackList(feedbackPage);
         return success("查询成功").result(detailDTO);
@@ -128,7 +132,7 @@ public class MerchantsController {
     @ResponseBody
     APIResponse addMyMerchantCollection(@PathVariable("merchantId") Integer merchantId, 
             @RequestBody MerchantRequest request){
-        boolean success = MyMerchantCollection.setting(request.getUserId(), merchantId);
+        boolean success = MyMerchantCollection.addCollection(request.getUserId(), merchantId);
         if(success) {
             return success("添加收藏成功");
         }

@@ -4,6 +4,7 @@
 package com.communityhelper.user;
 
 import com.communityhelper.user.RealNameAuthStatus;
+import com.communityhelper.user.UserServiceStatus;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.Date;
@@ -72,6 +73,14 @@ privileged aspect User_Roo_JavaBean {
     
     public void User.setRealNameAuthStatus(RealNameAuthStatus realNameAuthStatus) {
         this.realNameAuthStatus = realNameAuthStatus;
+    }
+    
+    public UserServiceStatus User.getUserServiceStatus() {
+        return this.userServiceStatus;
+    }
+    
+    public void User.setUserServiceStatus(UserServiceStatus userServiceStatus) {
+        this.userServiceStatus = userServiceStatus;
     }
     
     public Date User.getCreateDate() {

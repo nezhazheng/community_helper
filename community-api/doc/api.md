@@ -147,7 +147,8 @@ response
                 "iconURL": "http://localhost/image/i.png",  // 类别对应图片
                 "isCategory": true,			// 是否是类别
                 "order": 1,						// 后台会排好序，可以忽略
-                "serviceEnable": true			// 服务是否可用
+                "serviceEnable": true,			// 服务是否可用
+                "userServiceStatus": "DO_BUSINESS"
             },
             {
                 "id": 1,
@@ -157,7 +158,8 @@ response
                 "iconURL": null,
                 "isCategory": false,
                 "order": 1,
-                "serviceEnable": true
+                "serviceEnable": true,
+                "userServiceStatus": "BUSY"	// BUSY:正忙 DO_BUSINESS:营业中 OFF_WORK: 下班了
             },
             {
                 "id": 2,
@@ -167,7 +169,8 @@ response
                 "iconURL": null,
                 "isCategory": true,
                 "order": 2,
-                "serviceEnable": true
+                "serviceEnable": true,
+                "userServiceStatus": "BUSY"	// BUSY:正忙 DO_BUSINESS:营业中 OFF_WORK: 下班了
             },
             {
                 "id": 2,
@@ -177,7 +180,8 @@ response
                 "iconURL": null,
                 "isCategory": false,
                 "order": 2,
-                "serviceEnable": true
+                "serviceEnable": true,
+                "userServiceStatus": "BUSY"	// BUSY:正忙 DO_BUSINESS:营业中 OFF_WORK: 下班了
             }
         ],
         "currentPageNo": 1,
@@ -333,11 +337,11 @@ response
 }
 ```
 
-#### 完善用户信息
+#### 修改用户信息
 
 request
 
-* 完善用户信息和修改密码等可以使用此接口，按需传参数即可
+* 修改用户信息和更新我的状态等可以使用此接口，按需传参数即可
 
 URL:/user/{id}/update
 
@@ -345,7 +349,8 @@ URL:/user/{id}/update
 {
   "address": "更新地址了",
   "realName": "呵呵呵呵",
-  "password": "123456"
+  "password": "123456",
+  "UserServiceStatus": "OFF_WORK"		// BUSY:正忙 DO_BUSINESS:营业中 OFF_WORK: 下班了
 }
 ```
 
@@ -560,7 +565,8 @@ response
                 "authStatus": "VALID",
                 "serviceEnable": false,		// 服务状态
                 "order": 3,
-                "collected": false
+                "collected": false,
+                "userServiceStatus": "BUSY"	// BUSY:正忙 DO_BUSINESS:营业中 OFF_WORK: 下班了
             },
             {
                 "id": 4,
@@ -575,7 +581,8 @@ response
                 "scoreUserCount": 0,
                 "status": "VALID",
                 "order": 4,
-                "collected": false
+                "collected": false,
+                "userServiceStatus": "BUSY"	// BUSY:正忙 DO_BUSINESS:营业中 OFF_WORK: 下班了
             }
         ],
         "realNameAuth": {		// when realNameAuthStatus is not equals WAIT_TO_AUTH that will get null
@@ -646,7 +653,8 @@ response
             "scoreUserCount": 1,
             "status": "VALID",
             "order": 3,
-            "collected": false
+            "collected": false,
+            "userServiceStatus": "BUSY"	// BUSY:正忙 DO_BUSINESS:营业中 OFF_WORK: 下班了
         }
     ]
 }

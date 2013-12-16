@@ -23,7 +23,7 @@ public class CategoriesControllerTest extends MVCTestEnviroment {
         device.setCommunityId(1);
         
         //When
-        post("/category", device)
+        post("/category/0", device)
         //Then
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.status", is("000")))

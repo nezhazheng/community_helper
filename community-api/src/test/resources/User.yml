@@ -5,13 +5,15 @@ user:
     address: 'myaddress'
     real_name: 'zhengzheng'
     real_name_auth: 'HAS_NOT_AUTH'
+    user_service_status: 'DO_BUSINESS'
   - id: 2
     phonenum: '13311008878'
     password: '123456'
     address: 'myaddress'
     real_name: 'zhengzheng'
     real_name_auth: 'WAIT_TO_AUTH'
-
+    user_service_status: 'DO_BUSINESS'
+    
 merchant:
   - id: 1
     category_id: 0

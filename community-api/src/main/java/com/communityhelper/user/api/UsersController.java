@@ -21,13 +21,15 @@ import com.communityhelper.api.APIRequest;
 import com.communityhelper.api.APIResponse;
 import com.communityhelper.api.APIResponse.Status;
 import com.communityhelper.merchant.Merchant;
-import com.communityhelper.merchant.MerchantStatus;
 import com.communityhelper.merchant.MyMerchantCollection;
 import com.communityhelper.merchat.api.MerchantRequest;
+import com.communityhelper.merchat.api.representation.UserMerchantDTO;
+import com.communityhelper.merchat.service.MerchantService;
 import com.communityhelper.security.TokenService;
 import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;
 import com.communityhelper.user.RealNameAuthStatus;
+import com.communityhelper.user.UserServiceStatus;
 import com.communityhelper.user.api.representation.MyDTO;
 import com.communityhelper.user.api.representation.UserDTO;
 
@@ -38,6 +40,8 @@ public class UsersController {
     @Autowired
     private TokenService service;
     
+    @Autowired
+    private MerchantService merchantService;
     /**
      * 用户登录
      * @param user
@@ -81,6 +85,7 @@ public class UsersController {
         user.setImei(userDTO.getImei());
         user.setChannel(userDTO.getChannel());
         user.setCreateDate(new Date());
+        user.setUserServiceStatus(UserServiceStatus.DO_BUSINESS);
         user.setRealNameAuthStatus(RealNameAuthStatus.HAS_NOT_AUTH);
         
         if(user.persist()) {
@@ -90,6 +95,12 @@ public class UsersController {
         }
     }
     
+    /**
+     * 更新用户信息
+     * @param id
+     * @param userDTO
+     * @return
+     */
     @RequestMapping(value = "/{id}/update", method = RequestMethod.POST)
     public
     @ResponseBody
@@ -101,10 +112,12 @@ public class UsersController {
         if(StringUtils.hasLength(userDTO.getRealName())) {
             user.setRealName(userDTO.getRealName());
         }
+        if(null != userDTO.getUserServiceStatus()) {
+            user.setUserServiceStatus(userDTO.getUserServiceStatus());
+        }
         user.merge();
         return success("完善成功");
     }
-    
     
     /**
      * 修改密码
@@ -162,8 +175,9 @@ public class UsersController {
     @ResponseBody
     APIResponse myMerchants(@PathVariable Integer userId, @RequestBody MerchantRequest request) {
         List<Merchant> merchants = Merchant.findMerchantsByUserId(userId);
+        List<UserMerchantDTO> userMerchants = merchantService.toUserMerchantDTO(userId, merchants);
         MyDTO my = new MyDTO();
-        my.setMerchants(merchants);
+        my.setMerchants(userMerchants);
         User user = User.findUser(userId);
         my.setUser(user);
         RealNameAuth realNameAuth = RealNameAuth.findRealNameAuthByUserId(userId);
@@ -180,8 +194,9 @@ public class UsersController {
     @RequestMapping(value = "/{userId}/merchantcollection", method = RequestMethod.POST)
     public 
     @ResponseBody
-    APIResponse myMerchants(@PathVariable Integer userId, @RequestBody APIRequest request) {
+    APIResponse myMerchantCollection(@PathVariable Integer userId, @RequestBody APIRequest request) {
         List<Merchant> merchants = MyMerchantCollection.findMyMerchantCollectionByUserId(userId);
-        return success("我的收藏查询成功").result(merchants);
+        List<UserMerchantDTO> userMerchants = merchantService.toUserMerchantDTO(userId, merchants);
+        return success("我的收藏查询成功").result(userMerchants);
     }
 }

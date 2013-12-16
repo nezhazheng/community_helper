@@ -7,17 +7,14 @@ import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.List;
 
 import org.junit.Test;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.communityhelper.MVCTestEnviroment;
 import com.communityhelper.api.APIRequest;
-import com.communityhelper.merchant.Merchant;
-import com.communityhelper.merchat.api.MerchantRequest;
 import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;
+import com.communityhelper.user.UserServiceStatus;
 import com.communityhelper.user.api.representation.UserDTO;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 @DatabaseSetup("/User.yml")
@@ -43,13 +40,30 @@ public class UsersControllerTest extends MVCTestEnviroment {
         user.setPhonenum("admin");
         user.setAddress("test");
         
-      //When
+        // When
         post("/user/{userId}/update", user, 1)
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.status", is("000")));
         
         User valid = User.findUser(1);
         assertNotEquals("admin", valid.getPhonenum());
+    }
+    
+    @Test
+    public void should_change_user_status() throws Exception{
+        User valid = User.findUser(1);
+        assertNotEquals("DO_BUSINESS", valid.getPhonenum());
+        
+        UserDTO user = new UserDTO();
+        user.setUserServiceStatus(UserServiceStatus.BUSY);
+        
+        // When
+        post("/user/{userId}/update", user, 1)
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.status", is("000")));
+        
+        valid = User.findUser(1);
+        assertNotEquals("BUSY", valid.getUserServiceStatus());
     }
     
     @Test

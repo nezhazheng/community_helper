@@ -34,7 +34,7 @@ public class CategoriesController {
     public
     @ResponseBody
     APIResponse categoryList(@PathVariable(value = "categoryId") Integer categoryId,
-            @RequestBody CategoryListRequest request){
+            @RequestBody CategoryListRequest request) {
         Page<Category> categories = Category.findChildCategories(categoryId,
                 request.getStart(), request.getSize(), request.getCommunityId());
         Page<Merchant> merchants = Merchant.findValidMerchantsByCategoryId(categoryId,
