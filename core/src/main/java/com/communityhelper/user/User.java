@@ -86,8 +86,8 @@ public class User {
         }
     }
 
-    public static Page<User> findUsersPage(Integer start, Integer limit) {
-        List<User> users = entityManager().createQuery("from User", User.class)
+    public static Page<User> findOrderableUsersPage(Integer start, Integer limit) {
+        List<User> users = entityManager().createQuery("from User o order by o.createDate desc", User.class)
         .setFirstResult(start)
         .setMaxResults(limit)
         .getResultList();

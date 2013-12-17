@@ -1,5 +1,6 @@
 package com.communityhelper.merchat.api;
 
+import java.util.ArrayList;
 import java.util.List;
 import static com.communityhelper.api.APIResponse.*;
 
@@ -14,7 +15,9 @@ import com.communityhelper.api.APIResponse;
 import com.communityhelper.api.Page;
 import com.communityhelper.category.service.CategoryService;
 import com.communityhelper.merchant.Merchant;
+import com.communityhelper.merchant.MerchantErrorReport;
 import com.communityhelper.merchant.MerchantStatus;
+import com.communityhelper.merchat.api.representation.MerchantErrorReportDTO;
 
 @Controller
 @RequestMapping(value = "/merchant", method = RequestMethod.GET)
@@ -22,7 +25,7 @@ public class MerchantsController {
     @Autowired
     private CategoryService categoryService;
     /**
-     * 商户详情
+     * 商户列表
      */
     @RequestMapping(value = "/all")
     public 
@@ -30,7 +33,7 @@ public class MerchantsController {
     Page<Merchant> all(@RequestParam Integer page, 
             @RequestParam Integer start, 
             @RequestParam Integer limit) {
-        List<Merchant> merchants = Merchant.findMerchantEntries(start, limit);
+        List<Merchant> merchants = Merchant.findOrderableMerchants(start, limit);
         Page<Merchant> pageMerchants = new Page<Merchant>();
         pageMerchants.setList(merchants);
         pageMerchants.setTotalResult(Integer.parseInt((Merchant.countMerchants() + "")));
@@ -66,5 +69,28 @@ public class MerchantsController {
         merchant.setCategoryId(categoryId);
         merchant.merge();
         return success("审核成功");
+    }
+    
+    /**
+     * 商户详情
+     */
+    @RequestMapping(value = "/errorreport")
+    public 
+    @ResponseBody
+    Page<MerchantErrorReportDTO> errorReportList(@RequestParam Integer page, 
+            @RequestParam Integer start, 
+            @RequestParam Integer limit) {
+        List<MerchantErrorReport> merchants = MerchantErrorReport.findMerchantErrorReportEntries(start, limit);
+        List<MerchantErrorReportDTO> dtos = new ArrayList<MerchantErrorReportDTO>();
+        for(MerchantErrorReport report: merchants) {
+            MerchantErrorReportDTO dto = new MerchantErrorReportDTO();
+            dto.setMerchantName(Merchant.findMerchant(report.getMerchantId()).getName());
+            dto.setMerchantReport(report);
+            dtos.add(dto);
+        }
+        Page<MerchantErrorReportDTO> pageMerchants = new Page<MerchantErrorReportDTO>(start, limit);
+        pageMerchants.setList(dtos);
+        pageMerchants.setTotalResult(Integer.parseInt((MerchantErrorReport.countMerchantErrorReports() + "")));
+        return pageMerchants;
     }
 }

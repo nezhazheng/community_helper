@@ -13,6 +13,8 @@ import com.communityhelper.api.APIResponse;
 import com.communityhelper.api.APIResponse.Status;
 import com.communityhelper.feedback.Feedback;
 import com.communityhelper.merchant.Merchant;
+import com.communityhelper.user.RealNameAuthStatus;
+import com.communityhelper.user.User;
 
 @Controller
 @RequestMapping("/merchant/{merchantId}/feedback")
@@ -23,6 +25,10 @@ public class FeedbacksController {
     @ResponseBody
     APIResponse publishFeedback(@PathVariable Integer merchantId,
             @RequestBody FeedbackRequest feedbackDTO){
+        User user = User.findUser(feedbackDTO.getUserId());
+        if(!RealNameAuthStatus.ALREADY_AUTH.equals(user.getRealNameAuthStatus())) {
+            return response().status(Status.DOESNOT_REALNAMEAUTH);
+        }
         Feedback feedback = feedbackDTO.toFeedback();;
         feedback.setMerchantId(merchantId);
         if(!feedback.persist()){

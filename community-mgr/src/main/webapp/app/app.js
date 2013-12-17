@@ -6,7 +6,7 @@ Ext.application({
 	requires: ['Ext.container.Viewport',
 	           'Mgr.view.Navigator'],
 	appFolder: 'app',
-	models: ['User', 'RealNameAuth', 'Image', 'Feedback', 'MerchantAllField'],
+	models: ['User', 'RealNameAuth', 'Image', 'Feedback', 'MerchantAllField', 'MerchantErrorReport'],
 	controllers: ['Merchant'],
 	stores: ['AllMerchants', 'RealNameAuth'],
 	launch: function() {
@@ -23,7 +23,7 @@ Ext.application({
                 {
                 	id: 'right-container',
                 	region: 'center',
-                	xtype: 'container',
+                	xtype: 'panel',
                 	layout: 'fit',
                 	items: [{
                 		xtype: 'merchanttree'

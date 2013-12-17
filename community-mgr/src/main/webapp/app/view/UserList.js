@@ -63,7 +63,7 @@ Ext.define('Mgr.view.UserList', {
     	width: 150
     }, {
     	text: '实名认证状态',
-    	dataIndex: 'realNameAuth',
+    	dataIndex: 'realNameAuthStatus',
     	width: 150
     }],
     store: userStore,

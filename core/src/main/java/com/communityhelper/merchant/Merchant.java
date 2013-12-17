@@ -142,4 +142,9 @@ public class Merchant {
             return null;
         }
     }
+    
+    public static List<Merchant> findOrderableMerchants(int firstResult, int maxResults) {
+        return entityManager().createQuery("SELECT o FROM Merchant o order by o.createDate desc", Merchant.class)
+                .setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    }
 }

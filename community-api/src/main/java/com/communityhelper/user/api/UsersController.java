@@ -154,9 +154,6 @@ public class UsersController {
         if(RealNameAuthStatus.WAIT_TO_AUTH.equals(user.getRealNameAuthStatus())){
             return response().status(Status.WAIT_TO_AUTH);
         }
-        if(RealNameAuthStatus.ALREADY_AUTH.equals(user.getRealNameAuthStatus())){
-            return response().status(Status.ALREADY_AUTH);
-        }
         user.setRealNameAuthStatus(RealNameAuthStatus.WAIT_TO_AUTH);
         user.merge();
         RealNameAuth auth = userDTO.toRealNameAuth(id);

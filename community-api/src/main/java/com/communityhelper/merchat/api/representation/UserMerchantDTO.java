@@ -50,7 +50,6 @@ public class UserMerchantDTO {
             e.printStackTrace();
         }
         catch (NoSuchMethodException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

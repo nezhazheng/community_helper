@@ -8,7 +8,8 @@ Ext.define('Mgr.controller.Merchant',{
         'AddCategoryWindow',
         'ImageList',
         'AddImageWindow',
-        'FeedbackList'
+        'FeedbackList',
+        'MerchantErrorReportList'
     ],
 	init: function() {
         this.control({

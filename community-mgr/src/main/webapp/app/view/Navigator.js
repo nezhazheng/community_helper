@@ -17,22 +17,32 @@ Ext.define('Mgr.view.Navigator', {
                 data: [
                        {
                     	   title : '用户列表',
-                    	   widgetId: 'usersgrid'
+                    	   widgetId: 'usersgrid',
+                    	   id: 'users'
                        }, {
                     	   title : '类别商户列表',
-                    	   widgetId: 'merchanttree'
+                    	   widgetId: 'merchanttree',
+                    	   id: 'merchanttree'
                        }, {
                     	   title : '商户列表',
-                    	   widgetId: 'allmerchantsgrid'
+                    	   widgetId: 'allmerchantsgrid',
+                    	   id: 'allmerchants'
                        }, {
                     	   title : '用户实名认证',
-                    	   widgetId: 'realnameauthgrid'
+                    	   widgetId: 'realnameauthgrid',
+                    	   id: 'realnameauth'
                        }, {
                     	   title : '图片列表',
-                    	   widgetId: 'imagegrid'
+                    	   widgetId: 'imagegrid',
+                    	   id: 'images'
                        }, {
                     	   title : '评论列表',
-                    	   widgetId: 'feedbackgrid'
+                    	   widgetId: 'feedbackgrid',
+                    	   id: 'feedbacks'
+                       }, {
+                    	   title : '商户报错列表',
+                    	   widgetId: 'merchanterrorreportgrid',
+                    	   id: 'merchanterrorreport'
                        }
                 ]
             }),
@@ -53,8 +63,11 @@ Ext.define('Mgr.view.Navigator', {
         return this.view;
     },
     
-    onSelectionChange: function(data){
-    	Ext.getCmp('right-container').removeAll();
+    onSelectionChange: function(data) {
+    	if(data.selected.items.length == 0){
+    		return;	
+    	}
+    	Ext.getCmp('right-container').removeAll(false);
     	Ext.getCmp('right-container').add({xtype: data.selected.items[0].data.widgetId});
     },
     

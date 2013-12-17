@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,16 +35,21 @@ public class UsersController {
         return realNameAuths;
     }
     
+    @Transactional
     @RequestMapping(value = "/realnameauth", method = RequestMethod.POST)
     public 
     @ResponseBody
     String realNameAuth(@RequestParam Integer authId, 
             @RequestParam Integer userId, 
             @RequestParam("status") RealNameAuthStatus status) {
+        RealNameAuth realNameAuth = RealNameAuth.findRealNameAuth(authId);
         User user = User.findUser(userId);
         user.setRealNameAuthStatus(status);
+        user.setRealName(realNameAuth.getRealName());
+        user.setAddress(realNameAuth.getContractAddress());
         user.merge();
-        RealNameAuth.findRealNameAuth(authId).remove();
+        
+        realNameAuth.remove();
         return "success";
     }
     
@@ -53,7 +59,7 @@ public class UsersController {
     Page<User> users(@RequestParam Integer page, 
             @RequestParam Integer start, 
             @RequestParam Integer limit){
-        Page<User> userPage =  User.findUsersPage(start, limit);
+        Page<User> userPage =  User.findOrderableUsersPage(start, limit);
         return userPage;
     }
 }

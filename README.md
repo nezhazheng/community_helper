@@ -28,16 +28,20 @@
 25. feedback order.		DONE
 
 #### mgr feature
-1. give image a flag.
 2. could add image id when create category.	DONE
-3. made platform iamge type to column box.
-4. fix left navigation panel load view bug.
+3. made platform iamge type field to column box.
+4. lazy load grid data.
+5. could update category
+6. add order to pageable api.		DONE
+7. user list real name auth status doesn't appear.
+8. could remove merchant on merchant list.
 
 #### performance and security
 1. add compress			
 2. add encrypt
 3. caching
 4. password encrypt		DONE
+5. add test for merchant feedback.
 
 #### other
 1. api doc			DONE
