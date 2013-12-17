@@ -290,7 +290,9 @@ response
             "scoreUserCount": 1			// 评分人数
             "authStatus": "VALID",			// VALID:审核,NOT_VALID:未审核
             "order": 3,
-            "collected": true			// true 代表已收藏 false代表未收藏
+            "collected": true,			// true 代表已收藏 false代表未收藏
+            "standardCategoryName": "超市",		// 标准类别名
+            "userServiceStatus": "BUSY",	// BUSY:正忙 DO_BUSINESS:营业中 OFF_WORK: 下班了
         },
         "feedbackList": {		//商户反馈列表
             "pageIndex": 0,
@@ -568,7 +570,8 @@ response
                 "serviceEnable": false,		// 服务状态
                 "order": 3,
                 "collected": false,
-                "userServiceStatus": "BUSY"	// BUSY:正忙 DO_BUSINESS:营业中 OFF_WORK: 下班了
+                "userServiceStatus": "BUSY",	// BUSY:正忙 DO_BUSINESS:营业中 OFF_WORK: 下班了
+                "standardCategoryName": "超市"	// 标准类别名
             },
             {
                 "id": 4,
@@ -584,7 +587,8 @@ response
                 "status": "VALID",
                 "order": 4,
                 "collected": false,
-                "userServiceStatus": "BUSY"	// BUSY:正忙 DO_BUSINESS:营业中 OFF_WORK: 下班了
+                "userServiceStatus": "BUSY",	// BUSY:正忙 DO_BUSINESS:营业中 OFF_WORK: 下班了
+                "standardCategoryName": "超市"	// 标准类别名
             }
         ],
         "realNameAuth": {		// when realNameAuthStatus is not equals WAIT_TO_AUTH that will get null
@@ -656,7 +660,8 @@ response
             "status": "VALID",
             "order": 3,
             "collected": false,
-            "userServiceStatus": "BUSY"	// BUSY:正忙 DO_BUSINESS:营业中 OFF_WORK: 下班了
+            "userServiceStatus": "BUSY",	// BUSY:正忙 DO_BUSINESS:营业中 OFF_WORK: 下班了
+            "standardCategoryName": "超市"	// 标准类别名
         }
     ]
 }

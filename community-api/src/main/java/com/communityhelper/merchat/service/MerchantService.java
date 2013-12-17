@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.communityhelper.category.StandardCategory;
 import com.communityhelper.merchant.Merchant;
 import com.communityhelper.merchant.MyMerchantCollection;
 import com.communityhelper.merchat.api.representation.UserMerchantDTO;
@@ -30,6 +31,10 @@ public class MerchantService {
             userMerchant.setUserServiceStatus(User.findUser(merchant.getUserId()).getUserServiceStatus());
         } else {
             userMerchant.setUserServiceStatus(UserServiceStatus.DO_BUSINESS);
+        }
+        if(merchant.getStandardCategoryId() != null && 0 != merchant.getStandardCategoryId()) {
+            userMerchant.setStandardCategoryName(StandardCategory
+                    .findStandardCategory(merchant.getStandardCategoryId()).getName());
         }
         return userMerchant;
     }

@@ -31,12 +31,15 @@ public class UserMerchantDTO {
     private MerchantStatus authStatus;
     private Integer order;
     private Date createDate;
-    /** 商户服务状态 - 是否可用 */
+    /** 商户是否可用 */
     private Boolean serviceEnable;
     
     /** 当前用户是否收藏了 */
     private Boolean collected;
+    /** 用户服务状态 */
     private UserServiceStatus userServiceStatus;
+    /** 标准类别 */
+    private String standardCategoryName;
     
     public UserMerchantDTO() {}
     public UserMerchantDTO(Merchant m) {
@@ -52,6 +55,12 @@ public class UserMerchantDTO {
         catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
+    }
+    public String getStandardCategoryName() {
+        return standardCategoryName;
+    }
+    public void setStandardCategoryName(String standardCategoryName) {
+        this.standardCategoryName = standardCategoryName;
     }
     public Integer getId() {
         return id;
