@@ -17,6 +17,7 @@ import com.communityhelper.api.Page;
 import com.communityhelper.feedback.Feedback;
 import com.communityhelper.merchant.Merchant;
 import com.communityhelper.merchant.MerchantErrorReport;
+import com.communityhelper.merchant.MerchantStatus;
 import com.communityhelper.merchant.MyMerchantCollection;
 import com.communityhelper.merchat.api.representation.MerchantsDetailDTO;
 import com.communityhelper.merchat.api.representation.UserMerchantDTO;
@@ -73,6 +74,7 @@ public class MerchantsController {
         if(null != request.getStandardCategoryId() && request.getStandardCategoryId() != 0) {
             merchant.setStandardCategoryId(request.getStandardCategoryId());
         }
+        merchant.setAuthStatus(MerchantStatus.NOT_VALID);
         merchant.merge();
         return success("修改成功");
     }
@@ -85,7 +87,7 @@ public class MerchantsController {
     @RequestMapping
     public 
     @ResponseBody
-    APIResponse addMerchant(@RequestBody MerchantRequest dto){
+    APIResponse addMerchant(@RequestBody MerchantRequest dto) {
         Merchant merchant = dto.createMerchant();
         merchant.persist();
         return success("添加商户成功");

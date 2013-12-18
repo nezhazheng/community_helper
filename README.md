@@ -33,11 +33,11 @@
 4. lazy load grid data.
 5. could update category
 6. add order to pageable api.		DONE
-7. user list real name auth status doesn't appear.
+7. user list real name auth status doesn't appear.	DONE
 8. could remove merchant on merchant list.
 
 #### performance and security
-1. add compress			
+1. add compress	
 2. add encrypt
 3. caching
 4. password encrypt		DONE
