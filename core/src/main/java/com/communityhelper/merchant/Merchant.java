@@ -111,8 +111,6 @@ public class Merchant {
     public void setDefault() {
         this.setScore(0.0);
         this.setScoreUserCount(0);
-        this.setOrder(0);
-        this.setServiceEnable(false);
     }
 
     public static List<Merchant> findMerchantsByUserId(Integer userId) {

@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,20 +65,26 @@ public class CategoryService {
      */
     @Transactional
     public Integer inrcOrder(Integer categoryId, Integer order) {
-        int merchantCount = entityManager.createNativeQuery("update merchant set morder = morder + 1 where category_id = "+categoryId+" and morder >= " + order).executeUpdate();
+        if (order == 0) {
+            return -1;
+        }
+        int merchantCount = entityManager.createNativeQuery("update merchant set morder = morder + 1 where category_id = "+categoryId+" and auth_status = 'VALID' and morder >= " + order).executeUpdate();
         int categoryCount = entityManager.createNativeQuery("update category set corder = corder + 1 where category_id = "+categoryId+" and corder >= " + order).executeUpdate();
         return categoryCount + merchantCount;
     }
     
     /**
-     * 删除用
-     * @param categoryId
-     * @param order
+     * 删除或修改为未审核状态时用，总之在商户列表不再显示时，请调用此方法
+     * @param categoryId 被删除的CategoryId
+     * @param order     被删除的Order
      * @return
      */
     @Transactional
     public Integer reduceOrder(Integer categoryId, Integer order) {
-        int merchantCount = entityManager.createNativeQuery("update merchant set morder = morder - 1 where category_id = "+categoryId+" and morder > " + order).executeUpdate();
+        if (order == 0) {
+            return -1;
+        }
+        int merchantCount = entityManager.createNativeQuery("update merchant set morder = morder - 1 where category_id = "+categoryId+" and auth_status = 'VALID' and morder > " + order).executeUpdate();
         int categoryCount = entityManager.createNativeQuery("update category set corder = corder - 1 where category_id = "+categoryId+" and corder > " + order).executeUpdate();
         return categoryCount + merchantCount;
     }
@@ -92,21 +97,25 @@ public class CategoryService {
      */
     @Transactional
     public void updateRelatedOrder(Merchant updateMerchant, Integer updateOrder, Integer categoryId) {
-     // 审核情况，order顺序递增
-        if(0 == updateMerchant.getOrder() && updateOrder > updateMerchant.getOrder()){
+        if(updateOrder == 0) {
+            return;
+        }
+        Integer oldOrder = updateMerchant.getOrder();
+        // 审核情况，order顺序递增
+        if(0 ==  oldOrder && updateOrder > oldOrder){
             this.inrcOrder(categoryId, updateOrder);
         }
         // 更新情况, order调换
-        if(0 != updateMerchant.getOrder() && updateOrder != updateMerchant.getOrder()){
+        if(0 != oldOrder && updateOrder != oldOrder){
             Merchant replacedMerchant = Merchant.findMerchantByOrderAndCategoryId(updateOrder, categoryId);
             // TODO 如果找不着 找类别最大的那个做递增
             if(replacedMerchant != null){
-                replacedMerchant.setOrder(updateMerchant.getOrder());
+                replacedMerchant.setOrder(oldOrder);
                 replacedMerchant.merge();
             } else {
                 Category replacedCategory = Category.findCategoryByOrderAndCategoryId(updateOrder, categoryId);
                 if(replacedCategory != null) {
-                    replacedCategory.setOrder(updateMerchant.getOrder());
+                    replacedCategory.setOrder(oldOrder);
                     replacedCategory.merge();
                 }
             }

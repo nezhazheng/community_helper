@@ -13,7 +13,7 @@
     <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager" c:template-ref="redisTemplate"/>
   
     <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
-        p:hostName="localhost" p:port="6379" p:usePool="true"/>
+        p:hostName="${redis.host}" p:port="${redis.port}" p:usePool="true"/>
         
     <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
         p:connection-factory-ref="jedisConnectionFactory" p:keySerializer-ref="keySerializer">

@@ -65,7 +65,7 @@ public class CategoriesController {
     }
     
     /**
-     * 删除类别
+     * 删除类别或商户
      * @param id
      * @param isCategory
      * @return

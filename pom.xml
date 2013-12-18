@@ -569,6 +569,8 @@
 				<log.file>/Users/nezhazheng/communityhelper.log</log.file>
 				<tomcat.manager.url>http://localhost:8080/manager</tomcat.manager.url>
                 <tomcat.manager.port>8080</tomcat.manager.port>
+                <redis.host>localhost</redis.host>
+                <redis.port>6379</redis.port>
                 <imageServerURL>http://localhost/images/</imageServerURL>
                 <imageServerDir>/Users/nezhazheng/</imageServerDir>
 			</properties>
@@ -585,6 +587,8 @@
                 <log.file>/home/appusr/logs/communityhelper.log</log.file>
                 <tomcat.manager.url>http://58.83.193.119/manager</tomcat.manager.url>
                 <tomcat.manager.port>80</tomcat.manager.port>
+                <redis.host>192.168.65.5</redis.host>
+                <redis.port>6379</redis.port>
                 <imageServerURL>http://58.83.193.119/images/</imageServerURL>
                 <imageServerDir>/home/appusr/images/</imageServerDir>
             </properties>

@@ -40,6 +40,10 @@ var allMerchantStore = Ext.create('Ext.data.Store',{
              type: 'json',
              root: 'list',
              totalProperty: 'totalResult'
+         },
+         writer: {
+             type: 'json',
+             writeAllFields: true
          }
     },
     autoLoad: true
@@ -62,6 +66,11 @@ Ext.define('Mgr.view.AllMerchants', {
         clicksToEdit: 1
     })],
     columns: [{
+        text: '商户ID',
+        dataIndex: 'id',
+        sortable: true,
+        width: 150
+    },{
         text: '商户名称',
         dataIndex: 'name',
         width: 150,
@@ -141,8 +150,63 @@ Ext.define('Mgr.view.AllMerchants', {
     	text: '描述',
     	dataIndex: 'description',
     	width: 150
+    }, {
+        xtype: 'actioncolumn',
+        width: 30,
+        menuDisabled: true,
+        items: [{
+            icon: '../resources/images/icons/fam/delete.gif',
+            tooltip: '删除',
+            scope: this,
+            handler: function(grid, rowIndex) {
+            	Ext.Ajax.request({
+            	    url: '/mgr/merchant/delete',
+            	    method: 'POST',
+            	    params: {
+            	    	merchantId: grid.dataSource.data.items[rowIndex].data.id,
+            	    },
+            	    success: function(response){
+            	        var text = response.responseText;
+            	        Ext.getCmp('allmerchants').store.load();
+            	    }
+            	});
+            }
+        }]
     }],
     tbar: [{
+    	xtype: 'button',
+        text: '增加商户',
+        scope: this,
+        handler: function(){
+        	var merchant = new Mgr.model.MerchantAllField({
+                name: 'name',
+                categoryId: '0',
+    	    	contactAddress: 'Address',
+    	    	contactPhoneNumber: 'Phone Number',
+    	    	order: 0,
+    	    	authStatus: 'NOT_VALID',
+    	    	categoryId: 0,
+    	    	serviceEnable: false
+            });
+            
+        	Ext.getCmp('allmerchants').store.insert(0, merchant);
+        }
+    },{
+    	xtype: 'button',
+        text: '提交新增商户',
+        scope: this,
+        handler: function(){
+        	var data = Ext.getCmp('allmerchants').getSelectionModel().getSelection()[0].data;
+        	Ext.Ajax.request({
+        	    url: '/mgr/merchant/add',
+        	    method: 'POST',
+        	    jsonData: data,
+        	    success: function(response){
+        	        Ext.getCmp('allmerchants').store.load();
+        	    }
+        	});
+        }
+    },{
     	xtype: 'button',
         text: '修改商户',
         scope: this,
@@ -162,7 +226,23 @@ Ext.define('Mgr.view.AllMerchants', {
         	    	serviceEnable: data.serviceEnable
         	    },
         	    success: function(response){
-        	        var text = response.responseText;
+        	        Ext.getCmp('allmerchants').store.load();
+        	    }
+        	});
+        }
+    },{
+    	xtype: 'button',
+        text: '删除商户',
+        scope: this,
+        handler: function(){
+        	var data = Ext.getCmp('allmerchants').getSelectionModel().getSelection()[0].data;
+        	Ext.Ajax.request({
+        	    url: '/mgr/merchant/delete',
+        	    method: 'POST',
+        	    params: {
+        	    	merchantId: data.id
+        	    },
+        	    success: function(response){
         	        Ext.getCmp('allmerchants').store.load();
         	    }
         	});

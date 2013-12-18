@@ -6,6 +6,8 @@ import static com.communityhelper.api.APIResponse.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,10 +43,42 @@ public class MerchantsController {
     }
     
     /**
+     * 删除商户
+     * @param merchantId
+     * @return
+     */
+    @Transactional
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public 
+    @ResponseBody
+    APIResponse delete(@RequestParam("merchantId") Integer merchantId){
+        Merchant merchant = Merchant.findMerchant(merchantId);
+        Integer categoryId = merchant.getCategoryId();
+        Integer order = merchant.getOrder();
+        merchant.remove();
+        categoryService.reduceOrder(categoryId, order);
+        return success("审核成功");
+    }
+    
+    @Transactional
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public 
+    @ResponseBody
+    String add(@RequestBody Merchant merchant){
+        if(MerchantStatus.VALID.equals(merchant.getAuthStatus()) && merchant.getOrder() != 0) {
+            categoryService.inrcOrder(merchant.getCategoryId(), merchant.getOrder());
+        }
+        merchant.setDefault();
+        merchant.persist();
+        return "success";
+    }
+    
+    /**
      * 修改商户
      * @param merchantId
      * @return
      */
+    @Transactional
     @RequestMapping(value = "/modify", method = RequestMethod.POST)
     public 
     @ResponseBody
@@ -52,15 +86,24 @@ public class MerchantsController {
             @RequestParam("serviceEnable") Boolean serviceEnable,
             @RequestParam("merchantId") Integer merchantId,
             @RequestParam("categoryId") Integer categoryId,
-            @RequestParam("order") Integer order,
+            @RequestParam("order") Integer updateOrder,
             @RequestParam("contactAddress") String contactAddress,
             @RequestParam("name") String name,
             @RequestParam("contactPhoneNumber") String contactPhoneNumber){
         Merchant merchant = Merchant.findMerchant(merchantId);
         
-        categoryService.updateRelatedOrder(merchant, order, categoryId);
-        
-        merchant.setOrder(order);
+        // 如果商户状态为未审核
+        if(MerchantStatus.NOT_VALID.equals(MerchantStatus.valueOf(status))){
+            // 如果商户之前的order不为0 则判断是关闭账户成未审核情况，则递减所有顺序大于此商户顺序的商户群
+            if(merchant.getOrder() != 0) {
+                categoryService.reduceOrder(categoryId, merchant.getOrder());
+            }
+            // 如果商户状态为未审核，则order一定为0
+            merchant.setOrder(0);
+        } else if (updateOrder != 0){
+            categoryService.updateRelatedOrder(merchant, updateOrder, categoryId);
+            merchant.setOrder(updateOrder);
+        }
         merchant.setServiceEnable(serviceEnable);
         merchant.setContactAddress(contactAddress);
         merchant.setContactPhoneNumber(contactPhoneNumber);
@@ -68,7 +111,7 @@ public class MerchantsController {
         merchant.setAuthStatus(MerchantStatus.valueOf(status));
         merchant.setCategoryId(categoryId);
         merchant.merge();
-        return success("审核成功");
+        return success("修改成功");
     }
     
     /**
