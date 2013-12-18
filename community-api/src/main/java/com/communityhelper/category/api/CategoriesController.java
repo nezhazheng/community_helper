@@ -52,7 +52,7 @@ public class CategoriesController {
     public
     @ResponseBody
     APIResponse standardCategoryList(@RequestBody APIRequest request) {
-        List<StandardCategory> categories = StandardCategory.findAllStandardCategorys();
+        List<StandardCategory> categories = categoryService.findAllStandardCategorys();
         return success("查询成功").result(categories);
     }
 }

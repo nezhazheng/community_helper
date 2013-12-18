@@ -1,5 +1,7 @@
 package com.communityhelper.category;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +19,7 @@ import org.springframework.roo.addon.json.RooJson;
 @RooJson
 @RooJavaBean
 @RooEntity(versionField = "", table = "standard_category")
-public class StandardCategory {
+public class StandardCategory implements Serializable{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
