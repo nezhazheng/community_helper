@@ -111,6 +111,7 @@ public class Merchant {
     public void setDefault() {
         this.setScore(0.0);
         this.setScoreUserCount(0);
+        this.setCreateDate(new Date());
     }
 
     public static List<Merchant> findMerchantsByUserId(Integer userId) {

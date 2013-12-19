@@ -24,9 +24,22 @@ Ext.application({
                 	id: 'right-container',
                 	region: 'center',
                 	xtype: 'panel',
-                	layout: 'fit',
+                	layout: 'card',
+                	activeItem: 0,
                 	items: [{
                 		xtype: 'merchanttree'
+                	},{
+                		xtype: 'usersgrid'
+                	},{
+                		xtype: 'allmerchantsgrid'
+                	},{
+                		xtype: 'realnameauthgrid'
+                	},{
+                		xtype: 'imagegrid'
+                	},{
+                		xtype: 'feedbackgrid'
+                	},{
+                		xtype: 'merchanterrorreportgrid'
                 	}]
                 }
             ]

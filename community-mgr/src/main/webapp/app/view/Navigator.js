@@ -67,8 +67,7 @@ Ext.define('Mgr.view.Navigator', {
     	if(data.selected.items.length == 0){
     		return;	
     	}
-    	Ext.getCmp('right-container').removeAll(false);
-    	Ext.getCmp('right-container').add({xtype: data.selected.items[0].data.widgetId});
+    	Ext.getCmp('right-container').getLayout().setActiveItem(data.selected.items[0].data.id);
     },
     
     initComponent: function(){

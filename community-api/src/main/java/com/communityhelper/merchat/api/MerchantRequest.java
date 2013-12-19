@@ -88,7 +88,6 @@ public class MerchantRequest extends APIRequest {
         merchant.setContactPhoneNumber(this.getContactPhoneNumber());
         merchant.setCommunityId(this.getCommunityId());
         merchant.setAuthStatus(MerchantStatus.NOT_VALID);
-        merchant.setCreateDate(new Date());
         merchant.setOrder(0);
         merchant.setServiceEnable(false);
         merchant.setDefault();
