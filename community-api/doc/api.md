@@ -492,7 +492,7 @@ URL:/merchant/{merchantId}/update
   "contactAddress": "呵呵呵呵",
   "desc": "测试描述",
   "standardCategoryId": 1,
-  "serviceEnable": false
+  "serviceEnable": false			// 服务开启或者关闭
 }
 ```
 
