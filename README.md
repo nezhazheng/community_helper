@@ -34,12 +34,13 @@
 5. could update category
 6. add order to pageable api.		DONE
 7. user list real name auth status doesn't appear.	DONE
-8. could remove merchant on merchant list.
+8. could remove merchant on merchant list.	DONE
+9. delete error report when delete merchant.	DONE
 
 #### performance and security
 1. add compress	
 2. add encrypt
-3. caching
+3. add caching to load user interface		working on it
 4. password encrypt		DONE
 5. add test for merchant feedback.
 
@@ -50,4 +51,4 @@
 4. create PageService
 5. add log			DONE
 6. run test first when deploy
-7. add code quality tool	DONE
+7. add code quality tool

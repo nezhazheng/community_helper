@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.json.RooJson;
+import org.springframework.transaction.annotation.Transactional;
 
 @RooJson
 @RooJavaBean
@@ -32,5 +33,12 @@ public class MerchantErrorReport {
     
     public enum MerchantErrorCategory{
         ADDRESS_ERROR,PHONE_ERROR
+    }
+
+    @Transactional
+    public static Integer deleteAllByMerchantId(Integer merchantId) {
+        return entityManager().createQuery("delete from MerchantErrorReport o where o.merchantId = :merchantId")
+        .setParameter("merchantId", merchantId)
+        .executeUpdate();
     }
 }

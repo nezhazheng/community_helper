@@ -57,9 +57,15 @@ public class MerchantsController {
         Integer order = merchant.getOrder();
         merchant.remove();
         categoryService.reduceOrder(categoryId, order);
+        MerchantErrorReport.deleteAllByMerchantId(merchantId);
         return success("审核成功");
     }
     
+    /**
+     * 增加商户
+     * @param merchant
+     * @return
+     */
     @Transactional
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public 
