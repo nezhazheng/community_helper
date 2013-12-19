@@ -10,6 +10,13 @@ public class CategoryDTO implements Orderable, Comparable<Orderable>{
     private Boolean leaf;
     private String status;
     private Integer order;
+    private Boolean serviceEnable;
+    public Boolean getServiceEnable() {
+        return serviceEnable;
+    }
+    public void setServiceEnable(Boolean serviceEnable) {
+        this.serviceEnable = serviceEnable;
+    }
     public Integer getId() {
         return id;
     }

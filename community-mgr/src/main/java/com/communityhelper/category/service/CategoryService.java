@@ -10,7 +10,6 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.communityhelper.api.Page;
 import com.communityhelper.category.Category;
 import com.communityhelper.category.api.CategoryDTO;
 import com.communityhelper.merchant.Merchant;
@@ -19,19 +18,10 @@ import com.communityhelper.merchant.Merchant;
 public class CategoryService {
     @PersistenceContext
     transient EntityManager entityManager;
-    
-    public List createCategoryList(List<Category> categories,
-            List<Merchant> merchants) {
-        List result = new ArrayList();
-        result.addAll(categories);
-        result.addAll(merchants);
-        return result;
-    }
 
-    public Page createCategoryPage(Page<Category> categories, Page<Merchant> merchants) {
-        Page categoryPage = new Page(categories.getPageIndex(), categories.getMaxResult());
-        List result = new ArrayList();
-        for(Category category : categories.getList()){
+    public List<CategoryDTO> createCategoryPage(List<Category> categories, List<Merchant> merchants) {
+        List<CategoryDTO> result = new ArrayList<CategoryDTO>();
+        for(Category category : categories){
             CategoryDTO dto = new CategoryDTO();
             dto.setLeaf(false);
             dto.setStatus("");
@@ -41,7 +31,7 @@ public class CategoryService {
             dto.setId(category.getId());
             result.add(dto);
         }
-        for(Merchant merchant : merchants.getList()){
+        for(Merchant merchant : merchants){
             CategoryDTO dto = new CategoryDTO();
             dto.setLeaf(true);
             dto.setStatus(merchant.getAuthStatus().name());
@@ -49,12 +39,11 @@ public class CategoryService {
             dto.setCategoryId(merchant.getCategoryId());
             dto.setOrder(merchant.getOrder());
             dto.setMerchantId(merchant.getId());
+            dto.setServiceEnable(merchant.getServiceEnable());
             result.add(dto);
         }
         Collections.sort(result);
-        categoryPage.setTotalResult(categories.getTotalResult() + merchants.getTotalResult());
-        categoryPage.setList(result);
-        return categoryPage;
+        return result;
     }
     
     /**

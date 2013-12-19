@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.communityhelper.api.Page;
 import com.communityhelper.category.Category;
 import com.communityhelper.category.service.CategoryService;
 import com.communityhelper.merchant.Merchant;
@@ -20,20 +19,17 @@ public class CategoriesController {
     @Autowired
     private CategoryService categoryService;
     
-    
     /**
      * 类别列表（含商户）
      */
     @RequestMapping(method = RequestMethod.GET)
     public
     @ResponseBody
-    Page categoryMerchantList(@RequestParam("categoryId") Integer categoryId,
-            @RequestParam("communityId") Integer communityId,
-            @RequestParam(value = "start", defaultValue = "0") Integer start,
-            @RequestParam(value = "size", defaultValue = "10") Integer size){
-        Page categories = Category.findChildCategories(categoryId, start, size, communityId);
-        Page merchants = Merchant.findValidMerchantsByCategoryId(categoryId, start, size, communityId);
-        Page categoryPage = categoryService.createCategoryPage(categories, merchants);
+    List<CategoryDTO> categoryMerchantList(@RequestParam("categoryId") Integer categoryId,
+            @RequestParam("communityId") Integer communityId){
+        List<Category> categories = Category.findAllChildCategories(categoryId, communityId);
+        List<Merchant> merchants = Merchant.findAllValidMerchantsByCategoryId(categoryId, communityId);
+        List<CategoryDTO> categoryPage = categoryService.createCategoryPage(categories, merchants);
         return categoryPage;
     }
     

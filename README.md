@@ -36,6 +36,7 @@
 7. user list real name auth status doesn't appear.	DONE
 8. could remove merchant on merchant list.	DONE
 9. delete error report when delete merchant.	DONE
+10. remove page from category list.		DONE
 
 #### performance and security
 1. add compress	
@@ -52,3 +53,4 @@
 5. add log			DONE
 6. run test first when deploy
 7. add code quality tool
+8. remove Page from core project.

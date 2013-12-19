@@ -19,8 +19,7 @@ Ext.define('Mgr.store.AllMerchants',{
          noCache: false,
          autoAppendParams: true,
          reader: {
-             type: 'json',
-             root: 'list'
+             type: 'json'
          }
     },
     autoLoad: true

@@ -17,7 +17,6 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.json.RooJson;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.communityhelper.api.Page;
 import com.communityhelper.feedback.Feedback;
 
 @RooJson
@@ -72,29 +71,24 @@ public class Merchant {
     
     public Merchant() {}
 
-    public static Page<Merchant> findValidMerchantsByCategoryId(Integer categoryId,
-            Integer start, Integer size, Integer communityId) {
-        TypedQuery<Merchant> query = entityManager().createQuery(
-                "from Merchant c where c.categoryId = :categoryId " +
-                "and (c.order >= :start and c.order <= :size) and c.communityId = :communityId and c.authStatus = :status order by c.order asc", Merchant.class);
+    public static List<Merchant> findAllValidMerchantsByCategoryId(Integer categoryId, Integer communityId) {
+        String hql = "from Merchant o where o.categoryId = :categoryId and " +
+        		"o.communityId = :communityId and o.authStatus = :status order by o.order asc";
+        TypedQuery<Merchant> query = entityManager().createQuery(hql, Merchant.class);
         query.setParameter("categoryId", categoryId)
         .setParameter("communityId", communityId)
-        .setParameter("status", MerchantStatus.VALID)
-        .setParameter("start", start + 1)
-        .setParameter("size", start + size);
+        .setParameter("status", MerchantStatus.VALID);
         List<Merchant> merchants = query.getResultList();
-        Page<Merchant> page = new Page<Merchant>(start, size);
-        page.setList(merchants);
-        page.setTotalResult(countValidMerchantsByCategoryId(categoryId, communityId));
-        return page;
+        return merchants;
     }
     
     public static Integer countValidMerchantsByCategoryId(Integer parentId, Integer communityId) {
         return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Merchant o where o.categoryId = :categoryId " +
-        		" and o.communityId = :communityId and o.authStatus = :status", Long.class)
+        		" and o.communityId = :communityId and o.authStatus = :status and o.serviceEnable = :serviceEnable", Long.class)
                 .setParameter("communityId", communityId)
                 .setParameter("categoryId", parentId)
                 .setParameter("status", MerchantStatus.VALID)
+                .setParameter("serviceEnable", true)
                 .getSingleResult().toString());
     }
 

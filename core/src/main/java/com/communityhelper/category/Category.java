@@ -13,8 +13,6 @@ import org.springframework.roo.addon.entity.RooEntity;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.json.RooJson;
 
-import com.communityhelper.api.Page;
-
 @RooJson
 @RooJavaBean
 @RooEntity(versionField = "", table = "category")
@@ -42,22 +40,17 @@ public class Category implements Orderable, Comparable<Orderable> {
         return this.getOrder().compareTo(o.getOrder());
     }
     
-    public static Page<Category> findChildCategories(Integer categoryId, Integer start, Integer size, Integer communityId) {
-        TypedQuery<Category> query = entityManager().createQuery(
-                "select c from Category c where c.categoryId = :categoryId and c.communityId = :communityId " +
-                "and (c.order >= :start and c.order <= :size) order by c.order asc", Category.class);
+    public static List<Category> findAllChildCategories(Integer categoryId, Integer communityId) {
+        String hql = "select c from Category c where c.categoryId = :categoryId and c.communityId = :communityId " +
+                "order by c.order asc";
+        TypedQuery<Category> query = entityManager().createQuery(hql , Category.class);
         query.setParameter("categoryId", categoryId)
-        .setParameter("communityId", communityId)
-        .setParameter("start", start + 1)
-        .setParameter("size", start + size);
+        .setParameter("communityId", communityId);
         List<Category> categories = query.getResultList();
-        Page<Category> page = new Page<Category>(start, size);
-        page.setList(categories);
-        page.setTotalResult(countCategorysByParentId(categoryId, communityId));
-        return page;
+        return categories;
     }
     
-    public static Integer countCategorysByParentId(Integer categoryId, Integer communityId) {
+    public static Integer countCategorysByParentCategoryId(Integer categoryId, Integer communityId) {
         return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Category o where o.categoryId = :categoryId " +
         		" and o.communityId = :communityId", Long.class)
                 .setParameter("categoryId", categoryId)

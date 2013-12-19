@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.communityhelper.api.APIRequest;
 import com.communityhelper.api.APIResponse;
 import com.communityhelper.api.Page;
-import com.communityhelper.category.Category;
 import com.communityhelper.category.StandardCategory;
 import com.communityhelper.category.api.representation.ItemDTO;
 import com.communityhelper.category.service.CategoryService;
-import com.communityhelper.merchant.Merchant;
 
 import static com.communityhelper.api.APIResponse.*;
 @Controller
@@ -35,11 +33,7 @@ public class CategoriesController {
     @ResponseBody
     APIResponse categoryList(@PathVariable(value = "categoryId") Integer categoryId,
             @RequestBody CategoryListRequest request) {
-        Page<Category> categories = Category.findChildCategories(categoryId,
-                request.getStart(), request.getSize(), request.getCommunityId());
-        Page<Merchant> merchants = Merchant.findValidMerchantsByCategoryId(categoryId,
-                request.getStart(), request.getSize(), request.getCommunityId());
-        Page<ItemDTO> categoryPage = categoryService.createCategoryPage(categories, merchants);
+        Page<ItemDTO> categoryPage = categoryService.createCategoryPage(categoryId, request.getCommunityId(), request.getStart(), request.getSize());
         return success("查询成功").result(categoryPage);
     }
     

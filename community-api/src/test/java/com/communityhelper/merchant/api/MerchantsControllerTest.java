@@ -12,7 +12,6 @@ import org.junit.Test;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.communityhelper.MVCTestEnviroment;
-import com.communityhelper.api.APIRequest;
 import com.communityhelper.merchant.Merchant;
 import com.communityhelper.merchant.MerchantStatus;
 import com.communityhelper.merchant.MyMerchantCollection;
@@ -37,23 +36,23 @@ public class MerchantsControllerTest extends MVCTestEnviroment {
         
         //Then
         List<Merchant> merchants = Merchant.findAllMerchants();
-        assertEquals(6, merchants.size());
+        assertEquals(8, merchants.size());
     }
     
     @Transactional
     @Test
     public void should_user_auth_merchant_correct() throws Exception {
-        //Given
+        // Given
         MerchantRequest dto = new MerchantRequest();
         dto.setName("测试商户");
         dto.setDesc("测试描述");
         dto.setUserId(1);
         
-        //When
+        // When
         post("/merchant/auth", dto)
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.status", is("000")));
-        //Then
+        // Then
         List<Merchant> merchants = Merchant.findMerchantsByUserId(1);
         assertEquals(1, merchants.size());
         // the default serviceEnable is false

@@ -70,6 +70,10 @@
     </bean>
     <bean class="java.security.SecureRandom" id="secureRandom"></bean>
     
+    <bean class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="dataSource"></constructor-arg>
+    </bean>
+    
     <bean class="org.springframework.security.core.token.KeyBasedPersistenceTokenService" id="tokenService">
         <property name="serverSecret" value="2"/>
         <property name="serverInteger" value="1"/>

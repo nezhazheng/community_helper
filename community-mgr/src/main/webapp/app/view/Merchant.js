@@ -21,6 +21,10 @@ Ext.define('Mgr.view.Merchant', {
         dataIndex: 'status',
         flex: 1
     }, {
+        text: '服务是否开启',
+        dataIndex: 'serviceEnable',
+        flex: 1
+    },{
     	text: '类别ID',
     	dataIndex: 'id',
     	flex: 1
