@@ -729,7 +729,7 @@ response
 
 ```json
 {
-    "status": "000",
+    "status": "000",				// USER_ALREADY_EXISTS TOO_MANY_VALID_CODE SEND_SMS_ERROR
     "message": "验证码发送成功",
     "result": null
 }

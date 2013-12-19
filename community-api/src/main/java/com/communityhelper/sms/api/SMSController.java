@@ -1,5 +1,6 @@
 package com.communityhelper.sms.api;
 
+import static com.communityhelper.api.APIResponse.response;
 import static com.communityhelper.api.APIResponse.success;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.communityhelper.api.APIRequest;
 import com.communityhelper.api.APIResponse;
+import com.communityhelper.api.APIResponse.Status;
 import com.communityhelper.sms.ValidCode;
 import com.communityhelper.sms.service.SMSSerice;
 import com.communityhelper.user.User;
@@ -30,6 +32,9 @@ public class SMSController {
     public 
     @ResponseBody
     APIResponse sendValidCode(@PathVariable String phonenum, @RequestBody APIRequest device) {
+        if (null != User.findUserByPhonenum(phonenum)) {
+            return response().status(Status.USER_ALREADY_EXISTS);
+        }
         List<ValidCode> validCodes = ValidCode.findValidCodeTodayByPhonenum(phonenum, "register_valid_code");
         // 验证码发送超出上限
         if(validCodes.size() >= 3){
