@@ -509,7 +509,7 @@ response
 
 request
 
-URL:/merchant/{merchantId}/update
+URL:/merchant/{merchantId}/servicestatussetting
 
 ```json
 {

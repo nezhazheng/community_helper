@@ -115,8 +115,7 @@ public class Merchant {
         return merchants;
     }
     
-    public static List<Merchant> findMerchantsByAuthStatus(
-            MerchantStatus notValid) {
+    public static List<Merchant> findMerchantsByAuthStatus(MerchantStatus notValid) {
         TypedQuery<Merchant> query = entityManager().createQuery("from Merchant o where o.authStatus = :status", Merchant.class);
         query.setParameter("status", notValid);
         return query.getResultList();

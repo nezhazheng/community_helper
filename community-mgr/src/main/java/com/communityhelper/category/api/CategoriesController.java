@@ -61,6 +61,34 @@ public class CategoriesController {
     }
     
     /**
+     * 修改类别
+     * @param name
+     * @param updateOrder
+     * @param updateCategoryId
+     * @param communityId
+     * @return
+     */
+    @RequestMapping(value = "/modify", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    String modifyCategory(@RequestParam("name") String name,
+            @RequestParam("order") Integer updateOrder,
+            @RequestParam(value = "id") Integer id,
+            @RequestParam(value = "categoryId") Integer updateCategoryId,
+            @RequestParam(value = "iconId") Integer iconId) {
+        Category category = Category.findCategory(id);
+        
+        categoryService.updateRelatedOrder(category.getOrder(), category.getCategoryId(), updateOrder, updateCategoryId);
+        
+        category.setCategoryId(updateCategoryId);
+        category.setName(name);
+        category.setIconId(iconId);
+        category.setOrder(updateOrder);
+        category.merge();
+        return "success";
+    }
+    
+    /**
      * 删除类别或商户
      * @param id
      * @param isCategory

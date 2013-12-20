@@ -51,7 +51,7 @@ public class MerchantsController {
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public 
     @ResponseBody
-    APIResponse delete(@RequestParam("merchantId") Integer merchantId){
+    APIResponse delete(@RequestParam("merchantId") Integer merchantId) {
         Merchant merchant = Merchant.findMerchant(merchantId);
         Integer categoryId = merchant.getCategoryId();
         Integer order = merchant.getOrder();
@@ -70,7 +70,7 @@ public class MerchantsController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public 
     @ResponseBody
-    String add(@RequestBody Merchant merchant){
+    String add(@RequestBody Merchant merchant) {
         if(MerchantStatus.VALID.equals(merchant.getAuthStatus()) && merchant.getOrder() != 0) {
             categoryService.inrcOrder(merchant.getCategoryId(), merchant.getOrder());
         }
@@ -91,7 +91,7 @@ public class MerchantsController {
     APIResponse modify(@RequestParam("status") String status,
             @RequestParam("serviceEnable") Boolean serviceEnable,
             @RequestParam("merchantId") Integer merchantId,
-            @RequestParam("categoryId") Integer categoryId,
+            @RequestParam("categoryId") Integer updateCategoryId,
             @RequestParam("order") Integer updateOrder,
             @RequestParam("contactAddress") String contactAddress,
             @RequestParam("name") String name,
@@ -99,7 +99,7 @@ public class MerchantsController {
         Merchant merchant = Merchant.findMerchant(merchantId);
         
         // 更新相关联的顺序
-        categoryService.updateRelatedOrder(merchant, updateOrder, categoryId);
+        categoryService.updateRelatedOrder(merchant.getOrder(), merchant.getCategoryId(), updateOrder, updateCategoryId);
         
         merchant.setOrder(updateOrder);
         merchant.setServiceEnable(serviceEnable);
@@ -107,7 +107,7 @@ public class MerchantsController {
         merchant.setContactPhoneNumber(contactPhoneNumber);
         merchant.setName(name);
         merchant.setAuthStatus(MerchantStatus.valueOf(status));
-        merchant.setCategoryId(categoryId);
+        merchant.setCategoryId(updateCategoryId);
         merchant.merge();
         return success("修改成功");
     }

@@ -81,6 +81,7 @@ public class MerchantsController {
      * 开启关闭服务
      * @return
      */
+    @RequestMapping(value = "/{merchantId}/servicestatussetting")
     public 
     @ResponseBody
     APIResponse serviceStatusSetting(@PathVariable("merchantId") Integer merchantId, 
