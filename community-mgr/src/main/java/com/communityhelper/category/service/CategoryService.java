@@ -86,16 +86,19 @@ public class CategoryService {
      */
     @Transactional
     public void updateRelatedOrder(Merchant updateMerchant, Integer updateOrder, Integer categoryId) {
-        if(updateOrder == 0) {
-            return;
-        }
         Integer oldOrder = updateMerchant.getOrder();
-        // 审核情况，order顺序递增
-        if(0 ==  oldOrder && updateOrder > oldOrder){
+        // 顺序中移除
+        if(oldOrder != 0 && updateOrder == 0) {
+            this.reduceOrder(categoryId, oldOrder);
+        }
+        
+        // 顺序中增加
+        if(0 ==  oldOrder && updateOrder > oldOrder) {
             this.inrcOrder(categoryId, updateOrder);
         }
+        
         // 更新情况, order调换
-        if(0 != oldOrder && updateOrder != oldOrder){
+        if(0 != oldOrder && updateOrder != oldOrder) {
             Merchant replacedMerchant = Merchant.findMerchantByOrderAndCategoryId(updateOrder, categoryId);
             // TODO 如果找不着 找类别最大的那个做递增
             if(replacedMerchant != null){

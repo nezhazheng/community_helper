@@ -491,7 +491,28 @@ URL:/merchant/{merchantId}/update
   "contactPhoneNumber": "123456789",
   "contactAddress": "呵呵呵呵",
   "desc": "测试描述",
-  "standardCategoryId": 1,
+  "standardCategoryId": 1
+}
+```
+
+response
+
+```json
+{
+    "status": "000",
+    "message": "修改成功",
+    "result": null
+}
+```
+
+#### 设置商户服务状态
+
+request
+
+URL:/merchant/{merchantId}/update
+
+```json
+{
   "serviceEnable": false			// 服务开启或者关闭
 }
 ```
@@ -505,6 +526,7 @@ response
     "result": null
 }
 ```
+
 
 #### 商户报错
 

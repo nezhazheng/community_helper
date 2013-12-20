@@ -68,13 +68,27 @@ public class MerchantsController {
         if(StringUtils.hasLength(request.getName())) {
             merchant.setName(request.getName());
         }
-        if(null != request.getServiceEnable()) {
-            merchant.setServiceEnable(request.getServiceEnable());
-        }
         if(null != request.getStandardCategoryId() && request.getStandardCategoryId() != 0) {
             merchant.setStandardCategoryId(request.getStandardCategoryId());
         }
+        // 进入审核状态
         merchant.setAuthStatus(MerchantStatus.NOT_VALID);
+        merchant.merge();
+        return success("修改成功");
+    }
+    
+    /**
+     * 开启关闭服务
+     * @return
+     */
+    public 
+    @ResponseBody
+    APIResponse serviceStatusSetting(@PathVariable("merchantId") Integer merchantId, 
+            @RequestBody MerchantRequest request) {
+        Merchant merchant = Merchant.findMerchant(merchantId);
+        if(null != request.getServiceEnable()) {
+            merchant.setServiceEnable(request.getServiceEnable());
+        }
         merchant.merge();
         return success("修改成功");
     }

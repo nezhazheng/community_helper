@@ -95,21 +95,13 @@ public class MerchantsController {
             @RequestParam("order") Integer updateOrder,
             @RequestParam("contactAddress") String contactAddress,
             @RequestParam("name") String name,
-            @RequestParam("contactPhoneNumber") String contactPhoneNumber){
+            @RequestParam("contactPhoneNumber") String contactPhoneNumber) {
         Merchant merchant = Merchant.findMerchant(merchantId);
         
-        // 如果商户状态为未审核
-        if(MerchantStatus.NOT_VALID.equals(MerchantStatus.valueOf(status))){
-            // 如果商户之前的order不为0 则判断是关闭账户成未审核情况，则递减所有顺序大于此商户顺序的商户群
-            if(merchant.getOrder() != 0) {
-                categoryService.reduceOrder(categoryId, merchant.getOrder());
-            }
-            // 如果商户状态为未审核，则order一定为0
-            merchant.setOrder(0);
-        } else if (updateOrder != 0){
-            categoryService.updateRelatedOrder(merchant, updateOrder, categoryId);
-            merchant.setOrder(updateOrder);
-        }
+        // 更新相关联的顺序
+        categoryService.updateRelatedOrder(merchant, updateOrder, categoryId);
+        
+        merchant.setOrder(updateOrder);
         merchant.setServiceEnable(serviceEnable);
         merchant.setContactAddress(contactAddress);
         merchant.setContactPhoneNumber(contactPhoneNumber);

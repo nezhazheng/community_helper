@@ -268,11 +268,12 @@ Ext.define('Mgr.view.AllMerchants', {
     },
     
     onDeleteClick: function(grid, rowIndex) {
+    	var data = Ext.getCmp('allmerchants').getSelectionModel().getSelection()[0].data;
     	Ext.Ajax.request({
     	    url: '/mgr/merchant/delete',
     	    method: 'POST',
     	    params: {
-    	    	merchantId: grid.dataSource.data.items[rowIndex].data.id,
+    	    	merchantId: data.id,
     	    },
     	    success: function(response) {
     	        var text = response.responseText;

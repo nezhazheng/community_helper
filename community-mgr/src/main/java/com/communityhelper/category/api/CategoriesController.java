@@ -78,13 +78,8 @@ public class CategoriesController {
             categoryId = category.getCategoryId();
             order = category.getOrder();
             category.remove();
-        } else {
-            Merchant merchant = Merchant.findMerchant(id);
-            categoryId = merchant.getCategoryId();
-            order = merchant.getOrder();
-            merchant.remove();
+            categoryService.reduceOrder(categoryId, order);
         }
-        categoryService.reduceOrder(categoryId, order);
         return "success";
     }
     
