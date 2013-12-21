@@ -32,6 +32,11 @@ Ext.define('Mgr.view.Merchant', {
     	text: '商户ID',
     	dataIndex: 'merchantId',
     	flex: 1
+    }, {
+    	text: '图片ID',
+    	dataIndex: 'iconId',
+    	flex: 1,
+    	hidden: true
     }],
     tbar: [{
     	xtype: 'button',
@@ -40,6 +45,20 @@ Ext.define('Mgr.view.Merchant', {
         handler: function(){
         	var addCategoryWindow = new Mgr.view.AddCategoryWindow();
         	addCategoryWindow.show();
+        }
+    },{
+    	xtype: 'button',
+        text: '修改类别',
+        scope: this,
+        handler: function(){
+        	var model = Ext.getCmp('merchanttree').getSelectionModel().getSelection()[0];
+        	if(model.leaf) {
+        		return;
+        	}
+        	var modifyCategoryWindow = Ext.create('Mgr.view.ModifyCategoryWindow', {
+        		data: model
+        	});
+        	modifyCategoryWindow.show();
         }
     }, {
 		xtype: 'button',

@@ -31,7 +31,7 @@
 2. could add image id when create category.	DONE
 3. made platform iamge type field to column box.
 4. lazy load grid data.
-5. could update category
+5. could update category		DONE
 6. add order to pageable api.		DONE
 7. user list real name auth status doesn't appear.	DONE
 8. could remove merchant on merchant list.	DONE
@@ -49,8 +49,8 @@
 1. api doc			DONE
 2. more merchant list test	working on
 3. refactor api representation to keep consistency	DONE
-4. create PageService
+4. create PageService		DONE
 5. add log			DONE
-6. run test first when deploy
+6. run test first when deploy	DONE
 7. add code quality tool
 8. remove Page from core project.

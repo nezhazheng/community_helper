@@ -29,6 +29,7 @@ public class CategoryService {
             dto.setCategoryId(category.getCategoryId());
             dto.setOrder(category.getOrder());
             dto.setId(category.getId());
+            dto.setIconId(category.getIconId());
             result.add(dto);
         }
         for(Merchant merchant : merchants){

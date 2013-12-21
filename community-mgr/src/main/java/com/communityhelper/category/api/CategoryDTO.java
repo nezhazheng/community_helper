@@ -11,6 +11,13 @@ public class CategoryDTO implements Orderable, Comparable<Orderable>{
     private String status;
     private Integer order;
     private Boolean serviceEnable;
+    private Integer iconId;
+    public Integer getIconId() {
+        return iconId;
+    }
+    public void setIconId(Integer iconId) {
+        this.iconId = iconId;
+    }
     public Boolean getServiceEnable() {
         return serviceEnable;
     }
