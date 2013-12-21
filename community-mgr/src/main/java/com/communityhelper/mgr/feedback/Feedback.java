@@ -21,9 +21,9 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.json.RooJson;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.communityhelper.api.Page;
 import com.communityhelper.feedback.api.FeedbackDTO;
 import com.communityhelper.merchant.Merchant;
+import com.communityhelper.page.Page;
 import com.communityhelper.user.User;
 @RooJson
 @RooJavaBean

@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.communityhelper.api.APIRequest;
 import com.communityhelper.api.APIResponse;
-import com.communityhelper.api.Page;
 import com.communityhelper.category.StandardCategory;
 import com.communityhelper.category.api.representation.ItemDTO;
 import com.communityhelper.category.service.CategoryService;
+import com.communityhelper.page.Page;
 
 import static com.communityhelper.api.APIResponse.*;
 @Controller

@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.communityhelper.api.APIResponse;
-import com.communityhelper.api.Page;
 import com.communityhelper.category.service.CategoryService;
 import com.communityhelper.merchant.Merchant;
 import com.communityhelper.merchant.MerchantErrorReport;
 import com.communityhelper.merchant.MerchantStatus;
 import com.communityhelper.merchat.api.representation.MerchantErrorReportDTO;
+import com.communityhelper.page.Page;
 
 @Controller
 @RequestMapping(value = "/merchant", method = RequestMethod.GET)

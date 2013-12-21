@@ -2,6 +2,8 @@ package com.communityhelper.merchat.api;
 
 import static com.communityhelper.api.APIResponse.*;
 
+import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.communityhelper.api.APIResponse;
-import com.communityhelper.api.Page;
 import com.communityhelper.feedback.Feedback;
 import com.communityhelper.merchant.Merchant;
 import com.communityhelper.merchant.MerchantErrorReport;
@@ -22,12 +23,17 @@ import com.communityhelper.merchant.MyMerchantCollection;
 import com.communityhelper.merchat.api.representation.MerchantsDetailDTO;
 import com.communityhelper.merchat.api.representation.UserMerchantDTO;
 import com.communityhelper.merchat.service.MerchantService;
+import com.communityhelper.page.Page;
+import com.communityhelper.page.PageService;
 
 @Controller
 @RequestMapping(value = "/merchant", method = RequestMethod.POST)
 public class MerchantsController {
     @Autowired
     private MerchantService merchantService;
+    
+    @Autowired
+    private PageService pageService;
     
     /**
      * 商户详情
@@ -38,8 +44,9 @@ public class MerchantsController {
     APIResponse detail(@PathVariable("merchantId") Integer merchantId,
             @RequestBody MerchantRequest request){
         MerchantsDetailDTO detailDTO = new MerchantsDetailDTO();
-        Page<Feedback> feedbackPage =Feedback.findFeedbacksByMerchant(
+        List<Feedback> feedbacks =Feedback.findFeedbacksByMerchant(
                 merchantId, request.getStart(), request.getSize());
+        Page<Feedback> feedbackPage = pageService.createPage(feedbacks, Feedback.countFeedbacksByMerchantId(merchantId), request.getStart(), request.getSize());
         UserMerchantDTO merchant = merchantService.findMerchant(merchantId, request.getUserId());
         detailDTO.setMerchant(merchant);
         detailDTO.setFeedbackList(feedbackPage);

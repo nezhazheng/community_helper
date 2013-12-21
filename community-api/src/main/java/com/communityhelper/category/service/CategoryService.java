@@ -12,11 +12,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import com.communityhelper.api.Page;
 import com.communityhelper.category.Category;
 import com.communityhelper.category.StandardCategory;
 import com.communityhelper.category.api.representation.ItemDTO;
 import com.communityhelper.merchant.Merchant;
+import com.communityhelper.page.Page;
 import com.communityhelper.software.Image;
 import com.communityhelper.user.User;
 import com.communityhelper.user.UserServiceStatus;

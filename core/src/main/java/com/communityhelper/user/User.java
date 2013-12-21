@@ -19,7 +19,6 @@ import org.springframework.roo.addon.json.RooJson;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.communityhelper.api.Page;
 
 @RooJavaBean
 @RooEntity(versionField = "", table = "user", finders = "findUsersByPhonenumEquals")
@@ -86,14 +85,11 @@ public class User {
         }
     }
 
-    public static Page<User> findOrderableUsersPage(Integer start, Integer limit) {
+    public static List<User> findOrderableUsersPage(Integer start, Integer limit) {
         List<User> users = entityManager().createQuery("from User o order by o.createDate desc", User.class)
         .setFirstResult(start)
         .setMaxResults(limit)
         .getResultList();
-        Page<User> page = new Page<User>();
-        page.setList(users);
-        page.setTotalResult(Integer.parseInt((User.countUsers() + "")));
-        return page;
+        return users;
     }
 }

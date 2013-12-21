@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.communityhelper.api.Page;
+import com.communityhelper.page.Page;
 import com.communityhelper.software.Image;
 import com.communityhelper.software.Image.ImageType;
 

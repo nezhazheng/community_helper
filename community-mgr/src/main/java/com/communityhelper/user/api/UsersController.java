@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.communityhelper.api.Page;
+import com.communityhelper.page.Page;
+import com.communityhelper.page.PageService;
 import com.communityhelper.user.RealNameAuth;
 import com.communityhelper.user.User;
 import com.communityhelper.user.RealNameAuthStatus;
@@ -20,6 +22,9 @@ import com.communityhelper.user.RealNameAuthStatus;
 @RequestMapping("/user")
 public class UsersController {
     private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
+    
+    @Autowired
+    private PageService pageService;
     
     /**
      * 实名认证
@@ -59,7 +64,8 @@ public class UsersController {
     Page<User> users(@RequestParam Integer page, 
             @RequestParam Integer start, 
             @RequestParam Integer limit){
-        Page<User> userPage =  User.findOrderableUsersPage(start, limit);
+        List<User> users =  User.findOrderableUsersPage(start, limit);
+        Page<User> userPage = pageService.createPage(users, Integer.parseInt(User.countUsers() + ""), start, limit);
         return userPage;
     }
 }

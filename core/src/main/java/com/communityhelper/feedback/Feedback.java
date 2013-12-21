@@ -21,7 +21,6 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.json.RooJson;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.communityhelper.api.Page;
 import com.communityhelper.user.User;
 @RooJson
 @RooJavaBean
@@ -73,7 +72,7 @@ public class Feedback {
         return tryFeedback == null;
     }
 
-    public static Page<Feedback> findFeedbacksByMerchant(Integer merchantId,
+    public static List<Feedback> findFeedbacksByMerchant(Integer merchantId,
             Integer start, Integer size) {
         TypedQuery<Feedback> query = entityManager().createQuery(
                 "select new com.communityhelper.feedback.Feedback(c.merchantId,c.message,c.createDate,c.score,u.phonenum) " +
@@ -82,13 +81,10 @@ public class Feedback {
         .setFirstResult(start)
         .setMaxResults(size);
         List<Feedback> feedbacks = query.getResultList();
-        Page<Feedback> page = new Page<Feedback>(start, size);
-        page.setList(feedbacks);
-        page.setTotalResult(countFeedbacksByMerchantId(merchantId));
-        return page;
+        return feedbacks;
     }
 
-    private static Integer countFeedbacksByMerchantId(Integer merchantId) {
+    public static Integer countFeedbacksByMerchantId(Integer merchantId) {
         return Integer.parseInt(entityManager().createQuery("SELECT COUNT(o) FROM Feedback o where o.merchantId = :merchantId ", Long.class)
                 .setParameter("merchantId", merchantId).getSingleResult().toString());
     }

@@ -1,7 +1,7 @@
 package com.communityhelper.merchat.api.representation;
 
-import com.communityhelper.api.Page;
 import com.communityhelper.feedback.Feedback;
+import com.communityhelper.page.Page;
 
 public class MerchantsDetailDTO {
     private UserMerchantDTO merchant;
