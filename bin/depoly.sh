@@ -1,1 +1,1 @@
-mvn clean install -Pproduct -Dmaven.test.skip=true tomcat:redeploy
+mvn clean install -Pproduct tomcat:redeploy
