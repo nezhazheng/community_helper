@@ -37,29 +37,6 @@
     <!-- Store preferred theme configuration in a cookie -->
     <bean class="org.springframework.web.servlet.theme.CookieThemeResolver" id="themeResolver" p:cookieName="theme" p:defaultThemeName="standard"/>
 
-    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-        <property name="order" value="1" />
-        <property name="contentNegotiationManager">
-            <bean class="org.springframework.web.accept.ContentNegotiationManager">
-                <constructor-arg>
-                    <bean class="org.springframework.web.accept.PathExtensionContentNegotiationStrategy">
-                        <constructor-arg>
-                            <map>
-                                <entry key="json" value="application/json"/>
-                            </map>
-                        </constructor-arg>
-                    </bean>
-                </constructor-arg>
-            </bean>
-        </property>
-
-        <property name="defaultViews">
-            <list>
-                <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
-            </list>
-        </property>
-    </bean>
-    
     <!-- Enable this for integration of file upload functionality -->
     <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver"/>
 </beans>

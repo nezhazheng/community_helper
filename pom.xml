@@ -571,7 +571,7 @@
 				<database.driverClassName>com.mysql.jdbc.Driver</database.driverClassName>
 				<database.username>root</database.username>
 				<database.password>zhengshuli</database.password>
-				<logback.appender>CommunityLogFile</logback.appender>
+				<logback.appender>STDOUT</logback.appender>
 				<log.file>/Users/nezhazheng/communityhelper.log</log.file>
 				<tomcat.manager.url>http://localhost:8080/manager</tomcat.manager.url>
                 <tomcat.manager.port>8080</tomcat.manager.port>
@@ -581,6 +581,24 @@
                 <imageServerDir>/Users/nezhazheng/</imageServerDir>
 			</properties>
 		</profile>
+		
+		<profile>
+            <id>test</id>
+            <properties>
+                <database.url>jdbc:mysql://192.168.65.5:3306/test_community_helper?characterEncoding=utf-8</database.url>
+                <database.driverClassName>com.mysql.jdbc.Driver</database.driverClassName>
+                <database.username>root</database.username>
+                <database.password></database.password>
+                <logback.appender>CommunityLogFile</logback.appender>
+                <log.file>/home/appusr/testlogs/communityhelper.log</log.file>
+                <tomcat.manager.url>http://58.83.193.119:9090/manager</tomcat.manager.url>
+                <tomcat.manager.port>9090</tomcat.manager.port>
+                <redis.host>192.168.65.5</redis.host>
+                <redis.port>6380</redis.port>
+                <imageServerURL>http://58.83.193.119/testimages/</imageServerURL>
+                <imageServerDir>/home/appusr/testimages/</imageServerDir>
+            </properties>
+        </profile>
 		
 		<profile>
             <id>product</id>

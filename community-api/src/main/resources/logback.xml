@@ -8,6 +8,18 @@
 		</layout>
 	</appender>
 
+    <appender name="CommunityLogFileRequest"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${log.file}.request</File>
+        <encoder>
+            <pattern>%-20(%d{MM-dd HH:mm:ss.SSS}) %-5level%msg%n
+            </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.file}.request.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
 	<appender name="CommunityLogFile"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<File>${log.file}</File>
@@ -47,6 +59,10 @@
 	<logger name="org.hibernate" level="ERROR" />
 	<logger name="org.springframework" level="ERROR" />
 	<logger name="net.sf" level="ERROR" />
+
+    <logger name="com.communityhelper.api.RequestLoggingFilter" level="INFO">
+        <appender-ref ref="${logback.appender}Request" />
+    </logger>
 
 	<root level="INFO">
 		<appender-ref ref="${logback.appender}" />

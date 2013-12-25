@@ -53,4 +53,3 @@
 5. add log			DONE
 6. run test first when deploy	DONE
 7. add code quality tool
-8. remove Page from core project.

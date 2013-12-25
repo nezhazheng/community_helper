@@ -113,7 +113,7 @@ public class MerchantsController {
     }
     
     /**
-     * 商户详情
+     * 商户报错列表
      */
     @RequestMapping(value = "/errorreport")
     public 

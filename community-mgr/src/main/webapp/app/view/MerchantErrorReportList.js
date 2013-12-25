@@ -41,7 +41,7 @@ Ext.define('Mgr.view.MerchantErrorReportList', {
 	frame: true,
     columns: [{
         text: '用户ID',
-        dataIndex: 'id',
+        dataIndex: 'userId',
         width: 150,
         sortable: true
     }, {
