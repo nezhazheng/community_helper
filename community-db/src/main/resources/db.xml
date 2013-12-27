@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet author="nezhazheng (generated)" id="1388030352607-1" runOnChange="true">
+        <createTable catalogName="test_community_helper" tableName="community">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nezhazheng (generated)" id="1388030352607-2" runOnChange="true">
+        <createTable catalogName="test_community_helper" tableName="image">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="platform" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="url" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nezhazheng (generated)" id="1388030352607-3" runOnChange="true">
+        <createTable catalogName="test_community_helper" tableName="software">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="channel" type="VARCHAR(255)"/>
+            <column name="platform" type="VARCHAR(255)"/>
+            <column name="update_url" type="VARCHAR(255)"/>
+            <column name="version" type="VARCHAR(255)"/>
+            <column name="enable_upgrade" type="BIT(1)"/>
+            <column name="upgrade_desc" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nezhazheng (generated)" id="1388030352607-4" runOnChange="true">
+        <createTable catalogName="test_community_helper" tableName="user">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="real_name" type="VARCHAR(255)"/>
+            <column name="phonenum" type="VARCHAR(255)"/>
+            <column name="channel" type="VARCHAR(255)"/>
+            <column name="imei" type="VARCHAR(255)"/>
+            <column name="real_name_auth" type="VARCHAR(255)"/>
+            <column name="create_date" type="datetime"/>
+            <column name="user_service_status" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nezhazheng (generated)" id="1388030352607-5" runOnChange="true">
+        <createTable catalogName="test_community_helper" tableName="my_merchant_collection">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="merchant_id" type="INT(10)"/>
+            <column name="user_id" type="INT(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nezhazheng (generated)" id="1388030352607-6" runOnChange="true">
+        <createTable catalogName="test_community_helper" tableName="merchant">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="category_id" type="INT(10)"/>
+            <column name="contract_address" type="VARCHAR(255)"/>
+            <column name="contact_phone_number" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="score_user_count" type="INT(10)"/>
+            <column name="score" type="DOUBLE"/>
+            <column name="auth_status" type="VARCHAR(255)"/>
+            <column name="user_id" type="INT(10)"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="morder" type="INT(10)"/>
+            <column name="community_id" type="INT(10)"/>
+            <column name="create_date" type="datetime"/>
+            <column name="standard_category_id" type="INT(10)"/>
+            <column name="service_enable" type="BIT(1)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nezhazheng (generated)" id="1388030352607-7" runOnChange="true">
+        <createTable catalogName="test_community_helper" tableName="merchant_error_report">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="error_category" type="VARCHAR(255)"/>
+            <column name="merchant_id" type="INT(10)"/>
+            <column name="user_id" type="INT(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nezhazheng (generated)" id="1388030352607-8" runOnChange="true">
+        <createTable catalogName="test_community_helper" tableName="category">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="score" type="INT(10)"/>
+            <column name="corder" type="INT(10)"/>
+            <column name="community_id" type="INT(10)"/>
+            <column name="category_id" type="INT(10)"/>
+            <column name="icon_id" type="INT(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nezhazheng (generated)" id="1388030352607-9" runOnChange="true">
+        <createTable catalogName="test_community_helper" tableName="standard_category">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nezhazheng (generated)" id="1388030352607-10" runOnChange="true">
+        <createTable catalogName="test_community_helper" tableName="software_feedback">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="message" type="VARCHAR(255)"/>
+            <column name="software_id" type="INT(10)"/>
+            <column name="user_id" type="INT(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nezhazheng (generated)" id="1388030352607-11" runOnChange="true">
+        <createTable catalogName="test_community_helper" tableName="validcode">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="createtime" type="VARCHAR(255)"/>
+            <column name="phonenum" type="VARCHAR(255)"/>
+            <column name="securitycode" type="VARCHAR(255)"/>
+            <column name="type" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nezhazheng (generated)" id="1388030352607-12" runOnChange="true">
+        <createTable catalogName="test_community_helper" tableName="realnameauth">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="contract_address" type="VARCHAR(255)"/>
+            <column name="real_name" type="VARCHAR(255)"/>
+            <column name="user_id" type="INT(10)"/>
+            <column name="create_date" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nezhazheng (generated)" id="1388030352607-13" runOnChange="true">
+        <createTable catalogName="test_community_helper" tableName="feedback">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="create_date" type="datetime"/>
+            <column name="merchant_id" type="INT(10)"/>
+            <column name="message" type="VARCHAR(500)"/>
+            <column name="score" type="INT(10)"/>
+            <column name="user_id" type="INT(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nezhazheng (generated)" id="1388030352607-14" runOnChange="true">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableCatalogName="test_community_helper" baseTableName="my_merchant_collection" constraintName="FK_i3ar68vr1wob16o7d7lybmuvu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableCatalogName="test_community_helper" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="nezhazheng (generated)" id="1388030352607-15" runOnChange="true">
+        <addForeignKeyConstraint baseColumnNames="merchant_id" baseTableCatalogName="test_community_helper" baseTableName="my_merchant_collection" constraintName="FK_2po363vs1aivwf791ok5b88sm" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableCatalogName="test_community_helper" referencedTableName="merchant"/>
+    </changeSet>
+    <changeSet author="nezhazheng (generated)" id="1388030352607-16" runOnChange="true">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableCatalogName="test_community_helper" baseTableName="feedback" constraintName="FK_kfpy3yr8gaddnnd11oru7k19s" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableCatalogName="test_community_helper" referencedTableName="user"/>
+    </changeSet>
+    <changeSet author="nezhazheng (generated)" id="1388030352607-17" runOnChange="true">
+        <createIndex catalogName="test_community_helper" indexName="uk_le7md2am20u8jy9jdus549sqn" tableName="user" unique="true">
+            <column name="phonenum"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

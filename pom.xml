@@ -36,6 +36,7 @@
 	<modules>
 		<module>community-api</module>
 		<module>community-mgr</module>
+		<module>community-db</module>
 		<module>core</module>
 	</modules>
 	<pluginRepositories>
