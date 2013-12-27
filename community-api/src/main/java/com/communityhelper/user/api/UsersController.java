@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -73,6 +74,7 @@ public class UsersController {
      * @param userDTO
      * @return
      */
+    @Transactional
     @RequestMapping(method = RequestMethod.POST)
     public
     @ResponseBody
@@ -80,15 +82,20 @@ public class UsersController {
         User user = new User();
         user.setPhonenum(userDTO.getPhonenum());
         user.setPassword(User.PASSWORD_ENCODER.encode(userDTO.getPassword()));
-        user.setAddress(userDTO.getAddress());
-        user.setRealName(userDTO.getRealName());
         user.setImei(userDTO.getImei());
         user.setChannel(userDTO.getChannel());
         user.setCreateDate(new Date());
         user.setUserServiceStatus(UserServiceStatus.DO_BUSINESS);
-        user.setRealNameAuthStatus(RealNameAuthStatus.HAS_NOT_AUTH);
+        
+        if(StringUtils.hasLength(userDTO.getRealName())) {
+            user.setRealNameAuthStatus(RealNameAuthStatus.WAIT_TO_AUTH);
+        } else {
+            user.setRealNameAuthStatus(RealNameAuthStatus.HAS_NOT_AUTH);
+        }
         
         if(user.persist()) {
+            RealNameAuth realNameAuth = userDTO.toRealNameAuth(user.getId());
+            realNameAuth.persist();
             return success("注册成功").result(user);
         } else {
             return response().status(Status.USER_ALREADY_EXISTS);

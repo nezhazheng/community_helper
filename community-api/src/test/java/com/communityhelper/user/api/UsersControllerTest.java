@@ -3,6 +3,7 @@ package com.communityhelper.user.api;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,6 +32,27 @@ public class UsersControllerTest extends MVCTestEnviroment {
         post("/user/authenticate",user)
         // Then
         .andExpect(status().isOk());
+    }
+    
+    @Test
+    public void should_register_success_with_real_name_auth() throws Exception{
+        // Given
+        UserDTO user = new UserDTO();
+        user.setPhonenum("2222");
+        user.setPassword("111111");
+        user.setRealName("zzzz");
+        user.setAddress("bbbb");
+        user.setVersion("10.0");
+        
+        // When
+        post("/user",user)
+        // Then
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.status", is("000")))
+        .andExpect(jsonPath("$.result.realNameAuthStatus", is("WAIT_TO_AUTH")));
+        
+        Integer userId = User.findUserByPhonenum("2222").getId();
+        assertNotNull(RealNameAuth.findRealNameAuthByUserId(userId));
     }
     
     @Test
