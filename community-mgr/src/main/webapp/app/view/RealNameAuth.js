@@ -51,6 +51,25 @@ Ext.define('Mgr.view.RealNameAuth', {
         	    }
         	});
         }
+    }, {
+    	xtype: 'button',
+        text: '拒绝认证',
+        scope: this,
+        handler: function(){
+        	var data = Ext.getCmp('realnameauth').getSelectionModel().getSelection()[0].data;
+        	Ext.Ajax.request({
+        	    url: '/mgr/user/realnameauth',
+        	    method: 'POST',
+        	    params: {
+        	    	status: 'HAS_NOT_AUTH',
+        	    	authId: data.id,
+        	    	userId: data.userId
+        	    },
+        	    success: function(response){
+        	        Ext.getCmp('realnameauth').store.load();
+        	    }
+        	});
+        }
     }], 
 	store: 'RealNameAuth',
     title: '用户实名认证'

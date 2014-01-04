@@ -50,10 +50,13 @@ public class UsersController {
         RealNameAuth realNameAuth = RealNameAuth.findRealNameAuth(authId);
         User user = User.findUser(userId);
         user.setRealNameAuthStatus(status);
-        user.setRealName(realNameAuth.getRealName());
-        user.setAddress(realNameAuth.getContractAddress());
-        user.merge();
         
+        if(RealNameAuthStatus.ALREADY_AUTH.equals(status)) {
+            user.setRealName(realNameAuth.getRealName());
+            user.setAddress(realNameAuth.getContractAddress());
+        }
+        
+        user.merge();
         realNameAuth.remove();
         return "success";
     }
