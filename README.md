@@ -1,3 +1,16 @@
+## 这是什么？
+
+给朋友的移动互联网创业产品做的后台，这个产品旨在为某小区提供类大众点评的功能。
+
+## 为什么开源?  
+
+产品无疾而终，由于代码写的漂亮，技术用的合理，所以发挥一下这个产品最后的光和热吧。
+
+## 都有什么？
+
+REST,Spring Roo,Spring Security,Spring MVC,MVC Unit Test,Redis和整洁的代码(前端菜鸟，community-mgr部分直接略过)。
+
+
 ### TODO
 #### api feature
 
